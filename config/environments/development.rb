@@ -90,7 +90,7 @@ Rails.application.configure do
       :user_name            => APP_CONFIG.smtp_email_user_name,
       :password             => APP_CONFIG.smtp_email_password,
       :authentication       => 'plain',
-      :enable_starttls_auto => true
+      #:enable_starttls_auto => true
     }
   end
 

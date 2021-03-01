@@ -2,8 +2,8 @@
   "repository": "sharetribe/sharetribe",
   "license": "MIT",
   "engines": {
-    "node": "12.20.2",
-    "npm": "6.14.11"
+    "node": "10.15.3",
+    "npm": "6.4.1"
   },
   "scripts": {
     "ensure-node-version": "check-node-version --package",
