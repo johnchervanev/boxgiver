@@ -2,8 +2,9 @@ module MarketplaceHelper
   module_function
 
   def google_maps_key(cid)
-    community_key = Community.where(id: cid).pluck(:google_maps_key).first
-    community_key || APP_CONFIG.google_maps_key
+    'AIzaSyBKF-lLdIKsnOLbj9Tw0aig2pHJn1v_Kns'
+    # community_key = Community.where(id: cid).pluck(:google_maps_key).first
+    # community_key || APP_CONFIG.google_maps_key
   end
 
   def style_customizations_map(community)
