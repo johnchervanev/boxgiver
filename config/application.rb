@@ -1,7 +1,7 @@
 # encoding: utf-8
 
-require_relative 'boot'
-
+# require_relative 'boot'
+#
 require 'rails/all'
 
 # These needed to load the config.yml

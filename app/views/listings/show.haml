@@ -132,9 +132,9 @@
           .listing-price
             %span.listing-price-amount
               = MoneyViewUtils.to_humanized(@listing.price)
-            - with_quantity_text(@current_community, @listing) do |text|
-              %span.listing-price-quantity
-                = text
+            -# - with_quantity_text(@current_community, @listing) do |text|
+            -#   %span.listing-price-quantity
+            -#     = text
 
     .row-with-divider
       .col-12
