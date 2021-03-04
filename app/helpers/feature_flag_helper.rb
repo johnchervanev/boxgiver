@@ -69,6 +69,8 @@ module FeatureFlagHelper
   end
 
   def location_search_available
-    search_engine == :sphinx
+    # search_engine == :zappy
+    true
+
   end
 end
