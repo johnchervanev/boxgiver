@@ -1,6 +1,10 @@
 - community_location_lat = @current_community.location ? @current_community.location.latitude : nil
 - community_location_lon = @current_community.location ? @current_community.location.longitude : nil
 
+#style-selector-control.map-control.gmnoprint{style: 'z-index: 0;position: absolute;left: 188px;top: 0px;margin: 10px 10px 10px -5px;border: none;'}
+  %select#style-selector.selector-control{style: 'border: none;font-size: 17px;'}
+    %option{value: 'default'} Default
+    %option{value: 'night'} Night mode
 - content_for :extra_javascript do
   :javascript
     initialize_labels();
