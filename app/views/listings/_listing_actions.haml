@@ -66,7 +66,7 @@
               window.ST.initializeShippingPriceTotal(#{raw @listing_presenter.currency_opts.to_json}, '#quantity', '.delivery-price-value');
             }
 
-        .quantity-wrapper.input-group.clearfix
+        .quantity-wrapper.input-group.clearfix.hide_unit
           .quantity-label-wrapper
             %label.quantity-label{for: 'quantity'}
               = ListingViewUtils.translate_quantity(@listing.unit_type, @listing.unit_selector_tr_key)
