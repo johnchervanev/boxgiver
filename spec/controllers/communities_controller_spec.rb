@@ -108,6 +108,7 @@
 #  email_admins_about_new_transactions        :boolean          default(FALSE)
 #  show_location                              :boolean          default(TRUE)
 #  fuzzy_location                             :boolean          default(FALSE)
+#  twitter_announcement_enabled               :boolean          default(TRUE)
 #
 # Indexes
 #

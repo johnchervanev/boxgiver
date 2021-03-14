@@ -2553,6 +2553,10 @@ en:
       person: person
     verification_required:
       verification_required: "Verification required"
+    announcement:
+      twitter_html: |
+        %{full_name} just posted a %{listing_title} at %{listing_url} on https://boxgiver.com
+
   listing_conversations:
     preauthorize:
       dates_not_available: "Selected dates are not available"

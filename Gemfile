@@ -43,6 +43,7 @@ gem 'flying-sphinx', '~> 1.2.0'
 # Use patched v2.0.2
 # Fixes issues: Create a new delayed delta job if there is an existing delta job which has failed
 gem 'ts-delayed-delta', '2.1.0'
+gem 'twitter'
 gem 'possibly', '~> 1.0.1'
 
 gem 'delayed_job', '~> 4.1.3'
@@ -104,6 +105,8 @@ gem 'mail', '~> 2.6.6.rc1'
 
 gem 'tzinfo-data', '~> 1.2017', '>= 1.2017.2'
 
+gem 'puma'
+
 group :staging, :production do
   gem 'newrelic_rpm', '~> 4.2.0.334'
   gem 'rails_12factor', '~> 0.0.3'
@@ -149,7 +152,6 @@ group :test do
 
   gem 'fake_stripe', git: 'https://github.com/ithouse/fake_stripe.git', ref: '56fe73dc420d161ecf9842739af7d857031ca1b2'
   gem 'poltergeist'
-  gem 'puma'
   gem 'webdrivers'
 end
 
