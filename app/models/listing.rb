@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: listings
@@ -127,6 +129,7 @@ class Listing < ApplicationRecord
         pattern: "%#{pattern}%")
   end
 
+  ANNOUNCEMENTS = %i{twitter}
   HOMEPAGE_INDEX = "listings_homepage_query"
   # Use this scope before any query part to give DB server an index hint
   scope :use_index, ->(index) { from("#{self.table_name} USE INDEX (#{index})") }
@@ -156,6 +159,17 @@ class Listing < ApplicationRecord
   before_create :set_updates_email_at_to_now
   def set_updates_email_at_to_now
     self.updates_email_at ||= Time.now
+  end
+
+  after_create :listing_announcement
+  def listing_announcement
+    return if closed? || !approved?
+
+    ANNOUNCEMENTS.each do |platform|
+      if community.is_announcement_enabled_to(platform)    
+        Delayed::Job.enqueue(ListingAnnouncementJob.new(id, platform))
+      end
+    end
   end
 
   def uuid_object

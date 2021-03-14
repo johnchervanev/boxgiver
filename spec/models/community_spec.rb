@@ -108,6 +108,7 @@
 #  email_admins_about_new_transactions        :boolean          default(FALSE)
 #  show_location                              :boolean          default(TRUE)
 #  fuzzy_location                             :boolean          default(FALSE)
+#  twitter_announcement_enabled               :boolean          default(TRUE)
 #
 # Indexes
 #
@@ -253,6 +254,28 @@ describe Community, type: :model do
       expect(community1.is_person_only_admin(person_admin1)).to eq true
       person_admin2
       expect(community1.is_person_only_admin(person_admin1)).to eq false
+    end
+  end
+  
+  describe '#is_announcement_enabled_to' do
+    let(:community) { FactoryGirl.create(:community, twitter_announcement_enabled: true) }
+
+    context 'for non implemented annoucements' do
+      it 'raise NotImplementedError' do
+        expect { community.is_announcement_enabled_to(:shmitter) }.to raise_error(NotImplementedError)
+      end
+    end
+
+    context 'for implemented annoucements' do
+      it 'return true if enabled' do
+        expect(community.is_announcement_enabled_to(:twitter)).to be true
+      end
+
+      it 'return false if disabled' do
+        community.update(twitter_announcement_enabled: false)
+        community.reload
+        expect(community.is_announcement_enabled_to(:twitter)).to be false
+      end
     end
   end
 end
