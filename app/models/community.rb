@@ -108,6 +108,7 @@
 #  email_admins_about_new_transactions        :boolean          default(FALSE)
 #  show_location                              :boolean          default(TRUE)
 #  fuzzy_location                             :boolean          default(FALSE)
+#  twitter_announcement_enabled               :boolean          default(TRUE)
 #
 # Indexes
 #
@@ -693,6 +694,14 @@ class Community < ApplicationRecord
 
   def is_person_only_admin(person)
     admins.count == 1 && admins.first == person
+  end
+
+  def is_announcement_enabled_to(platform)
+    unless respond_to?("#{platform}_announcement_enabled")
+      raise NotImplementedError.new("#{platform.capitalize} announcements not implemented") 
+    end
+
+    send("#{platform}_announcement_enabled")
   end
 
   private

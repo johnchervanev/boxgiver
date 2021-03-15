@@ -1,22 +1,138 @@
-version: '2'
+version: '3.8'
 services:
   web:
-    build: .
+    image: boxgiver:latest
+    build:
+      context: .
+      dockerfile: docker/development/Dockerfile
+    env_file:
+      - docker/development/.env
+    volumes: 
+      - .:/opt/app
+      - /opt/app/tmp
+      - node_modules:/opt/app/client/node_modules
+      - bundle:/usr/local/bundle
+    depends_on:
+      - mysql
     ports:
-      - "3000:3000"
-    env_file: .env
+      - 3000:3000
+    entrypoint: docker/development/entrypoint.sh
+    command: bundle exec puma -C config/puma.rb
+
+  client_assets:
+    image: boxgiver:latest
+    env_file:
+      - docker/development/.env
+    volumes:
+      - .:/opt/app
+      - /opt/app/tmp
+      - node_modules:/opt/app/client/node_modules
+      - bundle:/usr/local/bundle
+    depends_on:
+      - web
+    working_dir: /opt/app/client
+    command: npm run build:dev:client
+  
+  server_assets:
+    image: boxgiver:latest
+    env_file:
+      - docker/development/.env
+    volumes: 
+      - .:/opt/app
+      - /opt/app/tmp
+      - node_modules:/opt/app/client/node_modules
+      - bundle:/usr/local/bundle
+    depends_on:
+      - web
+    working_dir: /opt/app/client
+    command: npm run build:dev:server
+
+  sphinx:
+    image: boxgiver:latest
+    env_file:
+      - docker/development/.env
+    volumes: 
+      - .:/opt/app
+      - /opt/app/tmp
+      - node_modules:/opt/app/node_modules:ro
+      - node_modules:/opt/app/client/node_modules:ro
+      - bundle:/usr/local/bundle:ro
+    depends_on:
+      - web
+    # environment:
+    command: bundle exec rake ts:start
+
   worker:
-    build: .
-    env_file: .env
+    image: boxgiver:latest
+    env_file:
+      - docker/development/.env
+    volumes: 
+      - .:/opt/app
+      - /opt/app/tmp
+      - node_modules:/opt/app/node_modules:ro
+      - node_modules:/opt/app/client/node_modules:ro
+      - bundle:/usr/local/bundle:ro
+    depends_on:
+      - web
     environment:
       - QUEUES=default,paperclip,mailers
       - MAGICK_MAP_LIMIT=64MiB
       - MAGICK_MEMORY_LIMIT=256MiB
       - MAGICK_TIME_LIMIT=30
+      # Uncomment when deploying own installation of Sharetribe
+      #- convox.cron.test-task=0 9 * * ? bundle exec rails runner CommunityMailer.deliver_community_updates
     command: bundle exec rake jobs:work
-  memcached:
-    image: memcached:latest
-networks:
-  default:
-    external:
-      name: sharetribe
+
+  shredder:
+    image: boxgiver:latest
+    volumes: 
+      - .:/opt/app
+      - /opt/app/tmp
+      - node_modules:/opt/app/node_modules:ro
+      - node_modules:/opt/app/client/node_modules:ro
+      - bundle:/usr/local/bundle:ro
+    depends_on:
+      - worker
+    mem_limit: 512m
+    command: bundle exec rake sharetribe:marketplace:run_shredder
+
+  mailcatcher:
+    restart: on-failure:10
+    image: dockage/mailcatcher:0.7.1
+    ports:
+      - 1080:1080
+      - 1025:1025
+
+  mysql:
+    image: mysql:5.7
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_DATABASE: sharetribe_development
+      MYSQL_USER: sharetribe
+      MYSQL_PASSWORD: secret
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_ROOT_HOST: '%'
+    volumes:
+      - mysql:/var/lib/mysql
+      - ./docker/development/init:/docker-entrypoint-initdb.d
+
+  test:
+    image: boxgiver:latest
+    env_file:
+      - docker/test/.env
+    volumes: 
+      - .:/opt/app
+      - /opt/app/tmp
+      - node_modules:/opt/app/node_modules:ro
+      - node_modules:/opt/app/client/node_modules:ro
+      - bundle:/usr/local/bundle:ro
+    depends_on:
+      - mysql
+    ports:
+      - 3001:3000
+
+volumes:
+  node_modules:
+  bundle:
+  mysql:

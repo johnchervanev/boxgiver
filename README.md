@@ -62,6 +62,14 @@ Before you get started, the following needs to be installed:
   * [**Sphinx**](http://pat.github.com/ts/en/installing_sphinx.html). Version 2.1.4 has been used successfully, but newer versions should work as well. Make sure to enable MySQL support. If you're using OS X and have Homebrew installed, install it with `brew install sphinx --with-mysql`
   * [**Imagemagick**](http://www.imagemagick.org). If you're using OS X and have Homebrew installed, install it with `brew install imagemagick`
 
+
+### Setting up the development environment with docker-compose
+1. Build `boxgiver:latest` image run `docker-compose build web`
+2. Init setup databse `docker-compose run --entrypoint='' web bundle exec rake db:structure:load`
+2. Then everytime when you need you project needs to be up locally `docker-compose up`
+
+To makes works malcatcher at localhost:1025 follow mailcather instructions
+
 ### Setting up the development environment
 
 1.  Get the code. Clone this git repository and check out the latest release:
