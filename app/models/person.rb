@@ -599,6 +599,10 @@ class Person < ApplicationRecord
     custom_field_values.by_question(custom_field).first
   end
 
+  def full_name
+    "#{given_name} #{family_name}"
+  end
+
   private
 
   def digest(password, salt)

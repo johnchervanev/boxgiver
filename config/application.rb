@@ -50,6 +50,7 @@ module Kassi
     config.autoload_paths += Dir[Rails.root.join('app', 'view_utils')]
     config.autoload_paths += Dir[Rails.root.join('app', 'forms')]
     config.autoload_paths += Dir[Rails.root.join('app', 'validators')]
+    config.autoload_paths += Dir[Rails.root.join('lib', 'announcement')]
 
     # Fakepal
     config.autoload_paths += Dir[Rails.root.join('lib', 'services')]
