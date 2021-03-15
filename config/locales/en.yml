@@ -2555,7 +2555,7 @@ en:
       verification_required: "Verification required"
     announcement:
       twitter_html: |
-        %{full_name} just posted a %{listing_title} at %{listing_url} on https://boxgiver.com
+        %{full_name} just posted a %{listing_title} %{listing_url} on https://boxgiver.com. #freemovingboxes
 
   listing_conversations:
     preauthorize:
