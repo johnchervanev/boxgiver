@@ -199,13 +199,13 @@ class LandingPageController < ActionController::Metal
       "all_categories" => search_path.call(category: "all"),
       "signup" => sign_up_path(locale: locale_param),
       "login" => login_path(locale: locale_param),
-      "about" => about_infos_path(locale: locale_param),
+      "about" => about_path(locale: locale_param),
       "contact_us" => new_user_feedback_path(locale: locale_param),
       "post_a_new_listing" => new_listing_path(locale: locale_param),
-      "how_to_use" => how_to_use_infos_path(locale: locale_param),
-      "terms" => terms_infos_path(locale: locale_param),
+      "how_to_use" => how_to_use_path(locale: locale_param),
+      "terms" => terms_path(locale: locale_param),
       "new_invitation" => new_invitation_path(locale: locale_param),
-      "privacy" => privacy_infos_path(locale: locale_param)
+      "privacy" => privacy_path(locale: locale_param)
     }
   end
 

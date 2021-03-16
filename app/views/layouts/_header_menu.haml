@@ -9,7 +9,7 @@
     = t("homepage.index.post_new_listing")
 
   - if @current_community.configuration.display_about_menu?
-    = link_to about_infos_path do
+    = link_to about_path do
       = icon_map_tag(icons, "information", ["icon-with-text"])
       = t("header.about")
 

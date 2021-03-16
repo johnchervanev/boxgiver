@@ -11,5 +11,8 @@
   "cacheDirectories": [
     "node_modules",
     "client/node_modules"
-  ]
+  ],
+  "devDependencies": {
+    "webpack-cli": "^4.5.0"
+  }
 }

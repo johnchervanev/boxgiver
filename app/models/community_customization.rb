@@ -34,6 +34,7 @@
 #  category_meta_description                  :text(65535)
 #  profile_meta_title                         :string(255)
 #  profile_meta_description                   :text(65535)
+#  earning_potential_text                     :text(65535)
 #
 # Indexes
 #

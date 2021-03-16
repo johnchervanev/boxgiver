@@ -126,6 +126,12 @@ group :development do
   gem 'zeus', '~> 0.15.13', require: false
   gem 'web-console', '~> 3.7.0'
   gem 'awesome_print', '~> 1.7.0'
+
+  gem 'capistrano',  '~> 3.1'
+  gem 'capistrano-rails', '~> 1.1'
+  gem 'capistrano-rvm',   '~> 0.1'
+  gem 'capistrano3-delayed-job', '~> 1.0'
+  gem 'capistrano-npm'
 end
 
 group :test do
@@ -177,7 +183,7 @@ gem 'memoist'
 gem 'biz'
 gem 'ffi', '>= 1.9.25'
 gem 'rubyzip', '~> 1.3.0'
-gem 'bootsnap', require: false
+gem 'bootsnap','1.4.3', require: false
 gem "select2-rails"
 gem "cocoon"
 gem "fast-polylines"

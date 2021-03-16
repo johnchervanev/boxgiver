@@ -108,6 +108,10 @@
 #  email_admins_about_new_transactions        :boolean          default(FALSE)
 #  show_location                              :boolean          default(TRUE)
 #  fuzzy_location                             :boolean          default(FALSE)
+#  earning_potential_image_file_name          :string(255)
+#  earning_potential_image_content_type       :string(255)
+#  earning_potential_image_file_size          :integer
+#  earning_potential_image_updated_at         :datetime
 #
 # Indexes
 #

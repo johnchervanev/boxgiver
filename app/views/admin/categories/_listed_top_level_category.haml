@@ -3,8 +3,10 @@
     .row.category-row
       .col-10.listed-category-col
         .row{:id => "top-level-category-#{category.display_name(I18n.locale).squish.downcase.tr(" ","_")}"}
-          .col-12.listed-category-col
+          .col-6.listed-category-col
             = category.display_name(I18n.locale)
+          .col-6.listed-category-col
+            = image_tag category.image.url, size: 70 if category.image.present?
       .col-2.listed-category-col
         = render :partial => "category_action_buttons", :locals => {category: category, category_count: category_count}
 

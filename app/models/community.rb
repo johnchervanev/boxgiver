@@ -108,6 +108,10 @@
 #  email_admins_about_new_transactions        :boolean          default(FALSE)
 #  show_location                              :boolean          default(TRUE)
 #  fuzzy_location                             :boolean          default(FALSE)
+#  earning_potential_image_file_name          :string(255)
+#  earning_potential_image_content_type       :string(255)
+#  earning_potential_image_file_size          :integer
+#  earning_potential_image_updated_at         :datetime
 #
 # Indexes
 #
@@ -270,6 +274,10 @@ class Community < ApplicationRecord
 
   validates_attachment_content_type :favicon,
                                     :content_type => %w[image/jpeg image/png image/gif image/x-icon image/vnd.microsoft.icon]
+
+  has_attached_file :earning_potential_image
+  validates_attachment_content_type :earning_potential_image, content_type: /\Aimage/
+  validates_attachment_file_name :earning_potential_image, matches: [/png\Z/, /jpe?g\Z/]
 
   # process_in_background definitions have to be after
   # after all attachments: https://github.com/jrgifford/delayed_paperclip/issues/129
