@@ -48,6 +48,17 @@ module CommunitiesHelper
     }
   end
 
+  def earning_potential_text_locals
+    translations = find_community_customizations(:earning_potential_text)
+    {
+      header: 'Earning Potential Text',
+      input_classes: "",
+      info_text: 'Text Top of the footer',
+      input_name: "earning_potential_text",
+      translations: translations
+    }
+  end
+
   def transaction_agreement_label_locals
     translations = find_community_customizations(:transaction_agreement_label)
     {

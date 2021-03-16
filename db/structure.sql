@@ -134,6 +134,10 @@ CREATE TABLE `categories` (
   `community_id` int(11) DEFAULT NULL,
   `sort_priority` int(11) DEFAULT NULL,
   `url` varchar(255) DEFAULT NULL,
+  `image_file_name` varchar(255) DEFAULT NULL,
+  `image_content_type` varchar(255) DEFAULT NULL,
+  `image_file_size` int(11) DEFAULT NULL,
+  `image_updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `index_categories_on_community_id` (`community_id`) USING BTREE,
   KEY `index_categories_on_parent_id` (`parent_id`) USING BTREE,
@@ -319,6 +323,10 @@ CREATE TABLE `communities` (
   `email_admins_about_new_transactions` tinyint(1) DEFAULT '0',
   `show_location` tinyint(1) DEFAULT '1',
   `fuzzy_location` tinyint(1) DEFAULT '0',
+  `earning_potential_image_file_name` varchar(255) DEFAULT NULL,
+  `earning_potential_image_content_type` varchar(255) DEFAULT NULL,
+  `earning_potential_image_file_size` int(11) DEFAULT NULL,
+  `earning_potential_image_updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `index_communities_on_uuid` (`uuid`),
   KEY `index_communities_on_domain` (`domain`) USING BTREE,
@@ -361,6 +369,7 @@ CREATE TABLE `community_customizations` (
   `category_meta_description` text,
   `profile_meta_title` varchar(255) DEFAULT NULL,
   `profile_meta_description` text,
+  `earning_potential_text` text,
   PRIMARY KEY (`id`),
   KEY `index_community_customizations_on_community_id` (`community_id`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -2457,6 +2466,8 @@ INSERT INTO `schema_migrations` (version) VALUES
 ('20200224080321'),
 ('20200303075727'),
 ('20200312062151'),
-('20200312112018');
+('20200312112018'),
+('20210308131717'),
+('20210309071843');
 
 

@@ -89,6 +89,12 @@
 .hide_unit {
   display: none;
 }
+
+.listing-container {
+  height: calc(100vh - 168px);
+  overflow-x: auto;
+  overflow-x: hidden;
+}
 .quantity-label-wrapper {
   float: left;
   width: 100%;
