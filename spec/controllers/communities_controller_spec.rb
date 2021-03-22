@@ -112,6 +112,7 @@
 #  earning_potential_image_content_type       :string(255)
 #  earning_potential_image_file_size          :integer
 #  earning_potential_image_updated_at         :datetime
+#  earning_potential_image_processing         :boolean
 #
 # Indexes
 #

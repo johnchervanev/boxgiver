@@ -6,11 +6,15 @@ module HomepageHelper
   end
 
   def with_first_listing_image(listing, &block)
-    Maybe(listing)
-      .listing_images
-      .map { |images| images.first }[:medium].each { |url|
-      block.call(url)
-    }
+    if listing.listing_images.size == 0
+      block.call(asset_path('nope-not-here.webp'))
+    else
+      Maybe(listing)
+        .listing_images
+        .map { |images| images.first }[:medium].each { |url|
+        block.call(url)
+      }
+    end
   end
 
   def without_listing_image(listing, &block)
