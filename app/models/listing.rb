@@ -91,6 +91,7 @@ class Listing < ApplicationRecord
   accepts_nested_attributes_for :origin_loc, :destination_loc
 
   has_and_belongs_to_many :followers, :class_name => "Person", :join_table => "listing_followers"
+  has_and_belongs_to_many :lovers, :class_name => "Person", :join_table => "listing_lovers"
 
   belongs_to :category
   has_many :working_time_slots, ->{ ordered }, dependent: :destroy, inverse_of: :listing

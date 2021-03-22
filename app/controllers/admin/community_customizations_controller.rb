@@ -19,6 +19,10 @@ class Admin::CommunityCustomizationsController < Admin::AdminBaseController
   end
 
   def update_details
+    p "<<<<<<<<<<<<<<<<<<<<<<<<,,"
+    p params[:earning_potential_image]
+    p params[:community_customizations][:earning_potential_image]
+    p "<<<<<<<<<<<<<<<<<<<<<<<<,,"
     update_results = []
     analytic = AnalyticService::CommunityCustomizations.new(user: @current_user, community: @current_community)
 
@@ -53,6 +57,7 @@ class Admin::CommunityCustomizationsController < Admin::AdminBaseController
 
     transaction_agreement_checked = Maybe(params)[:community][:transaction_agreement_checkbox].is_some?
     update_results.push(@current_community.update(transaction_agreement_in_use: transaction_agreement_checked))
+    update_results.push(@current_community.update(earning_potential_image: params[:community_customizations][:earning_potential_image]))
 
     show_slogan = Maybe(params)[:community][:show_slogan].is_some?
     update_results.push(@current_community.update(show_slogan: show_slogan))

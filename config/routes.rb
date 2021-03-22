@@ -627,7 +627,9 @@ Rails.application.routes.draw do
     resources :listings do
       member do
         post :follow
+        post :love
         delete :unfollow
+        delete :remove_from_love
         delete :delete
       end
       collection do

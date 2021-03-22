@@ -1,0 +1,29 @@
+<link rel="stylesheet" type="text/css" href="//wpcc.io/lib/1.0.2/cookieconsent.min.css"/>
+
+<script src="//wpcc.io/lib/1.0.2/cookieconsent.min.js"></script>
+
+<script>
+    message = "We use cookies on our website. To learn more about how we use cookies and how to change your cookies settings if you do not want cookies on your computer, please see our Privacy. By continuing to use this site you consent to our use of cookies.";
+    policy_link = "Cookie Policy";
+    button_text = "Accept cookies";
+    window.addEventListener("load", function () {
+        window.wpcc.init({
+            "corners": "normal",
+            "colors": {
+                "popup": {"background": "#ffffff", "text": "#000000", "border": "#555555"},
+                "button": {"background": "#4a90e2", "text": "#ffffff"}
+            },
+            "position": "bottom",
+            "padding": "small",
+            "margin": "small",
+            "fontsize": "small",
+            "content": {
+                "href": "https://piano.me/infos/privacy",
+                "message": message,
+                "link": policy_link,
+                "button": button_text
+            }
+        })
+    });
+
+</script>
