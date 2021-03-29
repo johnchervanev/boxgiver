@@ -3,7 +3,7 @@
 # Defines a single server with a list of roles and multiple properties.
 # You can define all roles on a single server, or split them:
 
-set :branch, 'development'
+set :branch, 'develop'
 set :deploy_to, "/home/sharetribeisprettygood/apps/boxgiver"
 
 server "198.211.105.116", user: "sharetribeisprettygood", roles: %w{app db web}

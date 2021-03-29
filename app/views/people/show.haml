@@ -73,14 +73,15 @@
     - if @service.community.follow_in_use?
       = render :partial => "followed_people", :locals => { person: person, followed_people: @service.followed_people, limit: 6 }
 
-    #profile-loved-listings
-      .row
-        %h2.people-header
-          - if @current_user.loved_listings.count > 0
-            = "You Loved The Following Listings"
-          - else
-            = "No Loved Listings"
-      = render :partial => "people/loved_listings_grid", :collection => @current_user.loved_listings, :as => :listing
+    - if @current_user.present? && (@current_user == @service.person)
+      #profile-loved-listings
+        .row
+          %h2.people-header
+            - if @current_user.loved_listings.count > 0
+              = "You Loved The Following Listings"
+            - else
+              = "No Loved Listings"
+        = render :partial => "people/loved_listings_grid", :collection => @current_user.loved_listings, :as => :listing
 
     #people-testimonials.listing-main.clear-both
       .row
