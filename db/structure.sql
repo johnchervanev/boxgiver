@@ -134,6 +134,10 @@ CREATE TABLE `categories` (
   `community_id` int(11) DEFAULT NULL,
   `sort_priority` int(11) DEFAULT NULL,
   `url` varchar(255) DEFAULT NULL,
+  `image_file_name` varchar(255) DEFAULT NULL,
+  `image_content_type` varchar(255) DEFAULT NULL,
+  `image_file_size` int(11) DEFAULT NULL,
+  `image_updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `index_categories_on_community_id` (`community_id`) USING BTREE,
   KEY `index_categories_on_parent_id` (`parent_id`) USING BTREE,
@@ -319,6 +323,15 @@ CREATE TABLE `communities` (
   `email_admins_about_new_transactions` tinyint(1) DEFAULT '0',
   `show_location` tinyint(1) DEFAULT '1',
   `fuzzy_location` tinyint(1) DEFAULT '0',
+  `earning_potential_image_file_name` varchar(255) DEFAULT NULL,
+  `earning_potential_image_content_type` varchar(255) DEFAULT NULL,
+  `earning_potential_image_file_size` int(11) DEFAULT NULL,
+  `earning_potential_image_updated_at` datetime DEFAULT NULL,
+  `earning_potential_image_processing` tinyint(1) DEFAULT NULL,
+  `hero_photo` varchar(255) DEFAULT NULL,
+  `hero_photo_file_name` varchar(255) DEFAULT NULL,
+  `hero_photo_content_type` varchar(255) DEFAULT NULL,
+  `hero_photo_processing` tinyint(1) DEFAULT NULL,
   `twitter_announcement_enabled` tinyint(1) DEFAULT '1',
   PRIMARY KEY (`id`),
   UNIQUE KEY `index_communities_on_uuid` (`uuid`),
@@ -362,6 +375,7 @@ CREATE TABLE `community_customizations` (
   `category_meta_description` text,
   `profile_meta_title` varchar(255) DEFAULT NULL,
   `profile_meta_description` text,
+  `earning_potential_text` text,
   PRIMARY KEY (`id`),
   KEY `index_community_customizations_on_community_id` (`community_id`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -774,6 +788,16 @@ CREATE TABLE `listing_images` (
   PRIMARY KEY (`id`),
   KEY `index_listing_images_on_listing_id` (`listing_id`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `listing_lovers`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `listing_lovers` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `person_id` int(11) DEFAULT NULL,
+  `listing_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `listing_shapes`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -2459,6 +2483,11 @@ INSERT INTO `schema_migrations` (version) VALUES
 ('20200303075727'),
 ('20200312062151'),
 ('20200312112018'),
-('20210313225935');
+('20210308131717'),
+('20210309071843'),
+('20210313225935'),
+('20210316072456'),
+('20210322051715'),
+('20210329040124');
 
 
