@@ -113,6 +113,10 @@
 #  earning_potential_image_file_size          :integer
 #  earning_potential_image_updated_at         :datetime
 #  earning_potential_image_processing         :boolean
+#  hero_photo                                 :string(255)
+#  hero_photo_file_name                       :string(255)
+#  hero_photo_content_type                    :string(255)
+#  hero_photo_processing                      :boolean
 #
 # Indexes
 #

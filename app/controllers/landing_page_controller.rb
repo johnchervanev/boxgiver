@@ -51,6 +51,9 @@ class LandingPageController < ActionController::Metal
     locale_param = params[:locale]
     script_digest = Digest::MD5.hexdigest(custom_head_scripts.to_s)
 
+    @categories = @current_community.categories.where("parent_id IS NULL")
+    @user_logged_in = user(request).present?
+
     begin
       content = nil
       cache_meta = CLP::Caching.fetch_cache_meta(cid, version, locale_param, cta, script_digest)
@@ -110,8 +113,9 @@ class LandingPageController < ActionController::Metal
       else
         expires_in(CACHE_TIME, public: true)
       end
-    rescue CLP::LandingPageContentNotFound
-      render_not_found()
+    rescue => ex #CLP::LandingPageContentNotFound
+      p ex
+      # render_not_found()
     end
   end
 
@@ -148,7 +152,6 @@ class LandingPageController < ActionController::Metal
   end
 
   include ActionView::Helpers::JavaScriptHelper
-
 
   private
 
@@ -275,7 +278,12 @@ class LandingPageController < ActionController::Metal
       google_analytics_key: c.google_analytics_key,
       social_image: c.social_logo.present? && c.social_logo.image.present?,
       show_slogan: c.show_slogan,
-      show_description: c.show_description
+      logo: c.stable_image_url(:wide_logo, :header_highres),
+      cover_photo: c.stable_image_url(:cover_photo, :hd_header),
+      hero_photo: c.stable_image_url(:hero_photo, :original),
+      show_description: c.show_description,
+      earning_text: nil,
+      earning_potential_image: c.stable_image_url(:earning_potential_image, :original)
     }
   end
 
@@ -302,7 +310,6 @@ class LandingPageController < ActionController::Metal
                          true)
     marketplace_context = marketplace_context(c, topbar_locale, request)
 
-
     denormalizer = build_denormalizer(
       cid: c&.id,
       cta: cta,
@@ -313,26 +320,26 @@ class LandingPageController < ActionController::Metal
     )
 
     render_to_string :landing_page,
-           locals: { font_path: FONT_PATH,
-                     landing_page_locale: landing_page_locale,
-                     landing_page_url: "#{c.full_url}#{request.fullpath}",
-                     styles: landing_page_styles,
-                     javascripts: {
-                       location_search: location_search_js,
-                       translations: js_translations(topbar_locale)
-                     },
-                     topbar: {
-                       enabled: true,
-                       props: props,
-                       marketplace_context: marketplace_context,
-                       props_endpoint: ui_api_topbar_props_path(locale: topbar_locale, landing_page: true)
-                     },
-                     page: denormalizer.to_tree(structure, root: "page"),
-                     sections: denormalizer.to_tree(structure, root: "composition"),
-                     community_context: community_context(request, landing_page_locale),
-                     feature_flags: FeatureFlagHelper.feature_flags,
-                     asset_host: APP_CONFIG.asset_host
-                   }
+                     locals: { font_path: FONT_PATH,
+                               landing_page_locale: landing_page_locale,
+                               landing_page_url: "#{c.full_url}#{request.fullpath}",
+                               styles: landing_page_styles,
+                               javascripts: {
+                                 location_search: location_search_js,
+                                 translations: js_translations(topbar_locale)
+                               },
+                               topbar: {
+                                 enabled: true,
+                                 props: props,
+                                 marketplace_context: marketplace_context,
+                                 props_endpoint: ui_api_topbar_props_path(locale: topbar_locale, landing_page: true)
+                               },
+                               page: denormalizer.to_tree(structure, root: "page"),
+                               sections: denormalizer.to_tree(structure, root: "composition"),
+                               community_context: community_context(request, landing_page_locale),
+                               feature_flags: FeatureFlagHelper.feature_flags,
+                               asset_host: APP_CONFIG.asset_host
+                     }
   end
 
   def render_not_found(msg = "Not found")

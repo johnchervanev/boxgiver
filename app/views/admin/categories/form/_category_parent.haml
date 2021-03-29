@@ -5,7 +5,7 @@
       = form.label :parent_id, t(".category_parent")
       = form.select :parent_id, options_for_select([[t(".no_parent"), nil]] + top_level_categories.collect { |c| [c.display_name(I18n.locale), c.id] }, @category.parent_id)
 
-  .row
-    .col-12
-      = form.label :image, t("listings.form.images.image")
-      = form.file_field :image
+.row
+  .col-12
+    = form.label :image, t("listings.form.images.image")
+    = form.file_field :image
