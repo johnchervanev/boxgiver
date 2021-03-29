@@ -35,6 +35,8 @@ append :linked_files, 'config/database.yml', 'config/secrets.yml', 'config/appli
 set :keep_releases, 3
 set :rvm_ruby_version, '2.6.5'
 
+set :npm_flags, '--production'
+
 set :nvm_type, :user
 set :nvm_map_bins, %w{node npm yarn}
 
