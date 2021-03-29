@@ -99,3 +99,5 @@
 
 - unless @disable_custom_head_script || on_admin?
   = @current_community.custom_head_script.try(:html_safe)
+- unless on_admin?
+  =  render 'layouts/cookies'

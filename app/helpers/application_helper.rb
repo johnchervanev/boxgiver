@@ -291,26 +291,26 @@ module ApplicationHelper
       {
         :text => t('layouts.infos.about'),
         :icon_class => icon_class("information"),
-        :path => about_infos_path,
+        :path => about_path,
         :name => "about"
       }
     ]
     links << {
       :text => t('layouts.infos.how_to_use'),
       :icon_class => icon_class("how_to_use"),
-      :path => how_to_use_infos_path,
+      :path => how_to_use_path,
       :name => "how_to_use"
     }
     links << {
       :text => t('layouts.infos.register_details'),
       :icon_class => icon_class("privacy"),
-      :path => privacy_infos_path,
+      :path => privacy_path,
       :name => "privacy"
     }
     links << {
       :text => t('layouts.infos.terms'),
       :icon_class => icon_class("terms"),
-      :path => terms_infos_path,
+      :path => terms_path,
       :name => "terms"
     }
   end

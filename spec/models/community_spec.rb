@@ -117,7 +117,6 @@
 #  hero_photo_file_name                       :string(255)
 #  hero_photo_content_type                    :string(255)
 #  hero_photo_processing                      :boolean
-#  twitter_announcement_enabled               :boolean          default(TRUE)
 #
 # Indexes
 #
@@ -265,7 +264,7 @@ describe Community, type: :model do
       expect(community1.is_person_only_admin(person_admin1)).to eq false
     end
   end
-  
+
   describe '#is_announcement_enabled_to' do
     let(:community) { FactoryGirl.create(:community, twitter_announcement_enabled: true) }
 

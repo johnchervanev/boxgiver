@@ -184,8 +184,8 @@ class Admin::CommunitiesController < Admin::AdminBaseController
     params[:community][:slogan_color] = nil if params[:community][:slogan_color] == ""
 
     permitted_params = [
-      :wide_logo, :logo,:cover_photo, :small_cover_photo, :favicon, :custom_color1,
-      :custom_color2, :slogan_color, :description_color, :default_browse_view, :name_display_type,
+      :wide_logo, :logo,:cover_photo, :hero_photo, :small_cover_photo, :favicon, :custom_color1,
+      :custom_color2, :slogan_color, :description_color, :default_browse_view, :name_display_type, :earning_potential_image,
       attachments_destroyer: []
     ]
     permitted_params << :custom_head_script
