@@ -26,6 +26,8 @@ Rails.application.routes.draw do
   # parameter with dots
   #
   get "/sitemap.xml.gz"                        => "sitemap#sitemap", format: :xml
+  get "/sitemap.xml"                        => "sitemap#index", as: :sitemap, format: :xml
+  get "/sitemap"                        => "sitemap#sitemap_plain"
   get "/sitemap/:sitemap_host/generate.xml.gz" => "sitemap#generate", format: :xml, :constraints => { sitemap_host: /[.\-\w]+/ }
 
   # A route for DV test file
@@ -114,6 +116,11 @@ Rails.application.routes.draw do
 
   # Adds locale to every url right after the root path
   scope "(/:locale)", :constraints => { :locale => locale_matcher } do
+
+    get "/about" => "infos#about"
+    get "/how_to_use" => "infos#how_to_use"
+    get "/privacy" => "infos#privacy"
+    get "/terms" => "infos#terms"
 
     put '/mercury_update' => "mercury_update#update", :as => :mercury_update
 
@@ -622,7 +629,9 @@ Rails.application.routes.draw do
     resources :listings do
       member do
         post :follow
+        post :love
         delete :unfollow
+        delete :remove_from_love
         delete :delete
       end
       collection do
@@ -659,15 +668,15 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :infos do
-      collection do
-        get :about
-        get :how_to_use
-        get :terms
-        get :privacy
-        get :news
-      end
-    end
+    # resources :infos do
+    #   collection do
+    #     get :about
+    #     get :how_to_use
+    #     get :terms
+    #     get :privacy
+    #     get :news
+    #   end
+    # end
     resource :terms do
       member do
         post :accept

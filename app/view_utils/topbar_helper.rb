@@ -103,7 +103,7 @@ module TopbarHelper
 
     if community.configuration.display_about_menu
       links << {
-        link: paths.about_infos_path(locale: locale_param),
+        link: paths.about_path(locale: locale_param),
         title: I18n.t("header.about"),
         priority: 0
       }

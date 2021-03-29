@@ -117,7 +117,6 @@
 #  hero_photo_file_name                       :string(255)
 #  hero_photo_content_type                    :string(255)
 #  hero_photo_processing                      :boolean
-#  twitter_announcement_enabled               :boolean          default(TRUE)
 #
 # Indexes
 #

@@ -36,6 +36,10 @@ module IntercomHelper
 
       match = domain_regexp.match(host_with_port)
 
+      if match.nil?
+        return
+      end
+
       ".#{match[0].split(":")[0]}"
     end
 

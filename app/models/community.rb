@@ -142,7 +142,7 @@ class Community < ApplicationRecord
   has_one :location, :dependent => :destroy
   has_many :community_customizations, :dependent => :destroy
   has_many :menu_links, -> { for_topbar.sorted }, :dependent => :destroy, :inverse_of => :community
-  has_many :footer_menu_links, -> { for_footer.sorted }, :class_name => "MenuLink",  :dependent => :destroy, :inverse_of => :community
+  has_many :footer_menu_links, -> { for_footer.sorted }, :class_name => "MenuLink", :dependent => :destroy, :inverse_of => :community
 
   has_many :categories, -> { order("sort_priority") }, :inverse_of => :community
   has_many :top_level_categories, -> { where("parent_id IS NULL").order("sort_priority") }, :class_name => "Category", :inverse_of => :community
@@ -153,7 +153,7 @@ class Community < ApplicationRecord
 
   has_many :listings, :dependent => :destroy
   has_many :listing_shapes, :dependent => :destroy
-  has_many :shapes, ->{ exist_ordered }, class_name: 'ListingShape', :dependent => :destroy, :inverse_of => :community
+  has_many :shapes, -> { exist_ordered }, class_name: 'ListingShape', :dependent => :destroy, :inverse_of => :community
 
   has_many :transaction_processes, :dependent => :destroy
 
@@ -162,7 +162,7 @@ class Community < ApplicationRecord
   has_many :custom_fields, -> { for_listing }, :dependent => :destroy, :inverse_of => :community
   has_many :custom_dropdown_fields, -> { for_listing.dropdown }, :class_name => "CustomField", :dependent => :destroy, :inverse_of => :community
   has_many :custom_numeric_fields, -> { for_listing.numeric }, :class_name => "NumericField", :dependent => :destroy, :inverse_of => :community
-  has_many :person_custom_fields, -> { for_person.sorted }, :class_name => "CustomField",  :dependent => :destroy, :inverse_of => :community
+  has_many :person_custom_fields, -> { for_person.sorted }, :class_name => "CustomField", :dependent => :destroy, :inverse_of => :community
   has_many :person_custom_dropdown_fields, -> { for_person.sorted.dropdown }, :class_name => "CustomField", :dependent => :destroy, :inverse_of => :community
   has_many :person_custom_numeric_fields, -> { for_person.sorted.numeric }, :class_name => "NumericField", :dependent => :destroy, :inverse_of => :community
   has_many :marketplace_sender_emails, :dependent => :destroy
@@ -186,9 +186,9 @@ class Community < ApplicationRecord
 
   # starts ends with alphanumerics can contain hyphen
   validates :ident, length: { in: 3..50 },
-                    format: { with: /\A[A-Z0-9][A-Z0-9\-]*[A-Z0-9]\z/i, message: :domain_name_is_invalid },
-                    uniqueness: true,
-                    exclusion: { in: MarketplaceService::RESERVED_DOMAINS, message: :domain_name_is_invalid }
+            format: { with: /\A[A-Z0-9][A-Z0-9\-]*[A-Z0-9]\z/i, message: :domain_name_is_invalid },
+            uniqueness: true,
+            exclusion: { in: MarketplaceService::RESERVED_DOMAINS, message: :domain_name_is_invalid }
   # cannot contain --
   validates :ident, format: { with: /\A((?!\-\-).)*\z/, message: :domain_name_is_invalid }
   validates_length_of :slogan, :in => 2..100, :allow_nil => true
@@ -250,11 +250,15 @@ class Community < ApplicationRecord
                       :hd_header => "1920x450#",
                       :original => "3840x3840>"
                     },
-                    :default_url => ->(_){ ActionController::Base.helpers.asset_path("cover_photos/header/default.jpg") },
+                    :default_url => ->(_) { ActionController::Base.helpers.asset_path("cover_photos/header/default.jpg") },
                     :keep_old_files => true
 
   validates_attachment_content_type :cover_photo,
                                     :content_type => IMAGE_CONTENT_TYPE
+
+  has_attached_file :hero_photo
+  validates_attachment_content_type :hero_photo, content_type: /\Aimage/
+  validates_attachment_file_name :hero_photo, matches: [/png\Z/, /jpe?g\Z/]
 
   has_attached_file :small_cover_photo,
                     :styles => {
@@ -281,12 +285,18 @@ class Community < ApplicationRecord
   validates_attachment_content_type :favicon,
                                     :content_type => %w[image/jpeg image/png image/gif image/x-icon image/vnd.microsoft.icon]
 
+  has_attached_file :earning_potential_image,
+                    :default_url => ->(_) { ActionController::Base.helpers.asset_path("board_summary.jpg") }
+  validates_attachment_content_type :earning_potential_image, content_type: /\Aimage/
+  validates_attachment_file_name :earning_potential_image, matches: [/png\Z/, /jpe?g\Z/]
+
   # process_in_background definitions have to be after
   # after all attachments: https://github.com/jrgifford/delayed_paperclip/issues/129
   process_in_background :logo
   process_in_background :wide_logo
   process_in_background :cover_photo
   process_in_background :small_cover_photo
+  process_in_background :hero_photo
 
   process_in_background :favicon
 
@@ -313,6 +323,7 @@ class Community < ApplicationRecord
   end
 
   before_create :add_uuid
+
   def add_uuid
     self.uuid ||= UUIDUtils.create_raw
   end
@@ -320,7 +331,7 @@ class Community < ApplicationRecord
   validates_format_of :twitter_handle, with: /\A[A-Za-z0-9_]{1,15}\z/, allow_nil: true
 
   validates :facebook_connect_id, numericality: { only_integer: true }, allow_nil: true
-  validates :facebook_connect_id, length: {maximum: 16}, allow_nil: true
+  validates :facebook_connect_id, length: { maximum: 16 }, allow_nil: true
 
   validates_format_of :facebook_connect_secret, with: /\A[a-f0-9]{32}\z/, allow_nil: true
 
@@ -461,7 +472,7 @@ class Community < ApplicationRecord
   end
 
   def locales
-   if settings && !settings["locales"].blank?
+    if settings && !settings["locales"].blank?
       return settings["locales"]
     else
       # if locales not set, return the short locales from the default list
@@ -471,7 +482,7 @@ class Community < ApplicationRecord
 
   # Returns the emails of admins in an array
   def admin_emails
-    admins.collect { |p| p.confirmed_notification_email_addresses } .flatten
+    admins.collect { |p| p.confirmed_notification_email_addresses }.flatten
   end
 
   def allows_user_to_send_invitations?(user)
@@ -546,7 +557,7 @@ class Community < ApplicationRecord
   end
 
   #returns full domain without protocol
-  def full_domain(options= {})
+  def full_domain(options = {})
     # assume that if port is used in domain config, it should
     # be added to the end of the full domain for links to work
     # This concerns usually mostly testing and development
@@ -555,7 +566,8 @@ class Community < ApplicationRecord
 
     if domain.present? && use_domain? # custom domain
       dom = domain
-    else # just a subdomain specified
+    else
+      # just a subdomain specified
       dom = "#{self.ident}.#{default_host}"
       dom += ":#{port_string}" unless port_string.blank?
     end
@@ -586,10 +598,10 @@ class Community < ApplicationRecord
     latest = person.last_community_updates_at
 
     selected_listings = listings
-      .currently_open
-      .where("updates_email_at > ? AND updates_email_at > created_at", latest)
-      .order("updates_email_at DESC")
-      .to_a
+                          .currently_open
+                          .where("updates_email_at > ? AND updates_email_at > created_at", latest)
+                          .order("updates_email_at DESC")
+                          .to_a
 
     additional_listings = 10 - selected_listings.length
     new_listings =
@@ -604,9 +616,9 @@ class Community < ApplicationRecord
         []
       end
 
-     selected_listings
+    selected_listings
       .concat(new_listings)
-      .sort_by { |listing| listing.updates_email_at}
+      .sort_by { |listing| listing.updates_email_at }
       .reverse
   end
 
@@ -628,7 +640,7 @@ class Community < ApplicationRecord
   # if email is given, only approves if email is allowed
   # returns true if membership was now approved
   # false if it wasn't allowed or if already a member
-  def approve_pending_membership(person, email_address=nil)
+  def approve_pending_membership(person, email_address = nil)
     membership = community_memberships.where(:person_id => person.id, :status => "pending_email_confirmation").first
     if membership && (email_address.nil? || email_allowed?(email_address))
       membership.update_attribute(:status, "accepted")
@@ -681,16 +693,17 @@ class Community < ApplicationRecord
 
   def images_processing?
     logo.processing? ||
-    wide_logo.processing? ||
-    cover_photo.processing? ||
-    small_cover_photo.processing? ||
-    favicon.processing?
+      wide_logo.processing? ||
+      cover_photo.processing? ||
+      small_cover_photo.processing? ||
+      favicon.processing? ||
+      hero_photo.processing?
   end
 
   def as_json(options)
     attrs = super(options)
     uuid = UUIDUtils.parse_raw(attrs["uuid"])
-    attrs.merge({"uuid" => uuid.to_s})
+    attrs.merge({ "uuid" => uuid.to_s })
   end
 
   # FIXME-RF not the best place
@@ -707,7 +720,7 @@ class Community < ApplicationRecord
 
   def is_announcement_enabled_to(platform)
     unless respond_to?("#{platform}_announcement_enabled")
-      raise NotImplementedError.new("#{platform.capitalize} announcements not implemented") 
+      raise NotImplementedError.new("#{platform.capitalize} announcements not implemented")
     end
 
     send("#{platform}_announcement_enabled")
@@ -716,7 +729,7 @@ class Community < ApplicationRecord
   private
 
   def initialize_settings
-    update_attribute(:settings,{"locales"=>[APP_CONFIG.default_locale]}) if self.settings.blank?
+    update_attribute(:settings, { "locales" => [APP_CONFIG.default_locale] }) if self.settings.blank?
     true
   end
 end

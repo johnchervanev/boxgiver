@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title><%= page["title"]["value"] %></title>
+
+  <%= render partial: "meta", locals: { cc: community_context, p: page, locale: landing_page_locale, url: landing_page_url } %>
+
+  <%= favicon_link_tag community_context[:favicon] %>
+  <%= favicon_link_tag community_context[:apple_touch_icon], rel: 'apple-touch-icon-precomposed', type: 'image/png' %>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+  <%= stylesheet_link_tag 'landing' %>
+  <%= stylesheet_link_tag 'landing_page/sections/footer' %>
+</head>
+<body>
+<div id="topbar-placeholder" class="topbar-placeholder"></div>
+<header class="header">
+  <div class="col-lg-12">
+    <div class="row">
+      <div class="col-md-7" style="height: 100%; padding: 0">
+        <div class="header-image" style="background-image: url('<%= community_context[:cover_photo] %>')">
+          <div class="header-content">
+            <%= image_tag(community_context[:logo]) %>
+            <h1> Find free moving boxes near you </h1>
+            <p>
+              BoxGiver is a marketplace that allows users to sell, give away, or find moving boxers.
+            </p>
+            <form action="/s">
+              <div class="search-wrapper">
+                <div class="search-icon"><i class="fa fa-search"></i></div>
+                <div class="search-input">
+                  <input type="text" name="q" placeholder="Search your city" required>
+                </div>
+                <div class="search-submit">
+                  <button type="submit"> Submit</button>
+                </div>
+              </div>
+            </form>
+            <p class="how-it-work-link">
+              <a href="#how-it-works"> Or click here to see how it works </a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-5" style="padding: 0">
+        <div class="header-image" style="background-image: url('<%= community_context[:hero_photo] %>')">
+
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+<div class="boxgiver-videos">
+  <video autoplay loop>
+    <source src="<%= asset_path('sarfing.mp4') %>" type="video/mp4">
+  </video>
+</div>
+<div class="how-it-works-wrapper" id='how-it-works'>
+  <div class="container">
+    <h3 class="text-center"> How it works </h3>
+    <p class="text-center">
+      Whether you're looking to borrow, lead, buy or sell, we offer you simple directions. just let us know what
+      you want to do.
+    </p>
+    <div class="how-it-works-items">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="row">
+            <div class="col-lg-3 col-md-6">
+              <%= image_tag('list') %>
+              <p>
+                LIST
+              </p>
+              <p>
+                List your item and add attractive photos/video together with a de-tailed description.
+              </p>
+            </div>
+            <div class="col-lg-3 col-md-6">
+              <%= image_tag('sell') %>
+              <p>
+                SELL
+              </p>
+              <p>
+                Choose whether you want to sell your times instantly or approve requests from potential
+                Buyers.
+              </p>
+            </div>
+            <div class="col-lg-3 col-md-6">
+              <%= image_tag('deliver') %>
+              <p>
+                DELIVERY
+              </p>
+              <p>
+                Once someone books your item for purchase, quickly arrange pick up or delivery of your
+                item within 7 days.
+              </p>
+            </div>
+            <div class="col-lg-3 col-md-6">
+              <%= image_tag('paid') %>
+              <p>
+                GET PAID
+              </p>
+              <p>
+                Receive your payment once the Buyer confirm that they have received the item. Don't
+                forget to leave feedback for the Buyer!
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="board-wrappers">
+  <div class="container">
+    <div class="board-title">
+      <h1 class="text-center"> All Types Of Boards </h1>
+    </div>
+    <div class="board-items">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="row">
+            <% @categories.each do |category| %>
+              <div class="col-lg-3 col-md-6">
+                <div class="board-item" style="background-image: url('<%= category.image ? category.image : asset_path('nope-not-here.webp') %>')">
+                  <a class="board-item-title" href="/<%= landing_page_locale %>/s?category=<%= category.url %>"> <%= category.display_name(locale) %> </a>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="board-summary">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="summary-text">
+                <p><b> Unlimited earning potential </b></p>
+                <p>
+                  <% if community_context[:earning_text].present? %>
+                    <%= community_context[:earning_text].html_safe %>
+                  <% else %>
+                    Put your board to work and make money renting then out. It's free and only takes
+                    minutes! <a href="<%= new_listing_path %>"> <b> List your boards </b> </a>
+                  <% end %>
+                </p>
+              </div>
+            </div>
+            <div class="col-md-8">
+              <div class="board-summary-image"
+                   style="background-image: url('<%= community_context[:earning_potential_image] %>')">
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<% sections.each_with_index do |section, index| %>
+
+  <% s = section["section"] %>
+  <% section_id = "#{s['kind']}__#{s['id']}__#{index}" %>
+
+  <% case s["kind"] %>
+<% when "footer" %>
+    <%= render partial: "footer", locals: { section_id: section_id, s: s } %>
+  <% end %>
+<% end %>
+<style type="text/css">
+  <%= yield :footer_css %>
+</style>
+<% asset_host = local_assigns.key?(:asset_host) ? asset_host : nil %>
+<%= stylesheet_link_tag asset_path('app-bundle', type: :stylesheet, host: asset_host) %>
+<%= javascript_include_tag asset_path('vendor-bundle', type: :javascript, host: asset_host) %>
+<%= javascript_include_tag asset_path('app-bundle', type: :javascript, host: asset_host) %>
+<%= render partial: "topbar",
+           locals: { props: topbar[:props],
+                     marketplace_context: topbar[:marketplace_context],
+                     props_endpoint: topbar[:props_endpoint],
+                     container_id: "topbar-placeholder" } %>
+</body>
+</html>

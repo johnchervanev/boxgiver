@@ -13,7 +13,7 @@ class ListingsController < ApplicationController
   end
 
   before_action :save_current_path, :only => :show
-  before_action :ensure_authorized_to_view, :only => [:show, :follow, :unfollow]
+  before_action :ensure_authorized_to_view, :only => [:show, :follow, :unfollow, :love, :remove_from_love]
 
   before_action :only => [:close] do |controller|
     controller.ensure_current_user_is_listing_author t("layouts.notifications.only_listing_author_can_close_a_listing")
@@ -261,6 +261,21 @@ class ListingsController < ApplicationController
   def unfollow
     change_follow_status("unfollow")
   end
+
+  def love
+    current_user.love(@listing)
+    respond_to do |format|
+      format.js { render :layout => false }
+    end
+  end
+
+  def remove_from_love
+    current_user.remove_from_love(@listing)
+    respond_to do |format|
+      format.js { render :layout => false }
+    end
+  end
+
 
   def verification_required
 

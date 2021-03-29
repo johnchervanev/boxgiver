@@ -19,6 +19,8 @@ Rails.application.config.assets.precompile += %w(
   application.css
   react_page/styles.css
   design.css
+  landing.css
+  landing_page/sections/footer.css
   email-v2.css
   admin2/admin.js
   admin2/admin.scss
