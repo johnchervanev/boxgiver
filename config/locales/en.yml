@@ -103,6 +103,7 @@ en:
         community_logo_icon: "Logo for social networks and mobile devices"
         community_logo_icon_mobile: "Square logo"
         community_cover_photo: "Cover photo"
+        community_cover_photo_right: "Hero right side photo"
         small_community_cover_photo: "Small cover photo"
         favicon: Favicon
         favicon_info_text: "Favicon will replace the default Sharetribe logo. The dimensions should be 32x32 pixels and the uploaded image will be resized to these dimensions."
@@ -118,6 +119,7 @@ en:
         logo_icon_instructions_text_with_dimensions_no_placing: "This square logo will be shown when people share your site in Facebook or when they bookmark your site to the home screen of their mobile device. The dimensions should be (at least) %{width}x%{height} pixels."
         logo_mobile_icon_instructions_text_with_dimensions: "This square logo will be shown when you perform some actions as an admin and when people bookmark your site to the home screen of their mobile device. The dimensions should be (at least) %{width}x%{height} pixels."
         cover_photo_visibility: "Cover photo is shown in the homepage for users who are not logged in."
+        cover_photo_right_visibility: "Cover photo is shown in the homepage hero container right side. The photo will be resized to 450x1200 pixels size"
         cover_photo_instructions_text_with_dimensions: "The photo will be resized to %{width}x%{height} pixels size and taller images will be cut in the middle. %{see_how_it_looks_like}."
         we_have_you_covered: "We have you covered"
         cover_photo_ready_made: "Are you looking for some ready-made and optimized cover pictures? Or would you like some inspiration and websites where to find great cover pictures? %{link}!"

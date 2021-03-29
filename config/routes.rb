@@ -26,6 +26,8 @@ Rails.application.routes.draw do
   # parameter with dots
   #
   get "/sitemap.xml.gz"                        => "sitemap#sitemap", format: :xml
+  get "/sitemap.xml"                        => "sitemap#index", as: :sitemap, format: :xml
+  get "/sitemap"                        => "sitemap#sitemap_plain"
   get "/sitemap/:sitemap_host/generate.xml.gz" => "sitemap#generate", format: :xml, :constraints => { sitemap_host: /[.\-\w]+/ }
 
   # A route for DV test file

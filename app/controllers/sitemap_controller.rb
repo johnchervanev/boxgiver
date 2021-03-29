@@ -1,4 +1,4 @@
-class SitemapController < ActionController::Metal
+class SitemapController < ActionController::Base
 
   include AbstractController::Rendering
   include ActionController::MimeResponds
@@ -30,6 +30,19 @@ class SitemapController < ActionController::Metal
     else
       render_site_map(com)
     end
+  end
+
+  def index
+    headers['Content-Type'] = 'application/xml'
+    community = community(request)
+    @open_listings = find_open_listings(community.id)
+    respond_to do |format|
+      format.xml { }
+    end
+  end
+
+  def sitemap_plain
+    redirect_to sitemap_path
   end
 
   def generate
@@ -138,9 +151,9 @@ class SitemapController < ActionController::Metal
       open_listings = find_open_listings(community.id)
 
       SitemapGenerator::Sitemap.create(
-            default_host: default_host,
-            verbose: false,
-            adapter: adapter) do
+        default_host: default_host,
+        verbose: false,
+        adapter: adapter) do
         open_listings.each do |l|
           add listing_path(id: l[:id]), lastmod: l[:lastmod]
         end
@@ -171,7 +184,7 @@ class SitemapController < ActionController::Metal
       .order(sort_date: :desc)
       .pluck(:id, :title, :updated_at)
       .map { |(id, title, updated_at)|
-          {id: Listing.to_param(id, title), lastmod: updated_at}
+        { id: Listing.to_param(id, title), lastmod: updated_at }
       }
   end
 

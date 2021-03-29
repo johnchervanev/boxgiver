@@ -327,6 +327,11 @@ CREATE TABLE `communities` (
   `earning_potential_image_content_type` varchar(255) DEFAULT NULL,
   `earning_potential_image_file_size` int(11) DEFAULT NULL,
   `earning_potential_image_updated_at` datetime DEFAULT NULL,
+  `earning_potential_image_processing` tinyint(1) DEFAULT NULL,
+  `hero_photo` varchar(255) DEFAULT NULL,
+  `hero_photo_file_name` varchar(255) DEFAULT NULL,
+  `hero_photo_content_type` varchar(255) DEFAULT NULL,
+  `hero_photo_processing` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `index_communities_on_uuid` (`uuid`),
   KEY `index_communities_on_domain` (`domain`) USING BTREE,
@@ -782,6 +787,16 @@ CREATE TABLE `listing_images` (
   PRIMARY KEY (`id`),
   KEY `index_listing_images_on_listing_id` (`listing_id`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `listing_lovers`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `listing_lovers` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `person_id` int(11) DEFAULT NULL,
+  `listing_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `listing_shapes`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -2468,6 +2483,9 @@ INSERT INTO `schema_migrations` (version) VALUES
 ('20200312062151'),
 ('20200312112018'),
 ('20210308131717'),
-('20210309071843');
+('20210309071843'),
+('20210316072456'),
+('20210322051715'),
+('20210329040124');
 
 
