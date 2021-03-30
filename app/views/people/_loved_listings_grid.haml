@@ -1,5 +1,5 @@
 .people-fluid-thumbnail-grid-container
-  .people-fluid-thumbnail-grid-item
+  .people-fluid-thumbnail-grid-item.clearfix
     %div
       -# Listing image
       = render :partial => "loved_listings", :locals => {:listing => listing, :modifier_class => "people-listings"}

@@ -350,7 +350,7 @@ module CustomLandingPage
         {"service": "pinterest", "url": "https://www.pinterest.com/"},
         {"service": "soundcloud", "url": "https://soundcloud.com/"}
       ],
-      "copyright": "Copyright Marketplace Ltd 2016"
+      "copyright": "Copyright Marketplace Ltd 2021"
     }
   ],
 

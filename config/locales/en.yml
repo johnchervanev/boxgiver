@@ -106,6 +106,8 @@ en:
         community_cover_photo_right: "Hero right side photo"
         small_community_cover_photo: "Small cover photo"
         favicon: Favicon
+        community_earning_potential_image: "Earning potential image"
+        community_earning_potential_info: "Image will show before footer section"
         favicon_info_text: "Favicon will replace the default Sharetribe logo. The dimensions should be 32x32 pixels and the uploaded image will be resized to these dimensions."
         community_custom_color1: "Marketplace main color"
         community_slogan_color: "Marketplace slogan color"

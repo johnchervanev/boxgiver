@@ -57,7 +57,7 @@
     .row
       .col-12
         - icon_label = ".community_earning_potential_image"
-        - icon_info = "Image will show before footer section"
+        - icon_info = ".community_earning_potential_info"
         = form.label :earning_potential_image, t(icon_label), :class => "input"
         = render :partial => "layouts/info_text", :locals => { :text => t(icon_info, :width => 600, :height => 600)}
         = render 'layouts/filename', file_field: @community.earning_potential_image
