@@ -1,18 +1,18 @@
 <%
-hero_style_variations = {
-  "light" => "hero__section--light",
-  "dark" => "hero__section--dark",
-  "transparent" => "hero__section"
-}
+  hero_style_variations = {
+    "light" => "hero__section--light",
+    "dark" => "hero__section--dark",
+    "transparent" => "hero__section"
+  }
 
-hero_style_variations.default = "hero__section--dark"
+  hero_style_variations.default = "hero__section--dark"
 
-section_style_class = hero_style_variations[s["background_image_variation"]]
+  section_style_class = hero_style_variations[s["background_image_variation"]]
 %>
 
 <% content_for :hero_css do %>
   .<%= section_style_class %> {
-    background-image: url('<%= s["background_image"]["src"] %>');
+  background-image: url('<%= s["background_image"]["src"] %>');
   }
 
   .hero__search-button,
@@ -20,14 +20,14 @@ section_style_class = hero_style_variations[s["background_image_variation"]]
   .hero__signup-button,
   .hero__signup-button:active
   {
-    background-color: rgb(<%= s["search_button_color"]["value"].join(",") %>);
+  background-color: rgb(<%= s["search_button_color"]["value"].join(",") %>);
   }
 
   .hero__search-button:hover,
   .hero__search-button:focus,
   .hero__signup-button:hover,
   .hero__signup-button:focus {
-    background-color: rgb(<%= s["search_button_color_hover"]["value"].join(",") %>);
+  background-color: rgb(<%= s["search_button_color_hover"]["value"].join(",") %>);
   }
 <% end %>
 
@@ -38,7 +38,7 @@ section_style_class = hero_style_variations[s["background_image_variation"]]
         <h1 class="hero__title"><%= s["title"]["value"] %></h1>
       <% end %>
       <% if community_context[:show_description] %>
-        <h3 class="hero__subtitle"><%= render partial: "prevent_widows", locals: { text: s["subtitle"]["value"]} %></h3>
+        <h3 class="hero__subtitle"><%= render partial: "prevent_widows", locals: { text: s["subtitle"]["value"] } %></h3>
       <% end %>
 
       <% cta_button_type = s["cta_button_type"] %>
@@ -50,7 +50,7 @@ section_style_class = hero_style_variations[s["background_image_variation"]]
       <% else %>
         <% search_mode = s["variation"]["value"] %>
         <% case search_mode %>
-        <% when "keyword_search", "location_search", "keyword_and_location_search" %>
+      <% when "keyword_search", "location_search", "keyword_and_location_search" %>
 
           <div class="hero__search-bar-padding">
             <% combined_mode = search_mode == 'keyword_and_location_search' ? '--combined' : '' %>
@@ -75,26 +75,29 @@ section_style_class = hero_style_variations[s["background_image_variation"]]
               <% search_title = button_title.present? ? button_title : s["search_button"]["value"] %>
               <button type="submit" class="hero__search-button hero__search-button<%= combined_mode %>"><%= search_title %></button>
               <% if search_mode == "location_search" || search_mode == "keyword_and_location_search" %>
-                <input type="hidden" name="ls" />
-                <input type="hidden" name="lc" />
-                <input type="hidden" name="boundingbox" />
-                <input type="hidden" name="distance_max" />
+                <input type="hidden" name="ls"/>
+                <input type="hidden" name="lc"/>
+                <input type="hidden" name="boundingbox"/>
+                <input type="hidden" name="distance_max"/>
 
                 <% content_for :javascript do %>
                   <script>
-                   window.ST.initializeLocationSearch({
-                     form: '#<%= section_id %>__search-form',
-                     search: '#<%= section_id %>__search-form [name=<%= search_mode == "keyword_and_location_search" ? "lq" : "q" %>]',
-                     status: '#<%= section_id %>__search-form [name=ls]',
-                     coordinate: '#<%= section_id %>__search-form [name=lc]',
-                     boundingbox: '#<%= section_id %>__search-form [name=boundingbox]',
-                     maxDistance: '#<%= section_id %>__search-form [name=distance_max]'
-                   })
+                      window.ST.initializeLocationSearch({
+                          form: '#<%= section_id %>__search-form',
+                          search: '#<%= section_id %>__search-form [name=<%= search_mode == "keyword_and_location_search" ? "lq" : "q" %>]',
+                          status: '#<%= section_id %>__search-form [name=ls]',
+                          coordinate: '#<%= section_id %>__search-form [name=lc]',
+                          boundingbox: '#<%= section_id %>__search-form [name=boundingbox]',
+                          maxDistance: '#<%= section_id %>__search-form [name=distance_max]'
+                      })
                   </script>
                 <% end %>
               <% end %>
 
             </form>
+            <p class="how-it-work-link">
+              <a href="#how-it-works"> Or click here to see how it works </a>
+            </p>
           </div>
 
         <% when "private" %>

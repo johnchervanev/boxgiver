@@ -21,66 +21,19 @@ header {
     background-position: center center;
   }
 
-  .header-content {
-    text-align: center;
-    position: relative;
-    padding: 0 15px;
-    margin: auto;
-
+  section {
     h1 {
-      font-size: 40px;
-      margin: 20px 0;
+      font-size: 46px !important;
+      margin: 0 0 10px 0 !important;
     }
 
-    .search-wrapper {
-      display: flex;
-      max-width: 620px;
-      margin: 30px auto;
-      background: #ffffff;
-      border-radius: 30px;
-      overflow: hidden;
+    button[type='submit'].hero__search-button {
+      background: #4aa28a;
+      color: #ffffff;
+      outline: none;
 
-      .search-icon {
-        width: 60px;
-        display: flex;
-        flex-basis: auto;
-        align-items: center;
-        justify-content: center;
-
-        i {
-          font-size: 20px;
-          color: #cccccc;
-        }
-      }
-
-      .search-input {
-        width: 100%;
-
-        input[type='text'] {
-          border: none;
-          outline: none;
-          padding: 15px 5px;
-          width: 100%;
-        }
-      }
-
-      .search-submit {
-        width: 130px;
-
-        button {
-          border: none;
-          padding: 10px;
-          height: 100%;
-          text-align: center;
-          width: 100%;
-          background: #4aa28a;
-          color: #ffffff;
-          outline: none;
-
-          &:hover {
-            background: #2F977B;
-          }
-        }
+      &:hover {
+        background: #2F977B;
       }
     }
 
@@ -206,6 +159,11 @@ header {
 @media (max-width: 768px) {
   .topbar-placeholder {
     min-height: 50px;
+  }
+  header {
+    .header-image {
+      min-height: auto;
+    }
   }
   .how-it-works-wrapper {
     padding: 30px 15px 20px 15px;
