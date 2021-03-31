@@ -612,7 +612,7 @@ Rails.application.routes.draw do
         resources :sections, controller: 'landing_page_versions/sections'
       end
     end
-
+    get :invite, to: 'invitations#new'
     resources :invitations, only: [:new, :create ] do
       collection do
         get :unsubscribe
