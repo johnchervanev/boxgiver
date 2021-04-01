@@ -1,3 +1,5 @@
+@import "custom_footer";
+
 body {
   margin: 0;
   padding: 0;
@@ -10,6 +12,12 @@ body {
 header {
   overflow: hidden;
   position: relative;
+
+  //.header-container {
+  //  max-width: 90%;
+  //  margin: auto;
+  //  padding: 25px 0;
+  //}
 
   .header-image {
     color: #fff;

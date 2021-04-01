@@ -25,14 +25,14 @@ Rails.application.routes.draw do
   # That's why there's the constraints in generate URL to accept host
   # parameter with dots
   #
-  get "/sitemap.xml.gz"                        => "sitemap#sitemap", format: :xml
-  get "/sitemap.xml"                        => "sitemap#index", as: :sitemap, format: :xml
-  get "/sitemap"                        => "sitemap#sitemap_plain"
+  get "/sitemap.xml.gz" => "sitemap#sitemap", format: :xml
+  get "/sitemap.xml" => "sitemap#index", as: :sitemap, format: :xml
+  get "/sitemap" => "sitemap#sitemap_plain"
   get "/sitemap/:sitemap_host/generate.xml.gz" => "sitemap#generate", format: :xml, :constraints => { sitemap_host: /[.\-\w]+/ }
 
   # A route for DV test file
   # A CA will check if there is a file in this route
-  get "/:dv_file" => "domain_validation#index", constraints: {dv_file: /.*\.txt/}
+  get "/:dv_file" => "domain_validation#index", constraints: { dv_file: /.*\.txt/ }
 
   get "/design" => "design#design"
 
@@ -111,7 +111,6 @@ Rails.application.routes.draw do
 
   resources :communities, only: [:new, :create]
 
-
   devise_for :people, only: :omniauth_callbacks, controllers: { omniauth_callbacks: "omniauth" }
 
   # Adds locale to every url right after the root path
@@ -139,9 +138,9 @@ Rails.application.routes.draw do
       "/#{params[:locale]}/listings/#{params[:listing_id]}/initiate?#{request.query_string}"
     }
     # Deprecated route (26-08-2016)
-    post "/listings/:listing_id/booked"    => "preauthorize_transactions#initiated", as: :booked # POST request, no redirect
+    post "/listings/:listing_id/booked" => "preauthorize_transactions#initiated", as: :booked # POST request, no redirect
 
-    get "/listings/:listing_id/initiate"   => "preauthorize_transactions#initiate", :as => :initiate_order
+    get "/listings/:listing_id/initiate" => "preauthorize_transactions#initiate", :as => :initiate_order
     post "/listings/:listing_id/initiated" => "preauthorize_transactions#initiated", :as => :initiated_order
 
     # free flow
@@ -160,13 +159,12 @@ Rails.application.routes.draw do
 
     # community membership related actions
 
-    get  '/community_memberships/pending_consent' => 'community_memberships#pending_consent', as: :pending_consent
-    post '/community_memberships/give_consent'    => 'community_memberships#give_consent', as: :give_consent
-    get  '/community_memberships/access_denied'   => 'community_memberships#access_denied', as: :access_denied
+    get '/community_memberships/pending_consent' => 'community_memberships#pending_consent', as: :pending_consent
+    post '/community_memberships/give_consent' => 'community_memberships#give_consent', as: :give_consent
+    get '/community_memberships/access_denied' => 'community_memberships#access_denied', as: :access_denied
 
-    get  '/community_memberships/check_email_availability_and_validity' => 'community_memberships#check_email_availability_and_validity'
-    get  '/community_memberships/check_invitation_code'                 => 'community_memberships#check_invitation_code'
-
+    get '/community_memberships/check_email_availability_and_validity' => 'community_memberships#check_email_availability_and_validity'
+    get '/community_memberships/check_invitation_code' => 'community_memberships#check_invitation_code'
 
     namespace :paypal_service do
       resources :checkout_orders do
@@ -423,41 +421,41 @@ Rails.application.routes.draw do
         end
       end
       # PayPal Connect
-      get  "/paypal_preferences" => redirect("/%{locale}/admin/payment_preferences")
-      get  "/paypal_preferences/account_create"       => "paypal_preferences#account_create"
-      get  "/paypal_preferences/permissions_verified" => "paypal_preferences#permissions_verified"
+      get "/paypal_preferences" => redirect("/%{locale}/admin/payment_preferences")
+      get "/paypal_preferences/account_create" => "paypal_preferences#account_create"
+      get "/paypal_preferences/permissions_verified" => "paypal_preferences#permissions_verified"
 
       # Settings
       resource :setting, path: 'settings', only: [:show, :update]
 
       # Guide
-      get "getting_started_guide"                        => "getting_started_guide#index",                  as: :getting_started_guide
+      get "getting_started_guide" => "getting_started_guide#index", as: :getting_started_guide
       get "getting_started_guide/slogan_and_description" => "getting_started_guide#slogan_and_description", as: :getting_started_guide_slogan_and_description
-      get "getting_started_guide/cover_photo"            => "getting_started_guide#cover_photo",            as: :getting_started_guide_cover_photo
-      get "getting_started_guide/filter"                 => "getting_started_guide#filter",                 as: :getting_started_guide_filter
-      get "getting_started_guide/payment"                => "getting_started_guide#payment",                as: :getting_started_guide_payment
-      get "getting_started_guide/listing"                => "getting_started_guide#listing",                as: :getting_started_guide_listing
-      get "getting_started_guide/invitation"             => "getting_started_guide#invitation",             as: :getting_started_guide_invitation
-      get "getting_started_guide/skip_payment"           => "getting_started_guide#skip_payment",           as: :getting_started_guide_skip_payment
+      get "getting_started_guide/cover_photo" => "getting_started_guide#cover_photo", as: :getting_started_guide_cover_photo
+      get "getting_started_guide/filter" => "getting_started_guide#filter", as: :getting_started_guide_filter
+      get "getting_started_guide/payment" => "getting_started_guide#payment", as: :getting_started_guide_payment
+      get "getting_started_guide/listing" => "getting_started_guide#listing", as: :getting_started_guide_listing
+      get "getting_started_guide/invitation" => "getting_started_guide#invitation", as: :getting_started_guide_invitation
+      get "getting_started_guide/skip_payment" => "getting_started_guide#skip_payment", as: :getting_started_guide_skip_payment
 
       # Details and look 'n feel
-      get   "/look_and_feel/edit" => "communities#edit_look_and_feel",          as: :look_and_feel_edit
-      patch "/look_and_feel"      => "communities#update_look_and_feel",        as: :look_and_feel
-      get   "/details/edit"       => "community_customizations#edit_details",   as: :details_edit
-      patch "/details"            => "community_customizations#update_details", as: :details
-      get   "/new_layout"         => "communities#new_layout",                  as: :new_layout
-      patch "/new_layout"         => "communities#update_new_layout",           as: :update_new_layout
+      get "/look_and_feel/edit" => "communities#edit_look_and_feel", as: :look_and_feel_edit
+      patch "/look_and_feel" => "communities#update_look_and_feel", as: :look_and_feel
+      get "/details/edit" => "community_customizations#edit_details", as: :details_edit
+      patch "/details" => "community_customizations#update_details", as: :details
+      get "/new_layout" => "communities#new_layout", as: :new_layout
+      patch "/new_layout" => "communities#update_new_layout", as: :update_new_layout
 
       # Topbar menu
-      get   "/topbar/edit"        => "communities/topbar#edit",                 as: :topbar_edit
-      patch "/topbar"             => "communities/topbar#update",               as: :topbar
+      get "/topbar/edit" => "communities/topbar#edit", as: :topbar_edit
+      patch "/topbar" => "communities/topbar#update", as: :topbar
 
       # Footer menu
-      get   "/footer/edit"        => "communities/footer#edit",                 as: :footer_edit
-      patch "/footer"             => "communities/footer#update",               as: :footer
+      get "/footer/edit" => "communities/footer#edit", as: :footer_edit
+      patch "/footer" => "communities/footer#update", as: :footer
 
       # Landing page menu
-      get   "/landing_page"         => "communities#landing_page",                  as: :landing_page
+      get "/landing_page" => "communities#landing_page", as: :landing_page
 
       resources :communities do
         member do
@@ -490,23 +488,23 @@ Rails.application.routes.draw do
           # DEPRECATED (2016-03-22)
           # These routes are not in use anymore, don't use them
           # See new routes above, outside of communities resource
-          get :edit_details,       to: redirect("/admin/details/edit")
-          put :update_details,     to: "community_customizations#update_details" # PUT request, no redirect
+          get :edit_details, to: redirect("/admin/details/edit")
+          put :update_details, to: "community_customizations#update_details" # PUT request, no redirect
           get :edit_look_and_feel, to: redirect("/admin/look_and_feel/edit")
           put :edit_look_and_feel, to: "community_customizations#update_look_and_feel" # PUT request, no redirect
 
           # DEPRECATED (2016-03-22)
           # These routes are not in use anymore, don't use them
           # See the above :admin_settings routes, outside of :communities resource
-          get :settings,       to: redirect("/admin/settings")
+          get :settings, to: redirect("/admin/settings")
           put :update_settings # PUT request, no redirect
-          get "getting_started_guide",                        to: redirect("/admin/getting_started_guide")
+          get "getting_started_guide", to: redirect("/admin/getting_started_guide")
           get "getting_started_guide/slogan_and_description", to: redirect("/admin/getting_started_guide/slogan_and_description")
-          get "getting_started_guide/cover_photo",            to: redirect("/admin/getting_started_guide/cover_photo")
-          get "getting_started_guide/filter",                 to: redirect("/admin/getting_started_guide/filter")
-          get "getting_started_guide/paypal",                 to: redirect("/admin/getting_started_guide/paypal")
-          get "getting_started_guide/listing",                to: redirect("/admin/getting_started_guide/listing")
-          get "getting_started_guide/invitation",             to: redirect("/admin/getting_started_guide/invitation")
+          get "getting_started_guide/cover_photo", to: redirect("/admin/getting_started_guide/cover_photo")
+          get "getting_started_guide/filter", to: redirect("/admin/getting_started_guide/filter")
+          get "getting_started_guide/paypal", to: redirect("/admin/getting_started_guide/paypal")
+          get "getting_started_guide/listing", to: redirect("/admin/getting_started_guide/listing")
+          get "getting_started_guide/invitation", to: redirect("/admin/getting_started_guide/invitation")
 
         end
         resources :listings, controller: :community_listings, only: [:index, :edit, :update] do
@@ -558,9 +556,9 @@ Rails.application.routes.draw do
           # See the above :paypal_preferences routes, outside of communities resource
 
           member do
-            get :index,                to: redirect("/admin/paypal_preferences")
-            post :preferences_update   # POST request, no redirect
-            get :account_create,       to: redirect("/admin/paypal_preferences/account_create")
+            get :index, to: redirect("/admin/paypal_preferences")
+            post :preferences_update # POST request, no redirect
+            get :account_create, to: redirect("/admin/paypal_preferences/account_create")
             get :permissions_verified, to: redirect("/admin/paypal_preferences/permissions_verified")
           end
         end
@@ -612,12 +610,14 @@ Rails.application.routes.draw do
         resources :sections, controller: 'landing_page_versions/sections'
       end
     end
-    get :invite, to: 'invitations#new'
-    resources :invitations, only: [:new, :create ] do
+
+    resources :invitations, only: [:new, :create] do
       collection do
         get :unsubscribe
       end
     end
+    get :invite, to: 'invitations#new'
+    get :contact, to: 'feedbacks#new'
     resources :user_feedbacks, :controller => :feedbacks
     resources :homepage do
       collection do
@@ -693,7 +693,7 @@ Rails.application.routes.draw do
       get :message_arrived
     end
 
-    devise_for :people, skip: :omniauth_callbacks, controllers: { confirmations: "confirmations", registrations: "people", omniauth_callbacks: "omniauth"}, :path_names => { :sign_in => 'login'}
+    devise_for :people, skip: :omniauth_callbacks, controllers: { confirmations: "confirmations", registrations: "people", omniauth_callbacks: "omniauth" }, :path_names => { :sign_in => 'login' }
     devise_scope :person do
       # these matches need to be before the general resources to have more priority
       get "/people/confirmation" => "confirmations#show", :as => :confirmation

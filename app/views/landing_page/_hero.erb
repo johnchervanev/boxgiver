@@ -12,7 +12,7 @@
 
 <% content_for :hero_css do %>
   .<%= section_style_class %> {
-  background-image: url('<%= s["background_image"]["src"] %>');
+  background-image: url('<%= community_context[:cover_photo].present? ? community_context[:cover_photo] : s["background_image"]["src"] %>');
   }
 
   .hero__search-button,
