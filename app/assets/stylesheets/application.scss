@@ -7,6 +7,7 @@
 //= require jquery.ui.tooltip
 //= require datepicker3
 //= require selectize
+//= require _custom_footer
 
 //= require ./reset
 //= require ./main
@@ -16,4 +17,39 @@
 
 .clear-both {
   clear: both;
+}
+
+.stripe-payment-form {
+  .form-group {
+    margin-bottom: 15px;
+  }
+
+  .top-label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: block;
+  }
+
+  .input-group {
+    input:focus {
+      outline: none;
+    }
+
+    input:first-child {
+      border-bottom-width: 1px;
+      border-radius: 0.3125em 0.3125em 0 0;
+    }
+
+    input:last-child {
+      border-top-width: 1px;
+      border-radius: 0 0 0.3125em 0.3125em;
+    }
+  }
+}
+
+.paypal-button-wrapper {
+  .checkout-with-stripe-button {
+    width: 100%;
+    font-weight: bold;
+  }
 }

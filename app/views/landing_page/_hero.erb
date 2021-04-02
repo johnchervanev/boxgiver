@@ -12,7 +12,9 @@
 
 <% content_for :hero_css do %>
   .<%= section_style_class %> {
-  background-image: url('<%= community_context[:cover_photo].present? ? community_context[:cover_photo] : s["background_image"]["src"] %>');
+    background-image: url('<%= community_context[:cover_photo].present? ? community_context[:cover_photo] : s["background_image"]["src"] %>');
+    background: #ffffff;
+    box-shadow: none;
   }
 
   .hero__search-button,
@@ -31,7 +33,7 @@
   }
 <% end %>
 
-<section id="<%= section_id %>" class="<%= section_style_class %>" style="padding: 0">
+<section id="<%= section_id %>" style="padding: 0" class="<%= section_style_class %> landing-hero-container">
   <div class="hero__content">
     <div class="hero__content-container">
       <% if community_context[:show_slogan] %>

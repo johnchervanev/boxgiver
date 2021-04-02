@@ -1,0 +1,28 @@
+<div class='stripe-payment-form'>
+  <div class='form-group'>
+    <label class='top-label' for='card-email'> Email </label>
+    <input type="text" name='card_email' placeholder="Email" id='card-email'>
+  </div>
+  <div class='form-group'>
+    <label for="card-element" class="top-label">
+      Payment Information
+    </label>
+    <div id='card-element'>
+    </div>
+    <div style="text-align: right">
+      <%= image_tag('cards.jpg', style: 'max-width: 175px; margin-top: 7px;') %>
+    </div>
+  </div>
+  <div class='form-group'>
+    <label class='top-label' for='card-name'> Name on Card </label>
+    <input type="text" name='card_name' id='card-name' placeholder="Card Holder Name">
+  </div>
+  <div class='form-group'>
+    <label for="card-country" class='top-label'> Country or Region </label>
+    <div class='input-group'>
+      <input type="text" name='card_country' id='card-country' placeholder="Country">
+      <input type="text" name='card_region' placeholder="Zipcode">
+    </div>
+  </div>
+  <label class="hidden" id="card-errors" role="alert"></label>
+</div>
