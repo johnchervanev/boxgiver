@@ -195,7 +195,13 @@ header {
       form {
         border: none;
 
-        input[type='search'] {
+        .hero__search-input-container--combined {
+          input[type='search'] {
+            border: solid 1px #4aa28a;
+          }
+        }
+
+        .hero__search-input-container {
           border: solid 1px #4aa28a;
         }
       }
