@@ -13,11 +13,21 @@ header {
   overflow: hidden;
   position: relative;
 
+  .community-logo {
+    text-align: center;
+    padding: 0 15px 10px 15px;
+
+    img {
+      max-width: 100%;
+    }
+  }
+
   .header-image {
     color: #fff;
     display: flex;
     text-align: center;
     min-height: calc(100vh - 72px);
+    height: 100%;
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center center;
@@ -28,6 +38,7 @@ header {
 
     h1 {
       font-size: 46px !important;
+      line-height: 55px !important;
       margin: 0 0 10px 0 !important;
       color: #333333;
     }
@@ -190,6 +201,7 @@ header {
 
       h1 {
         font-size: 32px !important;
+        line-height: 42px !important;
       }
 
       form {

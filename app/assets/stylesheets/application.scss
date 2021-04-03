@@ -35,12 +35,12 @@
       outline: none;
     }
 
-    input:first-child {
+    input[name='card_country'] {
       border-bottom-width: 1px;
       border-radius: 0.3125em 0.3125em 0 0;
     }
 
-    input:last-child {
+    input[name='card_region'] {
       border-top-width: 1px;
       border-radius: 0 0 0.3125em 0.3125em;
     }
@@ -51,5 +51,6 @@
   .checkout-with-stripe-button {
     width: 100%;
     font-weight: bold;
+    background: #01a58a;
   }
 }
