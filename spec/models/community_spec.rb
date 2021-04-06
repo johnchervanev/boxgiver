@@ -118,11 +118,6 @@
 #  hero_photo_content_type                    :string(255)
 #  hero_photo_processing                      :boolean
 #  twitter_announcement_enabled               :boolean          default(TRUE)
-#  list_title                                 :string(255)      default("All Types Of Boards")
-#  hw_list                                    :text(65535)
-#  hw_sell                                    :text(65535)
-#  hw_delivery                                :text(65535)
-#  hw_paid                                    :text(65535)
 #
 # Indexes
 #

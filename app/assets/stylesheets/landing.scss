@@ -77,12 +77,8 @@ header {
 }
 
 .boxgiver-videos {
-  padding: 15px;
-  border-radius: 5px;
-
   video {
     width: 100%;
-    border-radius: 5px;
   }
 }
 
@@ -177,7 +173,6 @@ header {
 
     .board-summary-image {
       height: 100%;
-      min-height: 188px;
       border-radius: 7px;
       background-size: cover;
       background-position: center center;
@@ -221,16 +216,6 @@ header {
         .hero__search-input-container {
           border: solid 1px #4aa28a;
         }
-      }
-    }
-  }
-}
-
-@media (max-width: 767px) {
-  .board-wrappers {
-    .board-summary {
-      .board-summary-image {
-        margin-top: 15px;
       }
     }
   }
