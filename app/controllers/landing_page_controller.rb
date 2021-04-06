@@ -52,7 +52,6 @@ class LandingPageController < ActionController::Metal
     script_digest = Digest::MD5.hexdigest(custom_head_scripts.to_s)
 
     @categories = @current_community.categories.where("parent_id IS NULL")
-    @user_logged_in = user(request).present?
 
     begin
       content = nil
@@ -267,6 +266,7 @@ class LandingPageController < ActionController::Metal
 
   def community_context(request, locale)
     c = community(request)
+    custom_community = community_customization(request, locale)
 
     { id: c.id,
       favicon: c.favicon.url,
@@ -278,11 +278,13 @@ class LandingPageController < ActionController::Metal
       google_analytics_key: c.google_analytics_key,
       social_image: c.social_logo.present? && c.social_logo.image.present?,
       show_slogan: c.show_slogan,
+      slogan: custom_community.slogan,
       logo: c.stable_image_url(:wide_logo, :header_highres),
       cover_photo: c.stable_image_url(:cover_photo, :hd_header),
       hero_photo: c.stable_image_url(:hero_photo, :original),
       show_description: c.show_description,
-      earning_text: nil,
+      description: custom_community.description,
+      earning_text: custom_community.earning_potential_text,
       earning_potential_image: c.stable_image_url(:earning_potential_image, :original)
     }
   end

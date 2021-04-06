@@ -333,6 +333,11 @@ CREATE TABLE `communities` (
   `hero_photo_content_type` varchar(255) DEFAULT NULL,
   `hero_photo_processing` tinyint(1) DEFAULT NULL,
   `twitter_announcement_enabled` tinyint(1) DEFAULT '1',
+  `list_title` varchar(255) DEFAULT 'All Types Of Boards',
+  `hw_list` text,
+  `hw_sell` text,
+  `hw_delivery` text,
+  `hw_paid` text,
   PRIMARY KEY (`id`),
   UNIQUE KEY `index_communities_on_uuid` (`uuid`),
   KEY `index_communities_on_domain` (`domain`) USING BTREE,
@@ -2488,6 +2493,7 @@ INSERT INTO `schema_migrations` (version) VALUES
 ('20210313225935'),
 ('20210316072456'),
 ('20210322051715'),
-('20210329040124');
+('20210329040124'),
+('20210405123548');
 
 

@@ -15,42 +15,41 @@ Rails.application.configure do
   # config.action_view.cache_template_loading = false
 
   # Basic log config, for calls to Rails.logger.<level> { <message> }
-  config.logger = ::Logger.new(STDOUT)
-  # Formats log entries into: LEVEL MESSAGE
-  # Heroku adds to this timestamp and worker/dyno id, so datetime can be stripped
-  config.logger.formatter = ->(severity, datetime, progname, msg) { "#{severity} #{msg}\n" }
-  config.logger = ActiveSupport::TaggedLogging.new(config.logger)
-
-  # Lograge config, overrides default instrumentation for logging ActionController and ActionView logging
-  config.lograge.enabled = true
-  config.lograge.custom_options = ->(event) {
-    params = event.payload[:params].except('controller', 'action')
-
-    { params: params,
-      host: event.payload[:host],
-      community_id: event.payload[:community_id],
-      current_user_id: event.payload[:current_user_id],
-      user_agent: event.payload[:user_agent],
-      referer: event.payload[:referer],
-      forwarded_for: event.payload[:forwarded_for],
-      request_uuid: event.payload[:request_uuid] }
-  }
-
-  config.lograge.formatter = Lograge::Formatters::Json.new
-
-  config.after_initialize do
-    ActiveRecord::Base.logger = Rails.logger.clone
-    ActiveRecord::Base.logger.level = Logger::DEBUG
-    ActionMailer::Base.logger = Rails.logger.clone
-    ActionMailer::Base.logger.level = Logger::INFO
-  end
-
+  # config.logger = ::Logger.new(STDOUT)
+  # # Formats log entries into: LEVEL MESSAGE
+  # # Heroku adds to this timestamp and worker/dyno id, so datetime can be stripped
+  # config.logger.formatter = ->(severity, datetime, progname, msg) { "#{severity} #{msg}\n" }
+  # config.logger = ActiveSupport::TaggedLogging.new(config.logger)
+  #
+  # # Lograge config, overrides default instrumentation for logging ActionController and ActionView logging
+  # config.lograge.enabled = true
+  # config.lograge.custom_options = ->(event) {
+  #   params = event.payload[:params].except('controller', 'action')
+  #
+  #   { params: params,
+  #     host: event.payload[:host],
+  #     community_id: event.payload[:community_id],
+  #     current_user_id: event.payload[:current_user_id],
+  #     user_agent: event.payload[:user_agent],
+  #     referer: event.payload[:referer],
+  #     forwarded_for: event.payload[:forwarded_for],
+  #     request_uuid: event.payload[:request_uuid] }
+  # }
+  #
+  # config.lograge.formatter = Lograge::Formatters::Json.new
+  #
+  # config.after_initialize do
+  #   ActiveRecord::Base.logger = Rails.logger.clone
+  #   ActiveRecord::Base.logger.level = Logger::DEBUG
+  #   ActionMailer::Base.logger = Rails.logger.clone
+  #   ActionMailer::Base.logger.level = Logger::INFO
+  # end
 
   # Do not eager load code on boot.
   config.eager_load = false
 
   # Show full error reports and disable caching
-  config.consider_all_requests_local       = true
+  config.consider_all_requests_local = true
 
   # The default should be false, but is not for some reason (some gem sets it to
   # true?), so force it back. Origin checks are problematic because we force no
@@ -60,7 +59,7 @@ Rails.application.configure do
   # Enable/disable caching. By default caching is disabled.
   if Rails.root.join('tmp/caching-dev.txt').exist?
     config.action_controller.perform_caching = true
-    config.cache_store = :memory_store, { :namespace => "sharetribe-dev"}
+    config.cache_store = :memory_store, { :namespace => "sharetribe-dev" }
     config.public_file_server.headers = {
       'Cache-Control' => "public, max-age=#{2.days.to_i}"
     }
@@ -84,12 +83,12 @@ Rails.application.configure do
   elsif APP_CONFIG.mail_delivery_method == "smtp"
     # Enable sending mail from localhost
     ActionMailer::Base.smtp_settings = {
-      :address              => APP_CONFIG.smtp_email_address,
-      :port                 => APP_CONFIG.smtp_email_port,
-      :domain               => APP_CONFIG.smtp_email_domain || 'localhost',
-      :user_name            => APP_CONFIG.smtp_email_user_name,
-      :password             => APP_CONFIG.smtp_email_password,
-      :authentication       => 'plain',
+      :address => APP_CONFIG.smtp_email_address,
+      :port => APP_CONFIG.smtp_email_port,
+      :domain => APP_CONFIG.smtp_email_domain || 'localhost',
+      :user_name => APP_CONFIG.smtp_email_user_name,
+      :password => APP_CONFIG.smtp_email_password,
+      :authentication => 'plain',
       #:enable_starttls_auto => true
     }
   end

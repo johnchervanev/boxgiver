@@ -78,9 +78,9 @@
         .row
           %h2.people-header
             - if @current_user.loved_listings.count > 0
-              = "You Loved The Following Listings"
+              = "Favourites"
             - else
-              = "No Loved Listings"
+              = "No Favourite Listings"
         = render :partial => "people/loved_listings_grid", :collection => @current_user.loved_listings, :as => :listing
 
     #people-testimonials.listing-main.clear-both

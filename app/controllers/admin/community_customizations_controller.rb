@@ -35,6 +35,11 @@ class Admin::CommunityCustomizationsController < Admin::AdminBaseController
         :transaction_agreement_label,
         :transaction_agreement_content,
         :earning_potential_text,
+        :list_title,
+        :hw_list,
+        :hw_sell,
+        :hw_delivery,
+        :hw_paid,
       ]
       locale_params = params.require(:community_customizations).require(locale).permit(*permitted_params)
       customizations = find_or_initialize_customizations_for_locale(locale)

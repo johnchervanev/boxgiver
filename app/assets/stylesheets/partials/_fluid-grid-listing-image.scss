@@ -26,6 +26,43 @@
   line-height: 1.2em;
 }
 
+.home-fluid-thumbnail-grid-item {
+  position: relative;
+  min-height: 260px;
+
+  .fluid-thumbnail-grid-image-title {
+    width: 100%;
+    bottom: auto;
+    padding-top: calc(66.66667% + 12px);
+    z-index: 1;
+    color: #000;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 2;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    padding-bottom: 0;
+  }
+
+  .home-fluid-thumbnail-grid-author {
+    display: flex;
+    height: auto;
+    padding: 60px 0.75em 6px 0.75em;
+    align-items: center;
+
+    .home-fluid-thumbnail-grid-author-avatar {
+      padding: 0;
+    }
+
+    .home-fluid-thumbnail-grid-author-name {
+      position: relative;
+      left: 6px;
+      top: 0;
+      bottom: 0;
+    }
+  }
+}
+
 .fluid-thumbnail-grid-image-overlay {
   @include border-top-radius($default-border-radius);
   @include overlay;
