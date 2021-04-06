@@ -117,7 +117,8 @@ function googlemapMarkerInit(canvas,n_prefix,n_textfield,draggable,community_loc
     'map': map,
     'draggable': draggable,
     'animation': google.maps.Animation.DROP,
-    'position': markerPosition
+    'position': markerPosition,
+    'icon': {url: '/maps/marker.svg', scaledSize: new google.maps.Size(40, 40)}
   });
 
   infowindow = new google.maps.InfoWindow();
@@ -541,7 +542,8 @@ function addListingMarkers(listings, viewport) {
 
         var marker = new google.maps.Marker({
           position: location,
-          title: entry["title"]
+          title: entry["title"],
+          icon: {url: '/maps/marker.svg', scaledSize: new google.maps.Size(40, 40)}
         });
 
         // Marker icon based on category

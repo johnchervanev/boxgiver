@@ -71,10 +71,10 @@ class ListingsController < ApplicationController
     ids = params[:ids].split(",").map(&:to_i)
 
     @listings = if @current_user || !@current_community.private?
-      @current_community.listings.where(listings: {id: ids}).order("listings.created_at DESC")
-    else
-      []
-    end
+                  @current_community.listings.where(listings: { id: ids }).order("listings.created_at DESC")
+                else
+                  []
+                end
 
     if !@listings.empty?
       render :partial => "homepage/listing_bubble_multiple"
@@ -203,7 +203,7 @@ class ListingsController < ApplicationController
       return redirect_to edit_listing_path
     end
 
-    listing_params = result.data.merge(@listing.closed? ? {open: true} : {})
+    listing_params = result.data.merge(@listing.closed? ? { open: true } : {})
     service = Admin::ListingsService.new(community: @current_community, params: params, person: @current_user)
     listing_params.merge!(service.update_by_author_params(@listing))
 
@@ -263,7 +263,13 @@ class ListingsController < ApplicationController
   end
 
   def love
-    current_user.love(@listing)
+    @action = 'add'
+    if current_user.is_loving?(@listing)
+      @action = 'remove'
+      current_user.remove_from_love(@listing)
+    else
+      current_user.love(@listing)
+    end
     respond_to do |format|
       format.js { render :layout => false }
     end
@@ -275,7 +281,6 @@ class ListingsController < ApplicationController
       format.js { render :layout => false }
     end
   end
-
 
   def verification_required
 
@@ -324,7 +329,7 @@ class ListingsController < ApplicationController
 
   def form_locals(shape)
     @listing_presenter.listing_shape = shape
-    {shape: shape}
+    { shape: shape }
   end
 
   def form_content
@@ -346,11 +351,11 @@ class ListingsController < ApplicationController
 
     payment_type = @current_community.active_payment_types
     allow_posting, error_msg = payment_setup_status(
-                     community: @current_community,
-                     user: @listing_presenter.new_listing_author,
-                     listing: @listing,
-                     payment_type: payment_type,
-                     process: process)
+      community: @current_community,
+      user: @listing_presenter.new_listing_author,
+      listing: @listing,
+      payment_type: payment_type,
+      process: process)
 
     if allow_posting
       render :partial => "listings/form/form_content", locals: form_locals(shape).merge(run_js_immediately: true)
@@ -371,10 +376,10 @@ class ListingsController < ApplicationController
     unless Policy::ListingPolicy.new(@listing, @current_community, @current_user).visible?
       if @current_user
         flash[:error] = if @listing.closed?
-          t("layouts.notifications.listing_closed")
-        else
-          t("layouts.notifications.you_are_not_authorized_to_view_this_content")
-        end
+                          t("layouts.notifications.listing_closed")
+                        else
+                          t("layouts.notifications.you_are_not_authorized_to_view_this_content")
+                        end
         redirect_to search_path and return
       else
         session[:return_to] = request.fullpath
@@ -421,7 +426,7 @@ class ListingsController < ApplicationController
   def payment_setup_status(community:, user:, listing:, payment_type:, process:)
     case [payment_type, process]
     when matches([nil]),
-         matches([__, :none])
+      matches([__, :none])
       [true, ""]
     when matches([:paypal])
       can_post = PaypalHelper.community_ready_for_payments?(community.id)
@@ -480,14 +485,14 @@ class ListingsController < ApplicationController
 
     flash[:notice] = t(
       "layouts.notifications.listing_created_successfully",
-      :new_listing_link => view_context.link_to(t("layouts.notifications.create_new_listing"),new_listing_path)
+      :new_listing_link => view_context.link_to(t("layouts.notifications.create_new_listing"), new_listing_path)
     ).html_safe
 
     # Onboarding wizard step recording
     state_changed = Admin::OnboardingWizard.new(@current_community.id)
-      .update_from_event(:listing_created, @listing)
+                                           .update_from_event(:listing_created, @listing)
     if state_changed
-      record_event(flash, "km_record", {km_event: "Onboarding listing created"}, AnalyticService::EVENT_LISTING_CREATED)
+      record_event(flash, "km_record", { km_event: "Onboarding listing created" }, AnalyticService::EVENT_LISTING_CREATED)
 
       flash[:show_onboarding_popup] = true
     end
@@ -496,7 +501,7 @@ class ListingsController < ApplicationController
   def new_listing_author
     @new_listing_author ||=
       if params[:person_id].present? &&
-         @current_user.has_admin_rights?(@current_community)
+        @current_user.has_admin_rights?(@current_community)
         @current_community.members.find_by!(username: params[:person_id])
       else
         @current_user

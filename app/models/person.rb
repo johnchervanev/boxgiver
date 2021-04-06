@@ -109,8 +109,8 @@ class Person < ApplicationRecord
   belongs_to :community
   has_many :community_memberships, :dependent => :destroy
   has_many :communities, -> { where("community_memberships.status = 'accepted'") }, :through => :community_memberships
-  has_one  :community_membership, :dependent => :destroy
-  has_one  :accepted_community, -> { where("community_memberships.status= 'accepted'") }, through: :community_membership, source: :community
+  has_one :community_membership, :dependent => :destroy
+  has_one :accepted_community, -> { where("community_memberships.status= 'accepted'") }, through: :community_membership, source: :community
   has_many :invitations, :foreign_key => "inviter_id", :dependent => :destroy, :inverse_of => :inviter
   has_many :auth_tokens, :dependent => :destroy
   has_many :follower_relationships, :dependent => :destroy
@@ -145,7 +145,7 @@ class Person < ApplicationRecord
   end
   scope :has_no_listings, ->(community) do
     joins("LEFT OUTER JOIN `listings` ON `listings`.`author_id` = `people`.`id` AND `listings`.`community_id` = #{community.id} AND `listings`.`deleted` = 0")
-    .where(listings: {author_id: nil}).distinct
+      .where(listings: { author_id: nil }).distinct
   end
   scope :has_stripe_account, ->(community) do
     where(id: StripeAccount.active_users.by_community(community).select(:person_id))
@@ -195,10 +195,10 @@ class Person < ApplicationRecord
     "email_about_new_payments",
     "email_about_new_listings_by_followed_people"
 
-    # These should not yet be shown in UI, although they might be stored in DB
-    # "email_when_new_friend_request",
-    # "email_when_new_feedback_on_transaction",
-    # "email_when_new_listing_from_friend"
+  # These should not yet be shown in UI, although they might be stored in DB
+  # "email_when_new_friend_request",
+  # "email_when_new_feedback_on_transaction",
+  # "email_when_new_listing_from_friend"
   ]
   EMAIL_NEWSLETTER_TYPES = [
     "email_from_admins"
@@ -213,16 +213,16 @@ class Person < ApplicationRecord
 
   USERNAME_BLACKLIST = YAML.load_file("#{Rails.root}/config/username_blacklist.yml")
 
-  validates :username, exclusion: {in: USERNAME_BLACKLIST, message: :username_is_invalid},
-                       uniqueness: {scope: :community_id},
-                       length: {within: 3..20},
-                       format: {with: /\A[A-Z0-9_]*\z/i, message: :username_is_invalid}
+  validates :username, exclusion: { in: USERNAME_BLACKLIST, message: :username_is_invalid },
+            uniqueness: { scope: :community_id },
+            length: { within: 3..20 },
+            format: { with: /\A[A-Z0-9_]*\z/i, message: :username_is_invalid }
 
   has_attached_file :image, :styles => {
-                      :medium => "288x288#",
-                      :small => "108x108#",
-                      :thumb => "48x48#",
-                      :original => "600x800>"}
+    :medium => "288x288#",
+    :small => "108x108#",
+    :thumb => "48x48#",
+    :original => "600x800>" }
 
   process_in_background :image
 
@@ -238,6 +238,7 @@ class Person < ApplicationRecord
   end
 
   after_initialize :add_uuid
+
   def add_uuid
     self.uuid ||= UUIDUtils.create_raw
   end
@@ -283,7 +284,7 @@ class Person < ApplicationRecord
   end
 
   def set_given_name(name)
-    update({:given_name => name })
+    update({ :given_name => name })
   end
 
   def street_address
@@ -311,7 +312,7 @@ class Person < ApplicationRecord
         params[:location][:address] = params[:street_address] if params[:street_address]
 
         self.location = Location.new(params[:location])
-        params[:location].each {|key| params[:location].delete(key)}
+        params[:location].each { |key| params[:location].delete(key) }
         params.delete(:location)
       end
 
@@ -340,7 +341,7 @@ class Person < ApplicationRecord
 
     if positive.size > 0
       if negative.size > 0
-        (positive.size.to_f/received.size.to_f*100).round
+        (positive.size.to_f / received.size.to_f * 100).round
       else
         return 100
       end
@@ -390,7 +391,7 @@ class Person < ApplicationRecord
   end
 
   def is_loving?(listing)
-    loved_listings.include?(listing)
+    loved_listings.pluck(:id).include?(listing.id)
   end
 
   # Unfollows a listing
@@ -513,7 +514,7 @@ class Person < ApplicationRecord
     # Devise 3.1.0 doesn't expose methods to generate reset_password_token without
     # sending the email, so this code is copy-pasted from Recoverable module
     raw, enc = Devise.token_generator.generate(self.class, :reset_password_token)
-    self.reset_password_token   = enc
+    self.reset_password_token = enc
     self.reset_password_sent_at = Time.now.utc
     save(:validate => false)
     raw
@@ -552,16 +553,16 @@ class Person < ApplicationRecord
   # Returns and email that is pending confirmation
   # If community is given as parameter, in case of many pending
   # emails the one required by the community is returned
-  def latest_pending_email_address(community=nil)
+  def latest_pending_email_address(community = nil)
     pending_emails = Email.where(:person_id => id, :confirmed_at => nil).pluck(:address)
 
     allowed_emails = if community&.allowed_emails
-      pending_emails.select do |e|
-        community.email_allowed?(e)
-      end
-    else
-      pending_emails
-    end
+                       pending_emails.select do |e|
+                         community.email_allowed?(e)
+                       end
+                     else
+                       pending_emails
+                     end
 
     allowed_emails.last
   end
@@ -577,7 +578,6 @@ class Person < ApplicationRecord
   def self.members_of(community)
     joins(:communities).where("communities.id" => community.id)
   end
-
 
   # Overrides method injected from Devise::DatabaseAuthenticatable
   # Updates password with password that has been rehashed with new algorithm.
@@ -637,7 +637,7 @@ class Person < ApplicationRecord
   end
 
   class << self
-    def search_by_pattern_sql(table, pattern=':pattern')
+    def search_by_pattern_sql(table, pattern = ':pattern')
       "(#{table}.given_name LIKE #{pattern} OR #{table}.family_name LIKE #{pattern} OR #{table}.display_name LIKE #{pattern})"
     end
   end
