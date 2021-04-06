@@ -1,3 +1,6 @@
-/* Update follow links */
-$("#love-links").html("<%=raw escape_javascript(render(:partial => 'listings/loved_links')) %>");
-$("#love-links").effect("highlight", {}, 1000);
+love_btn = $('.love-<%= @listing.id %>-listing');
+<% if @action == 'add' %>
+love_btn.addClass('active');
+<% else %>
+love_btn.removeClass('active');
+<% end %>

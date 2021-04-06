@@ -337,8 +337,7 @@ module CustomLandingPage
         {"label": "How to use?", "href": {"type": "path", "id": "how_to_use"}},
         {"label": "Terms", "href": {"type": "path", "id": "terms"}},
         {"label": "Privary", "href": {"type": "path", "id": "privacy"}},
-        {"label": "Invite new members", "href": {"type": "path", "id": "new_invitation"}},
-        {"label": "Sharetribe", "href": {"value": "https://www.sharetribe.com"}}
+        {"label": "Invite new members", "href": {"type": "path", "id": "new_invitation"}}
       ],
       "social": [
         {"service": "facebook", "url": "https://www.facebook.com/Sharetribe/"},
@@ -347,10 +346,9 @@ module CustomLandingPage
         {"service": "youtube", "url": "https://www.youtube.com/channel/UCtefWVq2uu4pHXaIsHlBFnw"},
         {"service": "googleplus", "url": "https://plus.google.com/114869130265262677354/"},
         {"service": "linkedin", "url": "https://www.linkedin.com/company/2626583"},
-        {"service": "pinterest", "url": "https://www.pinterest.com/"},
-        {"service": "soundcloud", "url": "https://soundcloud.com/"}
+        {"service": "pinterest", "url": "https://www.pinterest.com/"}
       ],
-      "copyright": "Copyright Marketplace Ltd 2016"
+      "copyright": "© BoxGiver 2021. All rights reserved."
     }
   ],
 
@@ -375,7 +373,6 @@ module CustomLandingPage
   ]
 }
 JSON
-
 
   end
   # rubocop:enable Metrics/ModuleLength

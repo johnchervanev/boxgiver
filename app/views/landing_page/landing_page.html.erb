@@ -8,55 +8,76 @@
 
   <%= favicon_link_tag community_context[:favicon] %>
   <%= favicon_link_tag community_context[:apple_touch_icon], rel: 'apple-touch-icon-precomposed', type: 'image/png' %>
+  <!-- Google Tag Manager -->
+  <script>(function (w, d, s, l, i) {
+      w[l] = w[l] || [];
+      w[l].push({
+          'gtm.start':
+              new Date().getTime(), event: 'gtm.js'
+      });
+      var f = d.getElementsByTagName(s)[0],
+          j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : '';
+      j.async = true;
+      j.src =
+          'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+      f.parentNode.insertBefore(j, f);
+  })(window, document, 'script', 'dataLayer', 'GTM-58GRCK5');</script>
+  <!-- End Google Tag Manager -->
+  <!-- Google Tag Manager (noscript) -->
+  <noscript>
+    <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-58GRCK5"
+            height="0" width="0" style="display:none;visibility:hidden"></iframe>
+  </noscript>
+  <!-- End Google Tag Manager (noscript) -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
   <%= stylesheet_link_tag 'landing' %>
-  <%= stylesheet_link_tag 'landing_page/sections/footer' %>
 </head>
 <body>
 <div id="topbar-placeholder" class="topbar-placeholder"></div>
 <header class="header">
-  <div class="col-lg-12">
-    <div class="row">
-      <div class="col-md-7" style="height: 100%; padding: 0">
-        <div class="header-image" style="background-image: url('<%= community_context[:cover_photo] %>')">
-          <div class="header-content">
-            <%= image_tag(community_context[:logo]) %>
-            <h1> Find free moving boxes near you </h1>
-            <p>
-              BoxGiver is a marketplace that allows users to sell, give away, or find moving boxers.
-            </p>
-            <form action="/s">
-              <div class="search-wrapper">
-                <div class="search-icon"><i class="fa fa-search"></i></div>
-                <div class="search-input">
-                  <input type="text" name="q" placeholder="Search your city" required>
-                </div>
-                <div class="search-submit">
-                  <button type="submit"> Submit</button>
-                </div>
-              </div>
-            </form>
-            <p class="how-it-work-link">
-              <a href="#how-it-works"> Or click here to see how it works </a>
-            </p>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-5" style="padding: 0">
-        <div class="header-image" style="background-image: url('<%= community_context[:hero_photo] %>')">
+  <div class='header-container'>
+    <div class='row'>
+      <div class="col-lg-12">
+        <div class="row">
+          <div class="col-md-7" style="padding: 0">
+            <div class="header-image">
+              <% sections.each_with_index do |section, index| %>
 
+                <% s = section["section"] %>
+                <% section_id = "#{s['kind']}__#{s['id']}__#{index}" %>
+                <% case s["kind"] %>
+              <% when "hero" %>
+                  <%= render partial: "hero", locals: { section_id: section_id, s: s, community_context: community_context } %>
+                <% end %>
+
+              <% end %>
+            </div>
+          </div>
+          <div class="col-md-5" style="padding: 0">
+            <div class="header-image" style="background-image: url('<%= community_context[:hero_photo] %>')">
+
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </header>
+<% if sections.any? { |s| s["section"]["kind"] == "hero" && (s["section"]["variation"]["value"] == "location_search" || s["section"]["variation"]["value"] == "keyword_and_location_search") } %>
+  <% key_param = community_context.has_key?(:google_maps_key) && community_context[:google_maps_key] ? "&key=#{community_context[:google_maps_key]}" : "" %>
+  <script src="//maps.googleapis.com/maps/api/js?libraries=places<%= key_param %>"></script>
+  <script>
+      <%= javascripts[:location_search] %>
+  </script>
+<% end %>
 <div class="boxgiver-videos">
   <video autoplay loop>
-    <source src="<%= asset_path('sarfing.mp4') %>" type="video/mp4">
+    <source src="<%= asset_url('piano.mp4') %>" type="video/mp4">
   </video>
 </div>
+
 <div class="how-it-works-wrapper" id='how-it-works'>
   <div class="container">
     <h3 class="text-center"> How it works </h3>
@@ -74,7 +95,7 @@
                 LIST
               </p>
               <p>
-                List your item and add attractive photos/video together with a de-tailed description.
+                <%= @current_community.hw_list %>
               </p>
             </div>
             <div class="col-lg-3 col-md-6">
@@ -83,8 +104,7 @@
                 SELL
               </p>
               <p>
-                Choose whether you want to sell your times instantly or approve requests from potential
-                Buyers.
+                <%= @current_community.hw_sell %>
               </p>
             </div>
             <div class="col-lg-3 col-md-6">
@@ -93,8 +113,7 @@
                 DELIVERY
               </p>
               <p>
-                Once someone books your item for purchase, quickly arrange pick up or delivery of your
-                item within 7 days.
+                <%= @current_community.hw_delivery %>
               </p>
             </div>
             <div class="col-lg-3 col-md-6">
@@ -103,8 +122,7 @@
                 GET PAID
               </p>
               <p>
-                Receive your payment once the Buyer confirm that they have received the item. Don't
-                forget to leave feedback for the Buyer!
+                <%= @current_community.hw_paid %>
               </p>
             </div>
           </div>
@@ -116,7 +134,7 @@
 <div class="board-wrappers">
   <div class="container">
     <div class="board-title">
-      <h1 class="text-center"> All Types Of Boards </h1>
+      <h1 class="text-center"> <%= @current_community.list_title %> </h1>
     </div>
     <div class="board-items">
       <div class="row">
@@ -162,19 +180,36 @@
     </div>
   </div>
 </div>
-<% sections.each_with_index do |section, index| %>
 
-  <% s = section["section"] %>
-  <% section_id = "#{s['kind']}__#{s['id']}__#{index}" %>
-
-  <% case s["kind"] %>
-<% when "footer" %>
-    <%= render partial: "footer", locals: { section_id: section_id, s: s } %>
-  <% end %>
-<% end %>
 <style type="text/css">
-  <%= yield :footer_css %>
+  <% # Basic styling %>
+  <%= styles %>
+
+  <% # Styles from section partials. E.g. styles that need marketplace color %>
+  <%= yield :hero_css %>
+  <%= yield :video_css %>
+  <%= yield :locations_css %>
 </style>
+<%#= @current_community.custom_head_script.to_s.html_safe %>
+
+<%= yield :javascript %>
+
+<%# sections.each_with_index do |section, index| %>
+
+<%# s = section["section"] %>
+<%# section_id = "#{s['kind']}__#{s['id']}__#{index}" %>
+
+<%# case s["kind"] %>
+<%# when "footer" %>
+<%#= render partial: "footer", locals: { section_id: section_id, s: s } %>
+<%# end %>
+<%# end %>
+
+<!--<style type="text/css">-->
+<%#= yield :footer_css %>
+<!--</style>-->
+
+<%= render 'layouts/custom_footer', c: community_context %>
 <% asset_host = local_assigns.key?(:asset_host) ? asset_host : nil %>
 <%= stylesheet_link_tag asset_path('app-bundle', type: :stylesheet, host: asset_host) %>
 <%= javascript_include_tag asset_path('vendor-bundle', type: :javascript, host: asset_host) %>
@@ -184,5 +219,6 @@
                      marketplace_context: topbar[:marketplace_context],
                      props_endpoint: topbar[:props_endpoint],
                      container_id: "topbar-placeholder" } %>
+<%= render 'layouts/cookies' %>
 </body>
 </html>

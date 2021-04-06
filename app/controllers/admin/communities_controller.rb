@@ -186,6 +186,7 @@ class Admin::CommunitiesController < Admin::AdminBaseController
     permitted_params = [
       :wide_logo, :logo,:cover_photo, :hero_photo, :small_cover_photo, :favicon, :custom_color1,
       :custom_color2, :slogan_color, :description_color, :default_browse_view, :name_display_type, :earning_potential_image,
+      :list_title, :hw_list, :hw_sell, :hw_delivery, :hw_paid,
       attachments_destroyer: []
     ]
     permitted_params << :custom_head_script
