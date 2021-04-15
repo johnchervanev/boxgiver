@@ -90,7 +90,7 @@ class ListingsController < ApplicationController
     make_listing_presenter
     @listing_presenter.form_path = new_transaction_path(listing_id: @listing.id)
     @seo_service.listing = @listing
-    @related_listings = @listing.category.listings - [@listing]
+    @related_listings = @listing.category.listings.limit(10) - [@listing]
     @related_listings = @related_listings
 
     record_event(
