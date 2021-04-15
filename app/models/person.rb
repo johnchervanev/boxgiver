@@ -120,6 +120,7 @@ class Person < ApplicationRecord
 
   has_and_belongs_to_many :followed_listings, :class_name => "Listing", :join_table => "listing_followers"
   has_and_belongs_to_many :loved_listings, :class_name => "Listing", :join_table => "listing_lovers"
+  has_and_belongs_to_many :reported_listings, :class_name => "Listing", :join_table => "listing_reports"
   has_many :custom_field_values, :dependent => :destroy
   has_many :custom_dropdown_field_values, :class_name => "DropdownFieldValue", :dependent => :destroy
   has_many :custom_checkbox_field_values, :class_name => "CheckboxFieldValue", :dependent => :destroy
@@ -380,9 +381,6 @@ class Person < ApplicationRecord
   end
 
   def love(listing)
-    p "<<<<<<<<<<<<<<<"
-    p listing
-    p "<<<<<<<<<<<<<<<"
     loved_listings << listing
   end
 
@@ -392,6 +390,14 @@ class Person < ApplicationRecord
 
   def is_loving?(listing)
     loved_listings.pluck(:id).include?(listing.id)
+  end
+
+  def is_reported?(listing)
+    if reported_listings.pluck(:id).include?(listing.id)
+      'reported'
+      else
+    'not-reported'
+    end
   end
 
   # Unfollows a listing

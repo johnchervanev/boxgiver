@@ -53,6 +53,12 @@ class SettingsController < ApplicationController
     @presenter = Listing::ListPresenter.new(@current_community, @current_user, params, false)
   end
 
+  def reported_listings
+    @selected_left_navi_link = "reported_listings"
+    listing_ids = @current_user.listings.map(&:id)
+    @reported_listings = ListingReport.where(listing_id: listing_ids)
+  end
+
   def transactions
     @selected_left_navi_link = "transactions"
     @service = Admin::TransactionsService.new(@current_community, params, request.format, @current_user, true)

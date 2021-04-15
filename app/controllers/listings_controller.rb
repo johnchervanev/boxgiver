@@ -13,7 +13,7 @@ class ListingsController < ApplicationController
   end
 
   before_action :save_current_path, :only => :show
-  before_action :ensure_authorized_to_view, :only => [:show, :follow, :unfollow, :love, :remove_from_love]
+  before_action :ensure_authorized_to_view, :only => [:show, :follow, :unfollow, :love, :remove_from_love, :report]
 
   before_action :only => [:close] do |controller|
     controller.ensure_current_user_is_listing_author t("layouts.notifications.only_listing_author_can_close_a_listing")
@@ -90,13 +90,16 @@ class ListingsController < ApplicationController
     make_listing_presenter
     @listing_presenter.form_path = new_transaction_path(listing_id: @listing.id)
     @seo_service.listing = @listing
+    @related_listings = @listing.category.listings - [@listing]
+    @related_listings = @related_listings
 
     record_event(
       flash.now,
       "ListingViewed",
       { listing_id: @listing.id,
         listing_uuid: @listing.uuid_object.to_s,
-        payment_process: @listing_presenter.process })
+        payment_process: @listing_presenter.process
+      })
   end
 
   def new
@@ -273,6 +276,14 @@ class ListingsController < ApplicationController
     respond_to do |format|
       format.js { render :layout => false }
     end
+  end
+
+  def report
+    listing_report = ListingReport.find_or_initialize_by(listing_id: @listing.id, person_id: @current_user.id)
+    listing_report.reason = params[:reason]
+    listing_report.save
+    Delayed::Job.enqueue(ReportEmailJob.new(listing_report.id, @current_community))
+    redirect_to listing_path(@listing)
   end
 
   def remove_from_love

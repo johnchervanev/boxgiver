@@ -162,7 +162,7 @@ class HomepageController < ApplicationController
     SearchPageHelper.remove_irrelevant_search_fields(search_fields, relevant_filters)
   end
 
-  def find_listings(params:, current_page:, listings_per_page:, filter_params:, includes:, location_search_in_use:, keyword_search_in_use:, relevant_search_fields:)
+  def  find_listings(params:, current_page:, listings_per_page:, filter_params:, includes:, location_search_in_use:, keyword_search_in_use:, relevant_search_fields:)
 
     search = {
       # Add listing_id

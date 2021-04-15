@@ -608,6 +608,7 @@ en:
           date_sent: "Date sent"
       listings:
         listings: Listings
+        reported_listings: "Reported Listings"
         search_by_title_author_category: "Search for a listing title, author or category name"
         search: Search
         reset_search: "Show all"
