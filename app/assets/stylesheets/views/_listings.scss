@@ -377,3 +377,15 @@ $listing-author-avatar-height: 108;
   font-size: 15px;
   color: gray;
 }
+
+.not-reported {
+  font-size: 22px;
+  color: gray;
+  padding-left: 20px;
+}
+
+.reported {
+  font-size: 22px;
+  color: red;
+  padding-left: 20px;
+}

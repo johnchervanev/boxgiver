@@ -97,7 +97,7 @@
                 = t(".listing_created_at")
                 = l @listing.created_at, :format => :short_date
 
-    - if !@current_community.private?
+    - unless !@current_community.private?
       .row
         .col-12
           .listing-social
@@ -111,6 +111,7 @@
                   !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
             #love-links.love-links
               = render :partial => "loved_links"
+              = render :partial => "report_link"
 
     - unless (@listing.closed? && !current_user?(@listing.author)) || !@current_community.listing_comments_in_use
       .view-item
@@ -126,6 +127,7 @@
             = render :partial => "comment", :collection => @listing.comments
           #comment-form
             = render :partial => "comment_form"
+      =  render :partial => "related_listings", related_listings: @related_listings
 
   %aside.col-4
     - if @listing.price
@@ -178,3 +180,5 @@
           #googlemap
             = render :partial => "googlemap", :locals => { :listing => @listing}
             = render :partial => "origin", :locals => { :origin_loc => @listing.origin_loc }
+
+

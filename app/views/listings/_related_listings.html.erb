@@ -1,0 +1,54 @@
+<h2>Related Listings</h2>
+<div class="row">
+  <% @related_listings.each do |listing| %>
+    <div class="col-4">
+      <div class="home-fluid-thumbnail-grid-item">
+        <div>
+          <%= love_button(listing, @current_user, 'listing-over') %>
+          <% # Listing image %>
+          <%= link_to(listing_path(listing), :class => "fluid-thumbnail-grid-image-item-link") do %>
+            <div class="fluid-thumbnail-grid-image-image-container">
+              <% with_first_listing_image(listing) do |first_image_url| %>
+                <%= image_tag first_image_url, {:alt => listed_listing_title(listing), :class => "fluid-thumbnail-grid-image-image"} %>
+              <% end %>
+              <div class=" fluid-thumbnail-grid-image-overlay"></div>
+              <div class="fluid-thumbnail-grid-image-title">
+                <%= listing.title %>
+              </div>
+              <div class="fluid-thumbnail-grid-image-price-container">
+                <% if listing.price %>
+        <span class="fluid-thumbnail-grid-image-price">
+          <%= MoneyViewUtils.to_humanized(listing.price) %>
+          <% price_unit = '' #price_quantity_slash_unit(listing) %>
+        </span>
+                  <% if !price_unit.blank? %>
+                    <% price_text = " " + price_unit %>
+                    <span class="fluid-thumbnail-grid-image-quantity" title="<%= price_text %>">
+            <%= price_text %>
+          </span>
+                  <% end %>
+                <% else %>
+        <span class="fluid-thumbnail-grid-image-type">
+          <%= shape_name(listing) %>
+        </span>
+                <% end %>
+              </div>
+            </div>
+          <% end %>
+          <% # Listing author details %>
+          <div class="home-fluid-thumbnail-grid-author">
+            <div class="home-fluid-thumbnail-grid-author-avatar">
+              <%= link_to(person_path(username: listing.author.username)) do %>
+                <%= small_avatar_thumb(listing.author)%>
+              <% end %>
+            </div>
+            <% name = PersonViewUtils.person_entity_display_name(listing.author, @current_community.name_display_type) %>
+            <%= link_to(person_path(username: listing.author.username), :class => "home-fluid-thumbnail-grid-author-name", title: name) do %>
+              <%= name %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

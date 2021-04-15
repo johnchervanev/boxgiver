@@ -37,6 +37,11 @@ class Admin::CommunityListingsController < Admin::AdminBaseController
     end
   end
 
+  def reported_listings
+    @reported_listings = ListingReport.all
+    @selected_left_navi_link = 'reported_listings'
+  end
+
   private
 
   def set_selected_left_navi_link

@@ -289,6 +289,19 @@ class PersonMailer < ActionMailer::Base
     end
   end
 
+  def report_listing_admin_notification(report, community)
+    subject = "New report has been submitted"
+    @report_item = ListingReport.find report
+
+    premailer_mail(
+      :to => mail_feedback_to(community, APP_CONFIG.feedback_mailer_recipients),
+      :from => community_specific_sender(community),
+      :subject => subject) do |format|
+      format.html {
+      }
+    end
+  end
+
   def mail_feedback_to(community, platform_admin_email)
     if community.admin_emails.any?
       community.admin_emails.join(",")
@@ -296,6 +309,8 @@ class PersonMailer < ActionMailer::Base
       platform_admin_email
     end
   end
+
+
 
   # Old layout
 

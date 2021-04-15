@@ -1,0 +1,17 @@
+= link_to '', 'javascript:void(0)', class: "show-popup icon-flag report-btn #{@current_user.is_reported?(@listing)}",
+  data: { popup_content_id: "#pending-consent" }
+.hidden{id: "pending-consent"}
+  .membership--pending-popup
+    = "This is the test data"
+= render layout: "layouts/lightbox", locals: { id: "membership-popup"} do
+  #membership-popup-content.membership-popup-content
+    .membership--pending-popup
+      = form_tag report_listing_path(@listing), method: :post, id: "edit_community",reomte: true do
+        .row
+          .col-12
+            = label_tag "Reason"
+            = text_area_tag "reason"
+        .membership--pending-buttons
+          = submit_tag 'Submit', class: 'button search-button'
+          = link_to '#', class: 'cancel-button', id: 'close_x1' do
+            = t('admin.communities.manage_members.cancel')

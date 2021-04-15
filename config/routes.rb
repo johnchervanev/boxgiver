@@ -515,6 +515,7 @@ Rails.application.routes.draw do
           collection do
             get 'export'
             get 'export_status'
+            get 'reported_listings'
           end
         end
         resources :transactions, controller: :community_transactions, only: [:index, :show] do
@@ -630,6 +631,7 @@ Rails.application.routes.draw do
       member do
         post :follow
         post :love
+        post :report
         delete :unfollow
         delete :remove_from_love
         delete :delete
@@ -774,6 +776,7 @@ Rails.application.routes.draw do
             get :notifications
             get :unsubscribe
             get :listings
+            get 'reported_listings'
             get :transactions
           end
         end

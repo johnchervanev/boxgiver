@@ -105,3 +105,9 @@
 //= require stripe_payment
 //= require confirm_conversation
 //= require_self
+
+$('.not-reported').on('click', function() {
+    var contentId = $(this).data('popupContentId'),
+        content = $(contentId).html();
+    $('#membership-popup').lightbox_me({centered: true, closeSelector: '#close_x, #close_x1'});
+});

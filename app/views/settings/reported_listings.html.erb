@@ -1,0 +1,35 @@
+<% content_for :title_header do %>
+  <h1>
+    <%= t("layouts.settings.settings")%>
+    <%= "-" %>
+    <%= t("admin.communities.getting_started.getting_started") %>
+  </h1>
+<% end %>
+<%= render :partial => "layouts/left_hand_navigation", :locals => { :links => settings_links_for(@current_user, @current_community) }%>
+
+<div class="left-navi-section">
+  <h2>Reported Listings</h2>
+  <table id="admin_listings">
+    <thead>
+    <tr>
+      <th>
+        <%= t("admin.communities.listings.headers.title") %>
+      </th>
+      <th>Listing Owner</th>
+      <th>Reported By</th>
+      <th>Reason</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @reported_listings.each do |rl| %>
+      <tr>
+        <td><%= link_to rl.listing.title, listing_path(rl.listing) %></td>
+        <td><%= link_to rl.listing.author.full_name, person_url(rl.listing.author) %></td>
+        <td><%= link_to rl.person.full_name, person_url(rl.person) %></td>
+        <td><%= rl.reason %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>
+

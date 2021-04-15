@@ -389,6 +389,14 @@ module ApplicationHelper
         :path => admin_community_listings_path(@current_community, sort: "updated"),
         :name => "listings"
       },
+
+      {
+        :topic => :manage,
+        :text => t("admin.communities.listings.reported_listings"),
+        :icon_class => icon_class("thumbnails"),
+        :path => reported_listings_admin_community_listings_path(@current_community, sort: "updated"),
+        :name => "reported_listings"
+      },
       {
         :topic => :manage,
         :text => t("admin.communities.transactions.transactions"),
@@ -588,7 +596,14 @@ module ApplicationHelper
         :icon_class => icon_class("profile"),
         :path => person_settings_path(person),
         :name => "profile"
-      }
+      },
+      {
+        :topic => :manage,
+        :text => t("admin.communities.listings.reported_listings"),
+        :icon_class => icon_class("thumbnails"),
+        :path => reported_listings_person_settings_path(person),
+        :name => "reported_listings"
+      },
     ]
     unless restrict_for_admin
       links +=
