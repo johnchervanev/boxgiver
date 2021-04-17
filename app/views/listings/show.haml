@@ -127,7 +127,6 @@
             = render :partial => "comment", :collection => @listing.comments
           #comment-form
             = render :partial => "comment_form"
-      =  render :partial => "related_listings", related_listings: @related_listings
 
   %aside.col-4
     - if @listing.price
@@ -181,4 +180,6 @@
             = render :partial => "googlemap", :locals => { :listing => @listing}
             = render :partial => "origin", :locals => { :origin_loc => @listing.origin_loc }
 
-
+#related-listing
+  .col-12
+    =  render :partial => "related_listings", related_listings: @related_listings

@@ -1,5 +1,5 @@
-= link_to '', 'javascript:void(0)', class: "show-popup icon-flag report-btn #{@current_user.is_reported?(@listing)}",
-  data: { popup_content_id: "#pending-consent" }
+- if @current_user.present?
+  = link_to '', 'javascript:void(0)', class: "show-popup icon-flag report-btn #{@current_user.is_reported?(@listing)}", data: { popup_content_id: "#pending-consent" }
 .hidden{id: "pending-consent"}
   .membership--pending-popup
     = "This is the test data"
