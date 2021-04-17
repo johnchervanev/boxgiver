@@ -97,21 +97,20 @@
                 = t(".listing_created_at")
                 = l @listing.created_at, :format => :short_date
 
-    - unless @current_community.private?
-      .row
-        .col-12
-          .listing-social
-            .listing-fb-like-button
-              = facebook_like(current_user?(@listing.author))
-            .listing-tweet-button
-              - twitter_params =  {count: "horizontal", via: (@current_community.twitter_handle), text: @listing.title }.compact
-              = link_to("", "https://twitter.com/share", :class => "twitter-share-button", "data" => twitter_params)
-              - content_for :extra_javascript do
-                :javascript
-                  !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
-            #love-links.love-links
-              = render :partial => "loved_links"
-              = render :partial => "report_link"
+    .row
+      .col-12
+        .listing-social
+          .listing-fb-like-button
+            = facebook_like(current_user?(@listing.author))
+          .listing-tweet-button
+            - twitter_params =  {count: "horizontal", via: (@current_community.twitter_handle), text: @listing.title }.compact
+            = link_to("", "https://twitter.com/share", :class => "twitter-share-button", "data" => twitter_params)
+            - content_for :extra_javascript do
+              :javascript
+                !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+          #love-links.love-links
+            = render :partial => "loved_links"
+            = render :partial => "report_link"
 
     - unless (@listing.closed? && !current_user?(@listing.author)) || !@current_community.listing_comments_in_use
       .view-item
