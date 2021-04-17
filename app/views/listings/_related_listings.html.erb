@@ -1,14 +1,14 @@
-<h2>Related Listings</h2>
-<div class="row">
+<h2 style="margin: 15px 0;">Related Listings</h2>
+<div class="box-row">
   <% @related_listings.each do |listing| %>
-    <div class="col-4">
+    <div class="col-lg-3 col-3 col-md-4 col-sm-6 related-listing-item">
       <div class="home-fluid-thumbnail-grid-item">
         <div>
           <%= love_button(listing, @current_user, 'listing-over') %>
           <% # Listing image %>
           <%= link_to(listing_path(listing), :class => "fluid-thumbnail-grid-image-item-link") do %>
             <div class="fluid-thumbnail-grid-image-image-container">
-              <% with_first_listing_image(listing) do |first_image_url| %>
+              <% with_first_love_listing_image(listing) do |first_image_url| %>
                 <%= image_tag first_image_url, {:alt => listed_listing_title(listing), :class => "fluid-thumbnail-grid-image-image"} %>
               <% end %>
               <div class=" fluid-thumbnail-grid-image-overlay"></div>
