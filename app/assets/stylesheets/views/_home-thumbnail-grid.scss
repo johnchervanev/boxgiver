@@ -25,6 +25,12 @@ $home-thumbnail-grid-author: $home-thumbnail-grid-avatar + ($home-thumbnail-grid
 
 .home-fluid-thumbnail-grid-author-avatar {
   padding: $home-thumbnail-grid-avatar-padding;
+  img {
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    height: 36px;
+  }
 }
 
 .home-fluid-thumbnail-grid-author-avatar-image {
