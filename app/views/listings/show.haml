@@ -97,7 +97,7 @@
                 = t(".listing_created_at")
                 = l @listing.created_at, :format => :short_date
 
-    - unless !@current_community.private?
+    - unless @current_community.private?
       .row
         .col-12
           .listing-social
