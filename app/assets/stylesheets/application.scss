@@ -54,3 +54,19 @@
     background: #01a58a;
   }
 }
+
+@media (min-width: 48em) {
+  .box-row {
+    margin: 0 -15px 0 -15px;
+
+    [class*=col-]:first-child {
+      padding-left: 15px;
+    }
+  }
+
+  #related-listing {
+    .related-listing-item {
+      margin-bottom: 30px;
+    }
+  }
+}
