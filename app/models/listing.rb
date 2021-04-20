@@ -96,15 +96,15 @@ class Listing < ApplicationRecord
   has_and_belongs_to_many :lovers, :class_name => "Person", :join_table => "listing_lovers"
 
   belongs_to :category
-  has_many :working_time_slots, ->{ ordered }, dependent: :destroy, inverse_of: :listing
+  has_many :working_time_slots, -> { ordered }, dependent: :destroy, inverse_of: :listing
   accepts_nested_attributes_for :working_time_slots, reject_if: :all_blank, allow_destroy: true
 
   belongs_to :listing_shape
 
   has_many :tx, class_name: 'Transaction', :dependent => :destroy
   has_many :bookings, through: :tx
-  has_many :bookings_per_hour, ->{ per_hour_blocked }, through: :tx, source: :booking
-  has_many :bookings_per_day, ->{ per_day_blocked }, through: :tx, source: :booking
+  has_many :bookings_per_hour, -> { per_hour_blocked }, through: :tx, source: :booking
+  has_many :bookings_per_day, -> { per_day_blocked }, through: :tx, source: :booking
 
   has_many :blocked_dates, :dependent => :destroy
   accepts_nested_attributes_for :blocked_dates, reject_if: :all_blank, allow_destroy: true
@@ -126,8 +126,8 @@ class Listing < ApplicationRecord
       .where("listings.title like :pattern
         OR (category_translations.locale = :locale AND category_translations.name like :pattern)
         OR (people.given_name like :pattern OR people.family_name like :pattern OR people.display_name like :pattern)",
-        locale: I18n.locale,
-        pattern: "%#{pattern}%")
+             locale: I18n.locale,
+             pattern: "%#{pattern}%")
   end
 
   ANNOUNCEMENTS = %i{twitter}
@@ -136,7 +136,7 @@ class Listing < ApplicationRecord
   scope :use_index, ->(index) { from("#{self.table_name} USE INDEX (#{index})") }
   scope :use_homepage_index, -> { use_index(HOMEPAGE_INDEX) }
 
-  scope :status_open, ->   { where(open: true) }
+  scope :status_open, -> { where(open: true) }
   scope :status_closed, -> { where(open: false) }
   scope :status_expired, -> { where('valid_until < ?', DateTime.now) }
   scope :status_active, -> { where('valid_until > ? or valid_until is null', DateTime.now) }
@@ -153,21 +153,24 @@ class Listing < ApplicationRecord
   enum state: APPROVALS
 
   before_create :set_sort_date_to_now
+
   def set_sort_date_to_now
     self.sort_date ||= Time.now
   end
 
   before_create :set_updates_email_at_to_now
+
   def set_updates_email_at_to_now
     self.updates_email_at ||= Time.now
   end
 
   after_create :listing_announcement
+
   def listing_announcement
     return if closed? || !approved?
 
     ANNOUNCEMENTS.each do |platform|
-      if community.is_announcement_enabled_to(platform)    
+      if community.is_announcement_enabled_to(platform)
         Delayed::Job.enqueue(ListingAnnouncementJob.new(id, platform))
       end
     end
@@ -186,6 +189,7 @@ class Listing < ApplicationRecord
   end
 
   before_create :add_uuid
+
   def add_uuid
     self.uuid ||= UUIDUtils.create_raw
   end
@@ -195,17 +199,17 @@ class Listing < ApplicationRecord
     # Reason: Some browsers send line-break as \r\n which counts for 2 characters making the
     # 5000 character max length validation to fail.
     # This could be more general helper function, if this is needed in other textareas.
-    self.description = description.gsub("\r\n","\n") if self.description
+    self.description = description.gsub("\r\n", "\n") if self.description
   end
   validates_length_of :description, :maximum => 5000, :allow_nil => true
   validates_presence_of :category
-  validates_inclusion_of :valid_until, :allow_nil => true, :in => proc{ DateTime.now..DateTime.now + 7.months }
+  validates_inclusion_of :valid_until, :allow_nil => true, :in => proc { DateTime.now..DateTime.now + 7.months }
   validates_numericality_of :price_cents, :only_integer => true, :greater_than_or_equal_to => 0, :message => "price must be numeric", :allow_nil => true
 
   # sets the time to midnight
   def set_valid_until_time
     if valid_until
-      self.valid_until = valid_until.utc + (23-valid_until.hour).hours + (59-valid_until.min).minutes + (59-valid_until.sec).seconds
+      self.valid_until = valid_until.utc + (23 - valid_until.hour).hours + (59 - valid_until.min).minutes + (59 - valid_until.sec).seconds
     end
   end
 
@@ -249,6 +253,19 @@ class Listing < ApplicationRecord
         end
       end
     end
+  end
+
+  def geo_distance(p1)
+    p2 = self.location
+    return if p1.nil? || p2.nil?
+    r = 6371 # Radius of the Earth in km
+    dlat = (p2.latitude - p1.latitude) * Math::PI / 180
+    dlon = (p2.longitude - p1.longitude) * Math::PI / 180
+    a = Math.sin(dlat / 2) * Math.sin(dlat / 2) +
+      Math.cos(p1.latitude * Math::PI / 180) * Math.cos(p2.latitude * Math::PI / 180) *
+        Math.sin(dlon / 2) * Math.sin(dlon / 2)
+    c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
+    (r * c).round(1)
   end
 
   def image_by_id(id)
@@ -358,7 +375,7 @@ class Listing < ApplicationRecord
 
   def is_answer_value_blank(value)
     if value.is_a?(Hash)
-      value["(3i)"].blank? || value["(2i)"].blank? || value["(1i)"].blank?  # DateFieldValue check
+      value["(3i)"].blank? || value["(2i)"].blank? || value["(1i)"].blank? # DateFieldValue check
     else
       value.blank?
     end
@@ -369,7 +386,7 @@ class Listing < ApplicationRecord
       if params[:listing_images]
         params[:listing_images].collect { |h| h[:id] }.select { |id| id.present? }
       else
-        logger.error("Listing images array is missing", nil, {params: params})
+        logger.error("Listing images array is missing", nil, { params: params })
         []
       end
 
@@ -377,7 +394,7 @@ class Listing < ApplicationRecord
 
     if params[:listing_ordered_images].present?
       params[:listing_ordered_images].split(",").each_with_index do |image_id, position|
-        ListingImage.where(id: image_id, author_id: user_id).update_all(position: position+1)
+        ListingImage.where(id: image_id, author_id: user_id).update_all(position: position + 1)
       end
     end
   end
