@@ -265,7 +265,7 @@ class Listing < ApplicationRecord
       Math.cos(p1.latitude * Math::PI / 180) * Math.cos(p2.latitude * Math::PI / 180) *
         Math.sin(dlon / 2) * Math.sin(dlon / 2)
     c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
-    (r * c).round(1)
+    (r * c).round(2)
   end
 
   def image_by_id(id)
