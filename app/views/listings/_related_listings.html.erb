@@ -46,6 +46,9 @@
             <%= link_to(person_path(username: listing.author.username), :class => "home-fluid-thumbnail-grid-author-name", title: name) do %>
               <%= name %>
             <% end %>
+            <div style="float: right; margin-left: auto">
+              <%= listing.geo_distance(@listing.location) %> miles
+            </div>
           </div>
         </div>
       </div>
