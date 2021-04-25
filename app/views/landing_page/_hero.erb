@@ -33,7 +33,7 @@
   }
 <% end %>
 
-<section id="<%= section_id %>" style="padding: 15px 0" class="<%= section_style_class %> landing-hero-container">
+<section id="<%= section_id %>" style="padding: 15px 0" class="<%= section_style_class %> pre-loading landing-hero-container">
   <div class="hero__content">
     <div class="hero__content-container">
       <div class='text-center community-logo'>
@@ -115,3 +115,12 @@
     </div>
   </div>
 </section>
+
+<script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', (event) => {
+        setTimeout(function () {
+            var element = document.getElementById("hero__hero__0");
+            element.classList.remove("pre-loading");
+        }, 300);
+    })
+</script>
