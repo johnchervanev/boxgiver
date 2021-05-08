@@ -29,6 +29,14 @@ class InfosController < ApplicationController
     @selected_left_navi_link = "privacy"
   end
 
+  def faq
+    p "<<<<<<<<<<<<<<<<<<<<<<<<,"
+    p @community_customization && @community_customization.faq_page_content
+    p "<<<<<<<<<<<<<<<<<<<<<<<<,"
+    @selected_tribe_navi_tab = "about"
+    @selected_left_navi_link = "faq"
+  end
+
   private
 
   def how_to_use_content?

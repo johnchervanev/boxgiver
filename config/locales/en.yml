@@ -2097,6 +2097,7 @@ en:
       how_to_use: "How it works"
       info_about_kassi: "Information about %{service_name}"
       news: News
+      faq: FAQ
       register_details: "Privacy policy"
       terms: "Terms of use"
     logged_in:
