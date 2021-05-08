@@ -35,6 +35,7 @@
 #  profile_meta_title                         :string(255)
 #  profile_meta_description                   :text(65535)
 #  earning_potential_text                     :text(65535)
+#  faq_page_content                           :text(16777215)
 #
 # Indexes
 #
@@ -49,6 +50,7 @@ class CommunityCustomization < ApplicationRecord
   validates_length_of :blank_slate, maximum: 65535
   validates_length_of :welcome_email_content, maximum: 65535
   validates_length_of :how_to_use_page_content, maximum: 262140
+  validates_length_of :faq_page_content, maximum: 262140
   validates_length_of :about_page_content, maximum: 262140
   validates_length_of :terms_page_content, maximum: 393210
   validates_length_of :privacy_page_content, maximum: 262140
@@ -66,6 +68,7 @@ class CommunityCustomization < ApplicationRecord
     how_to_use_page_content
     about_page_content
     terms_page_content
+    faq_page_content
     privacy_page_content
     signup_info_content
     private_community_homepage_content

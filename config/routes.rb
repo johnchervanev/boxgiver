@@ -120,6 +120,7 @@ Rails.application.routes.draw do
     get "/how_to_use" => "infos#how_to_use"
     get "/privacy" => "infos#privacy"
     get "/terms" => "infos#terms"
+    get "/faq" => "infos#faq"
 
     put '/mercury_update' => "mercury_update#update", :as => :mercury_update
 
