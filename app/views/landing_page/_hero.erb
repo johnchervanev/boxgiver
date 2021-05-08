@@ -33,12 +33,9 @@
   }
 <% end %>
 
-<section id="<%= section_id %>" style="padding: 15px 0" class="<%= section_style_class %> pre-loading landing-hero-container">
+<section id="<%= section_id %>" class="pre-loading landing-hero-container">
   <div class="hero__content">
     <div class="hero__content-container">
-      <div class='text-center community-logo'>
-        <%= image_tag(community_context[:logo]) %>
-      </div>
       <% if community_context[:show_slogan] %>
         <h1 class="hero__title"><%= s["title"]["value"] %></h1>
       <% end %>
@@ -57,7 +54,7 @@
         <% case search_mode %>
       <% when "keyword_search", "location_search", "keyword_and_location_search" %>
 
-          <div class="hero__search-bar-padding">
+          <div class="hero__search-bar-paddingx">
             <% combined_mode = search_mode == 'keyword_and_location_search' ? '--combined' : '' %>
             <form method="get" id="<%= section_id %>__search-form" class="hero__search-bar<%= combined_mode %>" action="<%= s["search_path"]["value"] %>">
               <div class="hero__search-input-container<%= combined_mode %>">
@@ -101,7 +98,7 @@
 
             </form>
             <p class="how-it-work-link">
-              <a href="#how-it-works"> Or click here to see how it works </a>
+              <a href="#how-it-works"> How it works </a>
             </p>
           </div>
 
