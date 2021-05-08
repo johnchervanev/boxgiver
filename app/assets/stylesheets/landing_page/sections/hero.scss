@@ -36,7 +36,7 @@ $tablet--hero: "(min-width: 480px) and (max-width: 767px)";
 }
 
 .hero__content-container {
-  text-align: center;
+  //text-align: center;
 
   @media #{$mobile-landscape}, #{$tablet} {
     max-width: 561px;

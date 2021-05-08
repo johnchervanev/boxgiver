@@ -56,7 +56,7 @@
               <% end %>
             </div>
           </div>
-          <div class="col-md-5" style="padding: 0">
+          <div class="col-md-5 header-image-wrapper" style="padding: 0">
             <div class="header-image" style="background-image: url('<%= community_context[:hero_photo] %>')">
 
             </div>
@@ -73,16 +73,20 @@
       <%= javascripts[:location_search] %>
   </script>
 <% end %>
-<div class="boxgiver-videos">
-  <video autoplay loop>
-    <source src="<%= asset_url('piano.mp4') %>" type="video/mp4">
-  </video>
+<div class='container'>
+  <div class="boxgiver-videos">
+    <div class="video-content">
+      <video autoplay loop>
+        <source src="<%= asset_url('piano.mp4') %>" type="video/mp4">
+      </video>
+    </div>
+  </div>
 </div>
 
 <div class="how-it-works-wrapper" id='how-it-works'>
   <div class="container">
     <h3 class="text-center"> How it works </h3>
-    <p class="text-center">
+    <p class="text-center how-it-work-text">
       Whether you're looking to borrow, lead, buy or sell, we offer you simple directions. just let us know what
       you want to do.
     </p>
@@ -91,37 +95,41 @@
         <div class="col-lg-12">
           <div class="row">
             <div class="col-lg-3 col-md-6">
-              <%= image_tag('list.png') %>
-              <p>
-                LIST
-              </p>
+              <div class="item-header counter-one">
+                <%= image_tag('list.png') %>
+                <h3> LIST </h3>
+              </div>
               <p>
                 <%= @current_community.hw_list %>
               </p>
             </div>
             <div class="col-lg-3 col-md-6">
-              <%= image_tag('sell.png') %>
-              <p>
-                SELL
-              </p>
+              <div class="item-header counter-two">
+                <%= image_tag('sell.png') %>
+                <h3> SELL </h3>
+              </div>
               <p>
                 <%= @current_community.hw_sell %>
               </p>
             </div>
             <div class="col-lg-3 col-md-6">
-              <%= image_tag('deliver.png') %>
-              <p>
-                DELIVERY
-              </p>
+              <div class="item-header counter-three">
+                <%= image_tag('deliver.png') %>
+                <h3>
+                  DELIVERY
+                </h3>
+              </div>
               <p>
                 <%= @current_community.hw_delivery %>
               </p>
             </div>
             <div class="col-lg-3 col-md-6">
-              <%= image_tag('paid.png') %>
-              <p>
-                GET PAID
-              </p>
+              <div class="item-header counter-four">
+                <%= image_tag('paid.png') %>
+                <h3>
+                  GET PAID
+                </h3>
+              </div>
               <p>
                 <%= @current_community.hw_paid %>
               </p>
@@ -143,36 +151,79 @@
           <div class="row">
             <% @categories.each do |category| %>
               <div class="col-lg-3 col-md-6">
-                <div class="board-item" style="background-image: url('<%= category.image ? category.image : asset_path('nope-not-here.webp') %>')">
-                  <a class="board-item-title" href="/<%= landing_page_locale %>/s?category=<%= category.url %>"> <%= category.display_name(locale) %> </a>
-                </div>
+                <a class="board-item" href="/<%= landing_page_locale %>/s?category=<%= category.url %>">
+                  <div class='board-header'>
+                    <%= category.display_name(locale) %>
+                  </div>
+                  <div class='board-body'>
+                    <div class='image-wrapper' style="background-image: url('<%= category.image ? category.image : asset_path('nope-not-here.webp') %>')">
+
+                    </div>
+                  </div>
+                </a>
               </div>
             <% end %>
           </div>
         </div>
       </div>
     </div>
-    <div class="board-summary">
-      <div class="row">
-        <div class="col-lg-12">
-          <div class="row">
-            <div class="col-md-4">
-              <div class="summary-text">
-                <p><b> Unlimited earning potential </b></p>
-                <p>
-                  <% if community_context[:earning_text].present? %>
-                    <%= community_context[:earning_text].html_safe %>
-                  <% else %>
-                    Put your board to work and make money renting then out. It's free and only takes
-                    minutes! <a href="<%= new_listing_path %>"> <b> List your boards </b> </a>
-                  <% end %>
-                </p>
+  </div>
+</div>
+
+<div class="board-summary">
+  <div class='container'>
+    <div class='row'>
+      <div class="col-lg-12">
+        <div class="row">
+          <div class="col-md-6">
+            <div class='rowx'>
+              <div class="earning-faq">
+                <h1>
+                  Unlimited earning potential
+                </h1>
+                <div class='faq-items'>
+                  <div class='faq-item'>
+                    <h2> How can I become part of this? </h2>
+                    <p class='faq-text'>
+                      Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
+                      the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of
+                    </p>
+                  </div>
+                  <div class='faq-item'>
+                    <h2> Hwo can join the Beazy Gang? </h2>
+                    <p class='faq-text'>
+                      Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
+                      the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of
+                    </p>
+                  </div>
+                  <div class='faq-item'>
+                    <h2> Can I get a job through the Beazy Gang? </h2>
+                    <p class='faq-text'>
+                      Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
+                      the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of
+                    </p>
+                  </div>
+                </div>
+                <div class='check-it-out'>
+                  <a href='/listings'> Check it out </a>
+                </div>
               </div>
             </div>
-            <div class="col-md-8">
-              <div class="board-summary-image"
-                   style="background-image: url('<%= community_context[:earning_potential_image] %>')">
-
+          </div>
+          <div class="col-md-6 m-reset-padding">
+            <div class='earning-content' style="background-image: url('<%= community_context[:earning_potential_image] %>')">
+              <div class="earning-text-wrapper">
+                <div class='earning-text-content'>
+                  <h2> Unlimited earning potential </h2>
+                  <p>
+                    <% if community_context[:earning_text].present? %>
+                      <%= community_context[:earning_text].html_safe %>
+                    <% else %>
+                      Put your board to work and make money renting then out. It's free and only takes
+                      minutes! <a href="<%= new_listing_path %>"> <b> List your boards </b> </a>
+                    <% end %>
+                  </p>
+                </div>
               </div>
             </div>
           </div>
@@ -215,6 +266,7 @@
 <%= stylesheet_link_tag asset_path('app-bundle', type: :stylesheet, host: asset_host) %>
 <%= javascript_include_tag asset_path('vendor-bundle', type: :javascript, host: asset_host) %>
 <%= javascript_include_tag asset_path('app-bundle', type: :javascript, host: asset_host) %>
+<%= javascript_include_tag asset_path('landing', type: :javascript, host: asset_host) %>
 <%= render partial: "topbar",
            locals: { props: topbar[:props],
                      marketplace_context: topbar[:marketplace_context],
