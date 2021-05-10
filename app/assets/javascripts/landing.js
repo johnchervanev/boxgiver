@@ -17,4 +17,14 @@ $(function () {
             $this.next().slideToggle(350);
         }
     });
+
+    $('.play-container').click(function () {
+        $(this).hide();
+        var video = $("#boxgiver-video").get(0);
+        video.play();
+    });
+
+    $("#boxgiver-video").bind("pause ended", function () {
+        $('.play-container').show();
+    });
 });

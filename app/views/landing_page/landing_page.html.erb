@@ -76,8 +76,11 @@
 <div class='container'>
   <div class="boxgiver-videos">
     <div class="video-content">
-      <video autoplay loop>
-        <source src="<%= asset_url('piano.mp4') %>" type="video/mp4">
+      <div class="play-container">
+        <%= image_tag('play_button.png', class: 'play-button') %>
+      </div>
+      <video id="boxgiver-video">
+        <source src="<%= asset_url('boxgiver_video.mp4') %>" type="video/mp4">
       </video>
     </div>
   </div>
@@ -212,19 +215,19 @@
           </div>
           <div class="col-md-6 m-reset-padding">
             <div class='earning-content' style="background-image: url('<%= community_context[:earning_potential_image] %>')">
-              <div class="earning-text-wrapper">
-                <div class='earning-text-content'>
-                  <h2> Unlimited earning potential </h2>
-                  <p>
-                    <% if community_context[:earning_text].present? %>
-                      <%= community_context[:earning_text].html_safe %>
-                    <% else %>
-                      Put your board to work and make money renting then out. It's free and only takes
-                      minutes! <a href="<%= new_listing_path %>"> <b> List your boards </b> </a>
-                    <% end %>
-                  </p>
-                </div>
-              </div>
+              <!--              <div class="earning-text-wrapper">-->
+              <!--                <div class='earning-text-content'>-->
+              <!--                  <h2> Unlimited earning potential </h2>-->
+              <!--                  <p>-->
+              <%# if community_context[:earning_text].present? %>
+              <%#= community_context[:earning_text].html_safe %>
+              <%# else %>
+              <!--                      Put your board to work and make money renting then out. It's free and only takes-->
+              <!--                      minutes! <a href="<%#= new_listing_path %>"> <b> List your boards </b> </a>-->
+              <%# end %>
+              <!--                  </p>-->
+              <!--                </div>-->
+              <!--              </div>-->
             </div>
           </div>
         </div>
