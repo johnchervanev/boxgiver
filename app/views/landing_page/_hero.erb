@@ -33,7 +33,7 @@
   }
 <% end %>
 
-<section id="<%= section_id %>" class="pre-loading landing-hero-container">
+<section id="<%= section_id %>" class="landing-hero-container">
   <div class="hero__content">
     <div class="hero__content-container">
       <% if community_context[:show_slogan] %>
@@ -112,12 +112,3 @@
     </div>
   </div>
 </section>
-
-<script type="text/javascript">
-    document.addEventListener('DOMContentLoaded', (event) => {
-        setTimeout(function () {
-            var element = document.getElementById("hero__hero__0");
-            element.classList.remove("pre-loading");
-        }, 300);
-    })
-</script>

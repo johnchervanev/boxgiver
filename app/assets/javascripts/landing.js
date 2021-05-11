@@ -18,13 +18,15 @@ $(function () {
         }
     });
 
-    $('.play-container').click(function () {
-        $(this).hide();
-        var video = $("#boxgiver-video").get(0);
-        video.play();
-    });
-
-    $("#boxgiver-video").bind("pause ended", function () {
-        $('.play-container').show();
+    updatePlayer();
+    $(window).resize(function () {
+        updatePlayer();
     });
 });
+
+function updatePlayer() {
+    player = $("#boxgiver-video");
+    pwidth = player.width();
+    $('.boxgiver-videos').removeClass('preload');
+    player.height(pwidth * 0.57);
+}

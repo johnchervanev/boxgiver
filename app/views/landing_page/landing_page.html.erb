@@ -37,7 +37,7 @@
 </head>
 <body>
 <div id="topbar-placeholder" class="topbar-placeholder"></div>
-<header class="header">
+<header class="header pre-loading" id='landing-header'>
   <div class='header-container'>
     <div class='row'>
       <div class="col-lg-12">
@@ -74,14 +74,9 @@
   </script>
 <% end %>
 <div class='container'>
-  <div class="boxgiver-videos">
+  <div class="boxgiver-videos preload">
     <div class="video-content">
-      <div class="play-container">
-        <%= image_tag('play_button.png', class: 'play-button') %>
-      </div>
-      <video id="boxgiver-video">
-        <source src="https://boxgiver.com/system/video/boxgiver_video.mp4" type="video/mp4">
-      </video>
+      <iframe id='boxgiver-video' src="https://www.youtube.com/embed/0HxQCv6u2PA?controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     </div>
   </div>
 </div>
@@ -214,21 +209,7 @@
             </div>
           </div>
           <div class="col-md-6 m-reset-padding">
-            <div class='earning-content' style="background-image: url('<%= community_context[:earning_potential_image] %>')">
-              <!--              <div class="earning-text-wrapper">-->
-              <!--                <div class='earning-text-content'>-->
-              <!--                  <h2> Unlimited earning potential </h2>-->
-              <!--                  <p>-->
-              <%# if community_context[:earning_text].present? %>
-              <%#= community_context[:earning_text].html_safe %>
-              <%# else %>
-              <!--                      Put your board to work and make money renting then out. It's free and only takes-->
-              <!--                      minutes! <a href="<%#= new_listing_path %>"> <b> List your boards </b> </a>-->
-              <%# end %>
-              <!--                  </p>-->
-              <!--                </div>-->
-              <!--              </div>-->
-            </div>
+            <div class='earning-content' style="background-image: url('<%= community_context[:earning_potential_image] %>')"></div>
           </div>
         </div>
       </div>
@@ -245,24 +226,8 @@
   <%= yield :video_css %>
   <%= yield :locations_css %>
 </style>
-<%#= @current_community.custom_head_script.to_s.html_safe %>
 
 <%= yield :javascript %>
-
-<%# sections.each_with_index do |section, index| %>
-
-<%# s = section["section"] %>
-<%# section_id = "#{s['kind']}__#{s['id']}__#{index}" %>
-
-<%# case s["kind"] %>
-<%# when "footer" %>
-<%#= render partial: "footer", locals: { section_id: section_id, s: s } %>
-<%# end %>
-<%# end %>
-
-<!--<style type="text/css">-->
-<%#= yield :footer_css %>
-<!--</style>-->
 
 <%= render 'layouts/custom_footer', c: community_context %>
 <% asset_host = local_assigns.key?(:asset_host) ? asset_host : nil %>
@@ -276,5 +241,13 @@
                      props_endpoint: topbar[:props_endpoint],
                      container_id: "topbar-placeholder" } %>
 <%= render 'layouts/cookies' %>
+<script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', (event) => {
+        setTimeout(function () {
+            var element = document.getElementById("landing-header");
+            element.classList.remove("pre-loading");
+        }, 300);
+    })
+</script>
 </body>
 </html>
