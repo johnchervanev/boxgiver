@@ -1,0 +1,28 @@
+<%= link_to(listing_path(listing.url), :class => "#{modifier_class} fluid-thumbnail-grid-image-item-link") do %>
+  <div class="<%= modifier_class %> listing-image-wrapper">
+    <% with_first_listing_image(listing) do |first_image_url| %>
+      <%= image_tag first_image_url, { :alt => listed_listing_title(listing), :class => "#{modifier_class}" } %>
+    <% end %>
+    <!--    <div class="<%#= modifier_class %> fluid-thumbnail-grid-image-title">-->
+    <%#= listing.title %>
+    <!--    </div>-->
+    <!--    <div class="<%#= modifier_class %> fluid-thumbnail-grid-image-price-container">-->
+    <%# if listing.price %>
+    <!--        <span class="fluid-thumbnail-grid-image-price">-->
+    <%#= MoneyViewUtils.to_humanized(listing.price) %>
+    <%# price_unit = '' #price_quantity_slash_unit(listing) %>
+    <!--        </span>-->
+    <%# if !price_unit.blank? %>
+    <%# price_text = " " + price_unit %>
+    <!--          <span class="fluid-thumbnail-grid-image-quantity" title="<%#= price_text %>">-->
+    <%#= price_text %>
+    <!--          </span>-->
+    <%# end %>
+    <%# else %>
+    <!--        <span class="<%#= modifier_class %> fluid-thumbnail-grid-image-type">-->
+    <%#= shape_name(listing) %>
+    <!--        </span>-->
+    <%# end %>
+    <!--    </div>-->
+  </div>
+<% end %>

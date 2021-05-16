@@ -110,20 +110,20 @@ module TopbarHelper
     end
 
     if community.configuration.display_contact_menu
-      links << {
+      user_links << {
         link: paths.new_user_feedback_path(locale: locale_param),
         title: I18n.t("header.contact_us"),
         priority: !user_links.empty? ? user_links.last[:priority] + 1 : 1
       }
     end
 
-    if community.users_can_invite_new_users && community.configuration.display_invite_menu
-      links << {
-        link: paths.new_invitation_path(locale: locale_param),
-        title: I18n.t("header.invite"),
-        priority: !user_links.empty? ? user_links.last[:priority] + 2 : 2
-      }
-    end
+    # if community.users_can_invite_new_users && community.configuration.display_invite_menu
+    #   links << {
+    #     link: paths.new_invitation_path(locale: locale_param),
+    #     title: I18n.t("header.invite"),
+    #     priority: !user_links.empty? ? user_links.last[:priority] + 2 : 2
+    #   }
+    # end
 
     links + user_links
   end

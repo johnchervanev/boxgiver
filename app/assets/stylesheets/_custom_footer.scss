@@ -56,7 +56,7 @@
     border-left: 1px solid #ffffff;
     cursor: pointer;
     transition: background-color .3s;
-    font-size: 10.5px;
+    font-size: 14px;
     line-height: 14px;
     letter-spacing: 1px;
 
@@ -91,7 +91,7 @@
 
       .app-footer-menu-desktop__link {
         margin: 8px 0;
-        font-size: 10.5px;
+        font-size: 14px;
         line-height: 14px;
         letter-spacing: 1px;
 
@@ -177,7 +177,7 @@
         color: #fff;
         vertical-align: text-top;
         cursor: pointer;
-        font-size: 10.5px;
+        font-size: 12px;
         line-height: 14px;
         letter-spacing: 1px;
       }
@@ -193,7 +193,7 @@
     justify-content: space-between;
 
     .app-footer-copyright {
-      font-size: 10px;
+      font-size: 13px;
       line-height: 14px;
       letter-spacing: 1px;
       color: #fff;
@@ -223,7 +223,7 @@
 
     .app-footer-menu-copyright__link {
       margin: 0 20px;
-      font-size: 10.5px;
+      font-size: 14px;
       line-height: 14px;
       letter-spacing: 1px;
     }
@@ -258,6 +258,10 @@
       .app-footer-bottom__middle {
         display: none;
       }
+
+      .app-footer-copyright a {
+        font-size: 12px;
+      }
     }
   }
 }
@@ -280,6 +284,9 @@
         -ms-flex: 0 0 33.333333%;
         flex: 0 0 33.333333%;
         max-width: 33.333333%;
+        a {
+          font-size: 13px;
+        }
       }
     }
   }

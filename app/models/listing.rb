@@ -255,6 +255,15 @@ class Listing < ApplicationRecord
     end
   end
 
+  def self.love_count(id)
+    ls = Listing.find_by_id(id)
+    if ls.present?
+      ls.lovers.count
+    else
+      0
+    end
+  end
+
   def geo_distance(p1)
     p2 = self.location
     return if p1.nil? || p2.nil?

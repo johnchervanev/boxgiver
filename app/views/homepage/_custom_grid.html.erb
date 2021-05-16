@@ -1,0 +1,58 @@
+<% frontpage_fragment_cache("grid_item", listing) do %>
+  <div class='home-fluid-thumbnail-grid-item'>
+    <div class="home-custom-grid-item">
+      <div class="listing-author-wrapper clearfix">
+        <div class='avatar'>
+          <%= link_to(person_path(username: listing.author.username)) do %>
+            <%= image_tag(listing.author.avatar.thumb || missing_avatar(:thumb)) %>
+          <% end %>
+        </div>
+        <div class='author-name-posting clearfix'>
+          <% name = PersonViewUtils.person_entity_display_name(listing.author, @current_community.name_display_type) %>
+          <%= link_to(person_path(username: listing.author.username), title: name, class: 'author-link') do %>
+            <%= name %>
+          <% end %>
+          <div class='posting-time'>
+            2 days ago.
+          </div>
+        </div>
+      </div>
+      <div class="listing-image">
+        <%= render :partial => "layouts/custom_grid_listing_image", :locals => { :listing => listing, :modifier_class => "" } %>
+      </div>
+      <div class='listing-details'>
+        <p class="title">
+          <%= listing.title %>
+        </p>
+        <div class="price">
+          Price:
+          <b>
+            <% if listing.price %>
+              <%= MoneyViewUtils.to_humanized(listing.price) %>
+              <% price_unit = '' #price_quantity_slash_unit(listing) %>
+              <% unless price_unit.blank? %>
+                <% price_text = " " + price_unit %>
+                <%= price_text %>
+              <% end %>
+            <% else %>
+              <%= shape_name(listing) %>
+            <% end %>
+          </b>
+        </div>
+        <div class='user-reaction'>
+          <%= love_button(listing, @current_user, 'listing-overx') %>
+          <span class='love-count'> <%= Listing.love_count(listing) %> </span>
+        </div>
+        <div class='listing-displace'>
+          <% if show_distance && !distance.blank? %>
+            <% dist = format_distance(distance) %>
+            <% dist_string = "#{dist} #{listing.distance_unit}" %>
+            <span title="<%= dist_string %>" style="font-weight: 600">
+               <%= dist_string %>
+            </span>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
