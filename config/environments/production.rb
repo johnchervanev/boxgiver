@@ -119,16 +119,16 @@ Rails.application.configure do
 
   mail_delivery_method = (APP_CONFIG.mail_delivery_method.present? ? APP_CONFIG.mail_delivery_method.to_sym : :sendmail)
 
-  config.action_mailer.delivery_method = mail_delivery_method
+  config.action_mailer.delivery_method = :smtp
 
   if mail_delivery_method == :smtp
     ActionMailer::Base.smtp_settings = {
-      :address              => APP_CONFIG.smtp_email_address,
-      :port                 => APP_CONFIG.smtp_email_port,
-      :domain               => APP_CONFIG.smtp_email_domain,
-      :user_name            => APP_CONFIG.smtp_email_user_name,
-      :password             => APP_CONFIG.smtp_email_password,
-      :authentication       => 'plain',
+      :user_name => "Zl__tufvRhq-895FOjYk4g",
+      :password => "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",
+      :domain => "boxgiver.com",
+      :address => "smtp.sendgrid.net",
+      :port => 587,
+      :authentication => :plain,
       :enable_starttls_auto => true
     }
   end
