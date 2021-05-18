@@ -117,13 +117,13 @@ Rails.application.configure do
 
   config.action_mailer.perform_caching = false
 
-  mail_delivery_method = (APP_CONFIG.mail_delivery_method.present? ? APP_CONFIG.mail_delivery_method.to_sym : :sendmail)
+  mail_delivery_method = (APP_CONFIG.mail_delivery_method.present? ? APP_CONFIG.mail_delivery_method.to_sym : :smtp)
 
   config.action_mailer.delivery_method = :smtp
 
   if mail_delivery_method == :smtp
     ActionMailer::Base.smtp_settings = {
-      :user_name => "Zl__tufvRhq-895FOjYk4g",
+      :user_name => "apikey",
       :password => "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",
       :domain => "boxgiver.com",
       :address => "smtp.sendgrid.net",
