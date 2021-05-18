@@ -120,9 +120,7 @@ Rails.application.configure do
   mail_delivery_method = (APP_CONFIG.mail_delivery_method.present? ? APP_CONFIG.mail_delivery_method.to_sym : :smtp)
 
   config.action_mailer.delivery_method = :smtp
-
-  if mail_delivery_method == :smtp
-    ActionMailer::Base.smtp_settings = {
+  ActionMailer::Base.smtp_settings = {
       :user_name => "apikey",
       :password => "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",
       :domain => "boxgiver.com",
@@ -131,7 +129,6 @@ Rails.application.configure do
       :authentication => :plain,
       :enable_starttls_auto => true
     }
-  end
 
   # Sendmail is used for some mails (e.g. Newsletter) so configure it even when smtp is the main method
   ActionMailer::Base.sendmail_settings = {
