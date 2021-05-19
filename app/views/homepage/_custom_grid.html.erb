@@ -44,6 +44,7 @@
           <span class='love-count'> <%= Listing.love_count(listing) %> </span>
         </div>
         <div class='listing-displace'>
+          <% distance = Maybe(listing.distance).or_else(nil) %>
           <% if show_distance && !distance.blank? %>
             <% dist = format_distance(distance) %>
             <% dist_string = "#{dist} #{listing.distance_unit}" %>

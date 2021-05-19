@@ -21,13 +21,19 @@
         </div>
         <div class="listing-image">
           <%#= render :partial => "layouts/custom_grid_listing_image", :locals => { :listing => listing, :modifier_class => "" } %>
-          <% with_first_love_listing_image(listing) do |first_image_url| %>
-            <%= image_tag first_image_url, { :alt => listed_listing_title(listing) } %>
+          <%= link_to(listing_path(listing.id), :class => "fluid-thumbnail-grid-image-item-link") do %>
+            <div class='listing-image-wrapper'>
+              <% with_first_love_listing_image(listing) do |first_image_url| %>
+                <%= image_tag first_image_url, { :alt => listed_listing_title(listing) } %>
+              <% end %>
+            </div>
           <% end %>
         </div>
         <div class='listing-details'>
           <p class="title">
-            <%= listing.title %>
+            <%= link_to(listing_path(listing.id)) do %>
+              <%= listing.title %>
+            <% end %>
           </p>
           <div class="price">
             Price:
