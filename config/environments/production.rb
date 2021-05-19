@@ -117,21 +117,18 @@ Rails.application.configure do
 
   config.action_mailer.perform_caching = false
 
-  mail_delivery_method = (APP_CONFIG.mail_delivery_method.present? ? APP_CONFIG.mail_delivery_method.to_sym : :sendmail)
+  mail_delivery_method = (APP_CONFIG.mail_delivery_method.present? ? APP_CONFIG.mail_delivery_method.to_sym : :smtp)
 
-  config.action_mailer.delivery_method = mail_delivery_method
-
-  if mail_delivery_method == :smtp
-    ActionMailer::Base.smtp_settings = {
-      :address              => APP_CONFIG.smtp_email_address,
-      :port                 => APP_CONFIG.smtp_email_port,
-      :domain               => APP_CONFIG.smtp_email_domain,
-      :user_name            => APP_CONFIG.smtp_email_user_name,
-      :password             => APP_CONFIG.smtp_email_password,
-      :authentication       => 'plain',
+  config.action_mailer.delivery_method = :smtp
+  ActionMailer::Base.smtp_settings = {
+      :user_name => "apikey",
+      :password => "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",
+      :domain => "boxgiver.com",
+      :address => "smtp.sendgrid.net",
+      :port => 587,
+      :authentication => :plain,
       :enable_starttls_auto => true
     }
-  end
 
   # Sendmail is used for some mails (e.g. Newsletter) so configure it even when smtp is the main method
   ActionMailer::Base.sendmail_settings = {

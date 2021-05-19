@@ -83,13 +83,13 @@ Rails.application.configure do
   elsif APP_CONFIG.mail_delivery_method == "smtp"
     # Enable sending mail from localhost
     ActionMailer::Base.smtp_settings = {
-      :address => APP_CONFIG.smtp_email_address,
-      :port => APP_CONFIG.smtp_email_port,
-      :domain => APP_CONFIG.smtp_email_domain || 'localhost',
-      :user_name => APP_CONFIG.smtp_email_user_name,
-      :password => APP_CONFIG.smtp_email_password,
-      :authentication => 'plain',
-      #:enable_starttls_auto => true
+      :user_name => "apikey",
+      :password => "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",
+      :domain => "boxgiver.com",
+      :address => "smtp.sendgrid.net",
+      :port => 587,
+      :authentication => :plain,
+      :enable_starttls_auto => true
     }
   end
 
