@@ -13,6 +13,8 @@
       = link_to listing_path(listing.url), :class => "home-list-image-container-mobile" do
         = image_tag asset_path('no_image_available.jpg'), {:alt => listed_listing_title(listing), :class => "home-list-image"}
     = love_button(listing, @current_user, 'listing-over')
+    %span.love-count
+      = Listing.love_count(listing.id)
     .home-list-details-right
       .home-list-price
         - if listing.price

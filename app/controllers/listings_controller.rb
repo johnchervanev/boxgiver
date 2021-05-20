@@ -90,7 +90,7 @@ class ListingsController < ApplicationController
     make_listing_presenter
     @listing_presenter.form_path = new_transaction_path(listing_id: @listing.id)
     @seo_service.listing = @listing
-    @related_listings = @listing.category.listings - [@listing]
+    @related_listings = @listing.category.listings.where(open: true) - [@listing]
     @related_listings = @related_listings.sort_by { |l| (l.geo_distance(@listing.location) || 999999) }
     @related_listings = @related_listings[0..11] if @related_listings.length > 10
 

@@ -2,6 +2,8 @@
   .home-fluid-thumbnail-grid-item
     %div
       = love_button(listing, @current_user, 'listing-over')
+      %span.love-count
+        = Listing.love_count(listing.id)
       -# Listing image
       = render :partial => "layouts/grid_item_listing_image", :locals => {:listing => listing, :modifier_class => ""}
 

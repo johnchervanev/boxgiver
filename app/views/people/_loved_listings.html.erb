@@ -1,0 +1,35 @@
+<div class="home-custom-grid-item">
+  <div class="listing-image">
+    <%= link_to(listing_path(listing.to_param), :class => "fluid-thumbnail-grid-image-item-link") do %>
+      <div class='listing-image-wrapper'>
+        <% with_first_love_listing_image(listing) do |first_image_url| %>
+          <%= image_tag first_image_url, { :alt => listed_listing_title(listing) } %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+  <div class='listing-details'>
+    <p class="title">
+      <%= link_to listing.title, listing_path(listing.to_param) %>
+    </p>
+    <div class="price">
+      Price:
+      <b>
+        <% if listing.price %>
+          <%= MoneyViewUtils.to_humanized(listing.price) %>
+          <% price_unit = '' %>
+          <% unless price_unit.blank? %>
+            <% price_text = " " + price_unit %>
+            <%= price_text %>
+          <% end %>
+        <% else %>
+          <%= shape_name(listing) %>
+        <% end %>
+      </b>
+    </div>
+    <div class='user-reaction'>
+      <%= love_button(listing, @current_user, 'listing-overx') %>
+      <span class='love-count'> <%= Listing.love_count(listing.id) %> </span>
+    </div>
+  </div>
+</div>

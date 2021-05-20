@@ -15,13 +15,12 @@
               <%= name %>
             <% end %>
             <div class='posting-time'>
-              2 days ago.
+              <%= time_ago_in_words(listing.created_at) %> ago
             </div>
           </div>
         </div>
         <div class="listing-image">
-          <%#= render :partial => "layouts/custom_grid_listing_image", :locals => { :listing => listing, :modifier_class => "" } %>
-          <%= link_to(listing_path(listing.id), :class => "fluid-thumbnail-grid-image-item-link") do %>
+          <%= link_to(listing_path(listing.to_param), :class => "fluid-thumbnail-grid-image-item-link") do %>
             <div class='listing-image-wrapper'>
               <% with_first_love_listing_image(listing) do |first_image_url| %>
                 <%= image_tag first_image_url, { :alt => listed_listing_title(listing) } %>
@@ -31,9 +30,7 @@
         </div>
         <div class='listing-details'>
           <p class="title">
-            <%= link_to(listing_path(listing.id)) do %>
-              <%= listing.title %>
-            <% end %>
+            <%= link_to listing.title, listing_path(listing.to_param) %>
           </p>
           <div class="price">
             Price:
@@ -52,7 +49,7 @@
           </div>
           <div class='user-reaction'>
             <%= love_button(listing, @current_user, 'listing-overx') %>
-            <span class='love-count'> <%= Listing.love_count(listing) %> </span>
+            <span class='love-count'> <%= Listing.love_count(listing.id) %> </span>
           </div>
           <div class='listing-displace'>
             <span style="font-weight: 600">
