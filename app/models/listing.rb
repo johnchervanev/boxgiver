@@ -93,7 +93,8 @@ class Listing < ApplicationRecord
   accepts_nested_attributes_for :origin_loc, :destination_loc
 
   has_and_belongs_to_many :followers, :class_name => "Person", :join_table => "listing_followers"
-  has_and_belongs_to_many :lovers, :class_name => "Person", :join_table => "listing_lovers"
+  has_many :listing_lovers
+  has_many :loves, :through => :listing_lovers, source: 'listing'
 
   belongs_to :category
   has_many :working_time_slots, -> { ordered }, dependent: :destroy, inverse_of: :listing
@@ -258,7 +259,7 @@ class Listing < ApplicationRecord
   def self.love_count(id)
     ls = Listing.find_by_id(id)
     if ls.present?
-      ls.lovers.count
+      ls.loves.count
     else
       0
     end

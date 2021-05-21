@@ -7,8 +7,7 @@
 #  listing_id :integer
 #
 
-require 'rails_helper'
-
-RSpec.describe ListingLover, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+class ListingLover < ApplicationRecord
+  belongs_to :listing
+  belongs_to :person
 end

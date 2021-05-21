@@ -800,7 +800,7 @@ DROP TABLE IF EXISTS `listing_lovers`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `listing_lovers` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `person_id` int(11) DEFAULT NULL,
+  `person_id` varchar(255) DEFAULT NULL,
   `listing_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -2510,6 +2510,7 @@ INSERT INTO `schema_migrations` (version) VALUES
 ('20210329040124'),
 ('20210405123548'),
 ('20210409121839'),
-('20210507052923');
+('20210507052923'),
+('20210521101611');
 
 

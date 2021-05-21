@@ -119,7 +119,8 @@ class Person < ApplicationRecord
   has_many :followed_people, :through => :inverse_follower_relationships, :source => "person"
 
   has_and_belongs_to_many :followed_listings, :class_name => "Listing", :join_table => "listing_followers"
-  has_and_belongs_to_many :loved_listings, :class_name => "Listing", :join_table => "listing_lovers"
+  has_many :listing_lovers
+  has_many :loved_listings, :through => :listing_lovers, :source => 'listing'
   has_and_belongs_to_many :reported_listings, :class_name => "Listing", :join_table => "listing_reports"
   has_many :custom_field_values, :dependent => :destroy
   has_many :custom_dropdown_field_values, :class_name => "DropdownFieldValue", :dependent => :destroy
@@ -381,7 +382,7 @@ class Person < ApplicationRecord
   end
 
   def love(listing)
-    loved_listings << listing
+    listing_lovers.create(listing_id: listing.id)
   end
 
   def remove_from_love(listing)
@@ -395,8 +396,8 @@ class Person < ApplicationRecord
   def is_reported?(listing)
     if reported_listings.pluck(:id).include?(listing.id)
       'reported'
-      else
-    'not-reported'
+    else
+      'not-reported'
     end
   end
 
