@@ -39,38 +39,38 @@ Rails.application.configure do
   # If you have no front-end server that supports something like X-Sendfile,
   # just comment this out and Rails will serve the files
 
-  config.log_level = :info
+  config.log_level = :fatal
   # Basic log config, for calls to Rails.logger.<level> { <message> }
-  config.logger = ::Logger.new(STDOUT)
-  # Formats log entries into: LEVEL MESSAGE
-  # Heroku adds to this timestamp and worker/dyno id, so datetime can be stripped
-  config.logger.formatter = ->(severity, datetime, progname, msg) { "#{severity} #{msg}\n" }
-
-  # Lograge config, overrides default instrumentation for logging ActionController and ActionView logging
-  config.lograge.enabled = true
-  config.lograge.custom_options = ->(event) {
-    params = event.payload[:params].except('controller', 'action')
-
-    { params: params,
-      host: event.payload[:host],
-      community_id: event.payload[:community_id],
-      current_user_id: event.payload[:current_user_id],
-      user_agent: event.payload[:user_agent],
-      referer: event.payload[:referer],
-      forwarded_for: event.payload[:forwarded_for],
-      request_uuid: event.payload[:request_uuid] }
-  }
-
-  # to ignore certain messages, see commit e1ac643f677b0a9f73b10454fa04f67595c8c0c5
-
-  config.lograge.formatter = Lograge::Formatters::Json.new
-
-  config.after_initialize do
-    ActiveRecord::Base.logger = Rails.logger.clone
-    ActiveRecord::Base.logger.level = Logger::INFO
-    ActionMailer::Base.logger = Rails.logger.clone
-    ActionMailer::Base.logger.level = Logger::INFO
-  end
+  # config.logger = ::Logger.new(STDOUT)
+  # # Formats log entries into: LEVEL MESSAGE
+  # # Heroku adds to this timestamp and worker/dyno id, so datetime can be stripped
+  # config.logger.formatter = ->(severity, datetime, progname, msg) { "#{severity} #{msg}\n" }
+  #
+  # # Lograge config, overrides default instrumentation for logging ActionController and ActionView logging
+  # config.lograge.enabled = true
+  # config.lograge.custom_options = ->(event) {
+  #   params = event.payload[:params].except('controller', 'action')
+  #
+  #   { params: params,
+  #     host: event.payload[:host],
+  #     community_id: event.payload[:community_id],
+  #     current_user_id: event.payload[:current_user_id],
+  #     user_agent: event.payload[:user_agent],
+  #     referer: event.payload[:referer],
+  #     forwarded_for: event.payload[:forwarded_for],
+  #     request_uuid: event.payload[:request_uuid] }
+  # }
+  #
+  # # to ignore certain messages, see commit e1ac643f677b0a9f73b10454fa04f67595c8c0c5
+  #
+  # config.lograge.formatter = Lograge::Formatters::Json.new
+  #
+  # config.after_initialize do
+  #   ActiveRecord::Base.logger = Rails.logger.clone
+  #   ActiveRecord::Base.logger.level = Logger::INFO
+  #   ActionMailer::Base.logger = Rails.logger.clone
+  #   ActionMailer::Base.logger.level = Logger::INFO
+  # end
 
   # Prefer redis instead of memcached
   config.cache_store =
