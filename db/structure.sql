@@ -323,6 +323,7 @@ CREATE TABLE `communities` (
   `email_admins_about_new_transactions` tinyint(1) DEFAULT '0',
   `show_location` tinyint(1) DEFAULT '1',
   `fuzzy_location` tinyint(1) DEFAULT '0',
+  `twitter_announcement_enabled` tinyint(1) DEFAULT '1',
   `earning_potential_image_file_name` varchar(255) DEFAULT NULL,
   `earning_potential_image_content_type` varchar(255) DEFAULT NULL,
   `earning_potential_image_file_size` int(11) DEFAULT NULL,
@@ -332,7 +333,6 @@ CREATE TABLE `communities` (
   `hero_photo_file_name` varchar(255) DEFAULT NULL,
   `hero_photo_content_type` varchar(255) DEFAULT NULL,
   `hero_photo_processing` tinyint(1) DEFAULT NULL,
-  `twitter_announcement_enabled` tinyint(1) DEFAULT '1',
   `list_title` varchar(255) DEFAULT 'All Types Of Boards',
   `hw_list` text,
   `hw_sell` text,
@@ -803,7 +803,7 @@ CREATE TABLE `listing_lovers` (
   `person_id` varchar(255) DEFAULT NULL,
   `listing_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `listing_reports`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
