@@ -16,15 +16,39 @@
                 - community_name = community.name(community.locales.first)
                 - if community && community.wide_logo.present?
                   %tr
-                    %td.logo
-                      = image_tag community.wide_logo.url(:header), alt: community_name, style: 'margin: 1px auto;'
+                    %td.logo{style: "text-align: center"}
+                      = image_tag community.wide_logo.url(:header), alt: community_name, style: 'margin: 1px auto; max-width: 220px;'
                 - elsif @community
                   %tr
                     %td.community-name
                       %font
                         = community_name
+                %tr
+                  %td.nav-bar{style: 'background-color: #efefef; padding: 5px 0;'}
+                    %table{style: 'width: 100%'}
+                      %tbody
+                        %tr
+                          %td{style: 'text-align: center;'}
+                            = link_to 'Home', "https://boxgiver.com"
+                          %td{style: 'text-align: center;'}
+                            = link_to 'About', "https://boxgiver.com/about"
+                          %td{style: 'text-align: center;'}
+                            = link_to 'How it works', "https://boxgiver.com/how_to_use"
+                          %td{style: 'text-align: center;'}
+                            = link_to 'FAQ', "https://boxgiver.com/faq"
+                          %td{style: 'text-align: center;'}
+                            = link_to 'Blog', "https://blog.boxgiver.com"
+                          %td{style: 'text-align: center;'}
+                            = link_to 'Invite', "https://boxgiver.com/invite"
+                %tr
+                  %td{style: 'padding: 20px 40px;'}
+                    %div{style: 'height: 1px; background-color: #efefef'}
 
-                = yield
+                %tr
+                  %td{style: 'padding: 0 20px;'}
+                    %table
+                      %tbody
+                        = yield
 
                 - if @show_branding_info
                   = render :partial => "layouts/email-v2/email_non_whitelabel_branding", locals: {link_to_sharetribe: "https://www.sharetribe.com/?utm_source=#{@current_community.ident}.sharetribe.com&utm_medium=email&utm_campaign=nowl-emails-auto"}
@@ -47,4 +71,32 @@
                         = t("emails.common.unsubscribe_from_invitation_emails_info", service_name: @invitation_community)
                         = link_to(t("emails.common.unsubscribe_from_invitation_emails", service_name: @invitation_community),
                           unsubscribe_invitations_url(@url_params)) + "."
+                %tr
+                  %td
+                    %table{style: 'float: left;'}
+                      %tbody
+                    %table{style: 'float: right;'}
+                      %tbody
+                        %tr
+                          %td
+                            = link_to 'https://www.facebook.com/theboxgiver' do
+                              = image_tag 'social/facebook.png', style: 'width: 32px; padding-right: 10px;'
+                          %td
+                            = link_to 'https://twitter.com/box_giver' do
+                              = image_tag 'social/twitter.png', style: 'width: 32px; padding-right: 10px;'
+                          %td
+                            = link_to 'https://www.instagram.com/box_giver/' do
+                              = image_tag 'social/instagram.png', style: 'width: 32px; padding-right: 10px;'
+                          %td
+                            = link_to 'https://www.youtube.com/channel/UC00ylXdA7xnHbD-KJ9WDI5w' do
+                              = image_tag 'social/youtube.png', style: 'width: 32px; padding-right: 10px;'
+                          %td
+                            = link_to 'https://www.linkedin.com/company/boxgiver' do
+                              = image_tag 'social/linkedin.png', style: 'width: 32px; padding-right: 10px;'
+                          %td
+                            = link_to 'https://www.pinterest.com/boxgiver' do
+                              = image_tag 'social/pinterest.png', style: 'width: 32px; padding-right: 10px;'
 
+                %tr
+                  %td{style: 'text-align: center; padding: 40px 10px;'}
+                    = link_to "© #{community_name} #{Date.today.year}. All rights reserved.", "https://boxgiver.com"
