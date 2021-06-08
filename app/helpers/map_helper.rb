@@ -46,19 +46,21 @@ module MapHelper
 
   def listings_for_map(listings)
     listings.map do |listing|
-      result = {
-        category: listing[:category_id],
-        id: listing[:id],
-        icon: listing[:icon_name],
-        latitude: listing[:latitude],
-        longitude: listing[:longitude]
-      }
-      if @current_community.fuzzy_location
-        latitude, longitude = obfuscated_coordinates(listing[:latitude], listing[:longitude])
-        result[:latitude] = latitude
-        result[:longitude] = longitude
+      if listing[:latitude].present? && listing[:longitude].present?
+        result = {
+          category: listing[:category_id],
+          id: listing[:id],
+          icon: listing[:icon_name],
+          latitude: listing[:latitude],
+          longitude: listing[:longitude]
+        }
+        if @current_community.fuzzy_location
+          latitude, longitude = obfuscated_coordinates(listing[:latitude], listing[:longitude])
+          result[:latitude] = latitude
+          result[:longitude] = longitude
+        end
+        result
       end
-      result
-    end
+    end.compact
   end
 end

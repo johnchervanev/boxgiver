@@ -55,7 +55,7 @@ class HomepageController < ApplicationController
 
     compact_filter_params = HashUtils.compact(filter_params)
 
-    per_page = @view_type == "map" ? APP_CONFIG.map_listings_limit : APP_CONFIG.grid_listings_limit
+    per_page = APP_CONFIG.grid_listings_limit
 
     includes =
       case @view_type
