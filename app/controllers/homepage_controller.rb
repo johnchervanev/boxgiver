@@ -55,7 +55,7 @@ class HomepageController < ApplicationController
 
     compact_filter_params = HashUtils.compact(filter_params)
 
-    per_page = APP_CONFIG.grid_listings_limit
+    per_page = @view_type == "map" ? APP_CONFIG.map_listings_limit : APP_CONFIG.grid_listings_limit
 
     includes =
       case @view_type
@@ -74,7 +74,7 @@ class HomepageController < ApplicationController
     keyword_in_use = enabled_search_modes[:keyword]
     location_in_use = enabled_search_modes[:location]
 
-    current_page = Maybe(params)[:page].to_i.map { |n| n > 0 ? n : 1 }.or_else(1)
+    current_page = @view_type == "map" ? 1 : Maybe(params)[:page].to_i.map { |n| n > 0 ? n : 1 }.or_else(1)
     relevant_search_fields = parse_relevant_search_fields(params, relevant_filters)
 
     search_result = find_listings(params: params,

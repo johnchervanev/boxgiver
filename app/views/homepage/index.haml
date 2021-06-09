@@ -144,9 +144,7 @@
       - if @listings.total_entries > 0
         - if @view_type.eql?("map")
           .home-map
-            %p
-              - locations = listings_for_map(@listings)
-              = "#{locations.size} listing location#{ locations.size == 1 ? '' : 's' } found"
+            - locations = listings_for_map(@listings)
             = render :partial => "map", locals: { viewport: viewport, lstings: locations }
         - else
           - if @view_type.eql?("grid")
@@ -159,10 +157,10 @@
                 = render partial: "list_item_with_distance", collection: @listings, as: :listing, locals: { shape_name_map: shape_name_map, show_distance: location_search_in_use }
               - else
                 = render partial: "list_item", collection: @listings, as: :listing, locals: { shape_name_map: shape_name_map }
-        .home-loading-more
-          = will_paginate(@listings)
-          -# - item_container = if @view_type.eql?("grid") then '.home-fluid-thumbnail-grid' else '.home-listings' end
-          -# = pageless(@listings.total_pages, item_container, current_search_path_without_page, t('.loading_more_content'), current_page)
+          .home-loading-more
+            = will_paginate(@listings)
+            -# - item_container = if @view_type.eql?("grid") then '.home-fluid-thumbnail-grid' else '.home-listings' end
+            -# = pageless(@listings.total_pages, item_container, current_search_path_without_page, t('.loading_more_content'), current_page)
       - else
         .home-no-listings
           - if params[:q] || params[:category] || params[:share_type] # Some filter in use
