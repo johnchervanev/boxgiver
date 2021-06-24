@@ -84,10 +84,10 @@ Rails.application.configure do
   elsif APP_CONFIG.mail_delivery_method == "smtp"
     # Enable sending mail from localhost
     ActionMailer::Base.smtp_settings = {
-      :user_name => "postmaster@mail2.iomcompany.com",
-      :password => "9x4faedc5f0bbd7f2f3e2816c09c09984-24e2ac64-52dd6875",
-      :domain => "mail2.iomcompany.com",
-      :address => "smtp.eu.mailgun.org",
+      :user_name => "apikey",
+      :password => "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",
+      :domain => "boxgiver.com",
+      :address => "smtp.sendgrid.net",
       :port => 587,
       :authentication => :plain,
       :enable_starttls_auto => true
