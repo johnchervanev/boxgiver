@@ -108,6 +108,10 @@ class ListingsController < ApplicationController
     make_listing_presenter
   end
 
+  def sponsored
+    
+  end
+
   def new_form_content
     return redirect_to action: :new unless request.xhr?
 

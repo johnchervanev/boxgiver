@@ -139,12 +139,17 @@
           method: "delete", class: 'icon-with-text-container' do
           = icon_tag("trash", ["icon-part"])
           .text-part= t("listings.edit_links.delete_listing")
+      .listing-view-admin-link
+        = link_to sponsored_listing_path(@listing), data: {confirm: t("listings.make_listing_sponsored", amount: 50)},
+          method: "post", class: 'icon-with-text-container' do
+          = icon_tag("star", ["icon-part"])
+          .text-part= t("listings.edit_links.make_sponsored")
 
       - if @listing_presenter.is_marketplace_admin
         .listing-view-admin-link
           = link_to move_to_top_person_listing_path(@current_user, @listing), data: { method: "put" } do
             .icon-with-text-container
-              = icon_tag("star", ["icon-part"])
+              = icon_tag("home", ["icon-part"])
               .text-part= t("listings.edit_links.move_to_top")
 
         .listing-view-admin-link

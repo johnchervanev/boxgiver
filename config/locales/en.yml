@@ -2301,6 +2301,7 @@ en:
       you_must: "You must"
       subscribe_to_comments: "Notify me of new comments and updates"
     deleting_a_listing_cannot_be_undone: "Deleting a listing cannot be undone. Are you sure you want to proceed?"
+    make_listing_sponsored: "You need to pay %{amount} usd for this. Are you sure you want to proceed?"
     edit:
       edit_listing: "Edit listing"
     edit_links:
@@ -2317,6 +2318,7 @@ en:
       approve_listing: "Approve listing"
       reject_listing: "Reject listing"
       delete_listing: "Delete listing"
+      make_sponsored: "Make Sponsored"
     map:
       open_in_google_maps: "Open in Google Maps"
     error:

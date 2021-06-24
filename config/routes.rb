@@ -636,6 +636,7 @@ Rails.application.routes.draw do
         delete :unfollow
         delete :remove_from_love
         delete :delete
+        post :sponsored
       end
       collection do
         get :new_form_content
