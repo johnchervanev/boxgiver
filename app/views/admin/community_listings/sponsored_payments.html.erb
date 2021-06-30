@@ -1,0 +1,42 @@
+<% content_for :title_header do %>
+  <h1>
+    <%= t("layouts.admin.admin") %>
+    <%= "-" %>
+    <%= t("admin.communities.getting_started.getting_started") %>
+  </h1>
+<% end %>
+<%= render :partial => "admin/left_hand_navigation", :locals => { :links => admin_links_for(@current_community) } %>
+
+<div class="left-navi-section">
+  <h2>Sponsored Listings</h2>
+  <table id="admin_listings">
+    <thead>
+    <tr>
+      <th>
+        <%= t("admin.communities.listings.headers.title") %>
+      </th>
+      <th>Listing Owner</th>
+      <th> Amount</th>
+      <th>Payment Status</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @sponsored_payments.each do |sp| %>
+      <tr>
+        <td><%= link_to sp.listing.title, listing_path(sp.listing) %></td>
+        <td><%= link_to sp.listing.author.full_name, person_url(sp.listing.author) %></td>
+        <td>  <%= sp.amount %> </td>
+        <td>
+          <% if sp.listing.present? &&  sp.listing.sponsored == true%>
+            Yes
+          <%else %>
+            False
+          <%end %>
+        </td>
+
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>
+

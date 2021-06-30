@@ -490,6 +490,8 @@ default: &default_settings
   admin_enable_tracking_config: false
 
   clp_s3_bucket_name: 'landing_page'
+  STRIPE_SECRET_KEY: 'sk_test_51J6BhDC2vk5HNTexmd05yyfwDwDG2F97C9DvXeORXgYL441hG0vIwqSyTz8O6pFeCu8j2CmQGVd3UUqNNjU91lFG00QGavfoNs'
+  STRIPE_PUBLISHABLE_KEY: 'pk_test_51J6BhDC2vk5HNTexYfCPXlQ1dqViMq6HBMttXjkGrnHaFlhkwRLNq3ctbLdE9pISpAaewV1ccCyThLuhqrZdkDmc00tHTlzCkr'
 
   # Debian CA bundle required for Paypal
   ssl_ca_certificates_file: '/etc/ssl/certs/ca-certificates.crt'

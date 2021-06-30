@@ -1,6 +1,9 @@
 - content_for :javascript do
   initialize_listing_view('#{I18n.locale}');
 
+- content_for :javascript do
+  = render partial: "sponsored_payment"
+
 - content_for :extra_javascript do
   :javascript
     window.ST.listing({

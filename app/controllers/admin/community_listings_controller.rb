@@ -42,6 +42,11 @@ class Admin::CommunityListingsController < Admin::AdminBaseController
     @selected_left_navi_link = 'reported_listings'
   end
 
+  def sponsored_payments
+    @sponsored_payments = SponsoredPayment.all
+    @selected_left_navi_link = 'sponsored_payments'
+  end
+
   private
 
   def set_selected_left_navi_link

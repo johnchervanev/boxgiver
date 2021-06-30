@@ -51,6 +51,8 @@
 #  per_hour_ready                  :boolean          default(FALSE)
 #  state                           :string(255)      default("approved")
 #  approval_count                  :integer          default(0)
+#  sponsored                       :boolean          default(FALSE)
+#  sponsored_at                    :datetime
 #
 # Indexes
 #
@@ -69,7 +71,6 @@
 #
 
 class Listing < ApplicationRecord
-
   include ApplicationHelper
   include ActionView::Helpers::TranslationHelper
   include Rails.application.routes.url_helpers
@@ -109,6 +110,8 @@ class Listing < ApplicationRecord
 
   has_many :blocked_dates, :dependent => :destroy
   accepts_nested_attributes_for :blocked_dates, reject_if: :all_blank, allow_destroy: true
+
+  has_many :sponsored_payments
 
   monetize :price_cents, :allow_nil => true, with_model_currency: :currency
   monetize :shipping_price_cents, allow_nil: true, with_model_currency: :currency

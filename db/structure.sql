@@ -924,6 +924,8 @@ CREATE TABLE `listings` (
   `per_hour_ready` tinyint(1) DEFAULT '0',
   `state` varchar(255) DEFAULT 'approved',
   `approval_count` int(11) DEFAULT '0',
+  `sponsored` tinyint(1) DEFAULT '0',
+  `sponsored_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `index_listings_on_uuid` (`uuid`),
   KEY `index_listings_on_new_category_id` (`category_id`) USING BTREE,
@@ -1419,6 +1421,25 @@ CREATE TABLE `social_links` (
   PRIMARY KEY (`id`),
   KEY `index_social_links_on_community_id` (`community_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `sponsored_payments`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `sponsored_payments` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `listing_id` int(11) DEFAULT NULL,
+  `payment_result` varchar(255) DEFAULT NULL,
+  `charge_id` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `phone` varchar(255) DEFAULT NULL,
+  `balance_transaction` varchar(255) DEFAULT NULL,
+  `customer_id` varchar(255) DEFAULT NULL,
+  `amount` float DEFAULT NULL,
+  `payment_status` tinyint(1) DEFAULT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `stripe_accounts`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -2511,6 +2532,8 @@ INSERT INTO `schema_migrations` (version) VALUES
 ('20210405123548'),
 ('20210409121839'),
 ('20210507052923'),
-('20210521101611');
+('20210521101611'),
+('20210624142917'),
+('20210624143601');
 
 

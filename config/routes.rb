@@ -517,6 +517,7 @@ Rails.application.routes.draw do
             get 'export'
             get 'export_status'
             get 'reported_listings'
+            get 'sponsored_payments'
           end
         end
         resources :transactions, controller: :community_transactions, only: [:index, :show] do
@@ -639,6 +640,7 @@ Rails.application.routes.draw do
         post :sponsored
       end
       collection do
+        get :initialize_sponsored_payment
         get :new_form_content
         get :edit_form_content
         get :more_listings

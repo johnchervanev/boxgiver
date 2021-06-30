@@ -108,8 +108,23 @@ class ListingsController < ApplicationController
     make_listing_presenter
   end
 
+
+
   def sponsored
-    
+    begin
+     payment=  SponsoredPayment.add_pay(params[:stripeToken],params[:stripeEmail],params[:stripePhone],params[:listing_id] )
+     if payment.present?
+       flash[:success] = 'success'
+       redirect_to sponsored_payments_admin_community_listings_path(@current_community)
+     else
+       flash[:alert]= 'Try again'
+       redirect_to request.referrer
+     end
+
+    rescue Stripe::CardError => e
+      flash[:error] = e.message
+      redirect_to please_subscribe_path
+    end
   end
 
   def new_form_content

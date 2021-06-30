@@ -49,6 +49,8 @@
 #  per_hour_ready                  :boolean          default(FALSE)
 #  state                           :string(255)      default("approved")
 #  approval_count                  :integer          default(0)
+#  sponsored                       :boolean          default(FALSE)
+#  sponsored_at                    :datetime
 #
 # Indexes
 #

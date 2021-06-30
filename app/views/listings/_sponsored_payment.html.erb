@@ -1,0 +1,47 @@
+<!--<script type="text/javascript" src="https://checkout.stripe.com/checkout.js"></script>-->
+<!--<a href="javascript:;" class="btn btn-primary send-request-amount" id="paypal_btn"><i class="fa fa-money" aria-hidden="true"></i>-->
+<!--  Send ppp</a>-->
+<!--<script>-->
+<!--    $(document).ready(function () {-->
+<!--        var handler = StripeCheckout.configure({-->
+<!--            key: '<%#= ENV['STRIPE_PUBLISHABLE_KEY']%>',-->
+<!--            token: function (token) {-->
+<!--                var $input = $('<input type=hidden name=stripeToken />').val(token.id);-->
+<!--                $('form').append($input).submit();-->
+<!--            }-->
+<!--        });-->
+
+<!--        $('#payment_btn').on('click', function (e) {-->
+<!--            console.log('>>>>>>>>>>>>');-->
+<!--            var selected_plan = $(".subscription-plans input[type=radio]:checked");-->
+<!--            var amount = selected_plan.val();-->
+<!--            var offer_amount = selected_plan.attr('data-offer');-->
+<!--            $('#silvrback_plan').val(amount);-->
+<!--            handler.open({-->
+<!--                name: 'Silvrback Subscription',-->
+<!--                description: 'Annual Membership',-->
+<!--                amount: 999-->
+<!--            });-->
+<!--            e.preventDefault();-->
+<!--        });-->
+
+<!--        // Close Checkout on page navigation-->
+<!--        $(window).on('popstate', function () {-->
+<!--            handler.close();-->
+<!--        });-->
+
+<!--    });-->
+<!--</script>-->
+
+
+<a  class="icon-with-text-container make-payment" style="cursor: pointer" ><i class="icon-star icon-part"></i>
+  <div class="text-part">Make Sponsored</div>
+</a>
+<script type="text/javascript" >
+    $('.stripe-button-el').hide();
+    $('.make-payment').click(function() {
+        $('.stripe-button-el').click();
+    });
+
+</script>
+

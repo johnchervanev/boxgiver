@@ -406,6 +406,13 @@ module ApplicationHelper
       },
       {
         :topic => :manage,
+        :text => t("admin.communities.listings.sponsored_payment"),
+        :icon_class => icon_class("thumbnails"),
+        :path => sponsored_payments_admin_community_listings_path(@current_community, sort: "updated"),
+        :name => "sponsored_payments"
+      },
+      {
+        :topic => :manage,
         :text => t("admin.communities.transactions.transactions"),
         :icon_class => icon_class("coins"),
         :path => admin_community_transactions_path(@current_community, sort: "last_activity", direction: "desc"),
@@ -765,6 +772,11 @@ module ApplicationHelper
       logged_in: @current_user.present?,
       default_locale: @current_community.default_locale,
       locale_param: params[:locale])
+  end
+
+  def self.get_stripe_secret(id)
+    settings = PaymentSettings.where(community_id: id, payment_gateway: :stripe, payment_process: :preauthorize).first
+    TransactionService::Store::PaymentSettings.decrypt_value(settings.api_private_key, settings.key_encryption_padding)
   end
 
   # Give an array of translation keys you need in JavaScript. The keys will be loaded and ready to be used in JS
