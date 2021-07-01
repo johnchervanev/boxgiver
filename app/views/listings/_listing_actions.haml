@@ -137,7 +137,7 @@
       .listing-view-admin-link
         = sponsored_payment(@listing.id)
       .listing-view-admin-link
-        = render partial: 'sponsored_payment'
+        = render partial: 'sponsored_payment' unless @listing.sponsored?
       - if @listing_presenter.is_marketplace_admin
         .listing-view-admin-link
           = link_to move_to_top_person_listing_path(@current_user, @listing), data: { method: "put" } do

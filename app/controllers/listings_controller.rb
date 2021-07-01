@@ -115,7 +115,7 @@ class ListingsController < ApplicationController
      payment=  SponsoredPayment.add_pay(params[:stripeToken],params[:stripeEmail],params[:stripePhone],params[:listing_id] )
      if payment.present?
        flash[:success] = 'success'
-       redirect_to sponsored_payments_admin_community_listings_path(@current_community)
+       redirect_to listing_path(params[:listing_id])
      else
        flash[:alert]= 'Try again'
        redirect_to request.referrer
@@ -123,7 +123,7 @@ class ListingsController < ApplicationController
 
     rescue Stripe::CardError => e
       flash[:error] = e.message
-      redirect_to please_subscribe_path
+     redirect_to listing_path(params[:listing_id])
     end
   end
 

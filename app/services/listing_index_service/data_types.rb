@@ -70,6 +70,7 @@ module ListingIndexService::DataTypes
     [:longitude],
     [:distance, :optional],
     [:distance_unit, :optional],
+    [:sponsored, :optional],
     [:address, :string],
     [:comment_count, :fixnum, :optional],
     [:price, :money],

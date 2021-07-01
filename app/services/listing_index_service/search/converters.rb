@@ -14,6 +14,7 @@ module ListingIndexService::Search::Converters
       unit_tr_key: l.unit_tr_key,
       unit_type: l.unit_type,
       quantity: l.quantity,
+      sponsored: l.sponsored,
       shape_name_tr_key: l.shape_name_tr_key,
       listing_shape_id: l.listing_shape_id
     }.merge(meta)

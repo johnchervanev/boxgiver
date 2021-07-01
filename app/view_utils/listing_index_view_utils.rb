@@ -9,6 +9,7 @@ module ListingIndexViewUtils
     :longitude,
     :distance,
     :distance_unit,
+    :sponsored,
     :author,
     :description,
     :listing_images,
@@ -74,6 +75,7 @@ module ListingIndexViewUtils
         l[:longitude],
         l[:distance],
         l[:distance_unit],
+        l[:sponsored],
         author,
         l[:description],
         listing_images,
@@ -87,6 +89,10 @@ module ListingIndexViewUtils
         l[:created_at]
       )
     }
+
+    p "<<<<<<<<<<<<<<<<<<,,,,"
+    p listings.first
+    p "<<<<<<<<<<<<<<<<<<,,,,"
 
     paginated = WillPaginate::Collection.create(page, per_page, result[:count]) do |pager|
       pager.replace(listings)
