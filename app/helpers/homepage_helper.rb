@@ -35,9 +35,11 @@ module HomepageHelper
   def love_button(listing, user, klass = '')
     if user.present?
       loved = user.is_loving?(listing)
-      link_to("", love_listing_path(listing.id), :class => "icon-heart listing-love right-side #{klass} love-#{listing.id}-listing #{ loved ? 'active' : ''}", :title => "#{loved ? 'Remove from love' : 'Click to love'}", :method => :post, :remote => :true)
+      ct = Listing.love_count(listing.id)
+      sct = "<span class='love-count'> #{ct} </span>"
+      link_to(raw(sct), love_listing_path(listing.id), :class => "icon-heart listing-love right-side #{klass} love-#{listing.id}-listing #{ loved ? 'active' : ''}", :title => "#{loved ? 'Remove from love' : 'Click to love'}", :method => :post, :remote => :true)
     else
-      link_to("", login_path, :class => "icon-heart listing-love #{klass} right-side love-#{listing.id}-listing")
+      link_to(raw(sct), login_path, :class => "icon-heart listing-love #{klass} right-side love-#{listing.id}-listing")
     end
   end
 

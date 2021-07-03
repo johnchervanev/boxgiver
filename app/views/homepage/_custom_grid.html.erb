@@ -8,11 +8,6 @@
           <% end %>
         </div>
 
-        <% if listing.sponsored == true %>
-        <div class='avatar' style="float: right">
-            <%= image_tag('sponsor.png') %>
-        </div>
-        <% end %>
         <div class='author-name-posting clearfix'>
           <% name = PersonViewUtils.person_entity_display_name(listing.author, @current_community.name_display_type) %>
           <%= link_to(person_path(username: listing.author.username), title: name, class: 'author-link') do %>
@@ -24,7 +19,12 @@
         </div>
 
       </div>
-      <div class="listing-image">
+      <div class="listing-image" style="position: relative">
+        <% if listing.sponsored == true %>
+          <div class='promoted-text'>
+            Promoted
+          </div>
+        <% end %>
         <%= render :partial => "layouts/custom_grid_listing_image", :locals => { :listing => listing, :modifier_class => "" } %>
       </div>
       <div class='listing-details'>
@@ -48,7 +48,6 @@
         </div>
         <div class='user-reaction'>
           <%= love_button(listing, @current_user, 'listing-overx') %>
-          <span class='love-count'> <%= Listing.love_count(listing.id) %> </span>
         </div>
         <div class='listing-displace'>
           <% distance = Maybe(listing.distance).or_else(nil) %>

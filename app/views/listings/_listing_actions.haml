@@ -134,10 +134,9 @@
         %a.icon-with-text-container{href: close_person_listing_path(@current_user, @listing), data: { method: "put", remote: "true"}}
           = icon_tag("lock", ["icon-part"])
           .text-part= t("listings.edit_links.close_listing")
-      .listing-view-admin-link
-        = sponsored_payment(@listing.id)
-      .listing-view-admin-link
-        = render partial: 'sponsored_payment' unless @listing.sponsored?
+      - if @listing_presenter.is_author
+        .listing-view-admin-link.promote-listing-link
+          = render partial: 'sponsored_payment' unless @listing.sponsored?
       - if @listing_presenter.is_marketplace_admin
         .listing-view-admin-link
           = link_to move_to_top_person_listing_path(@current_user, @listing), data: { method: "put" } do

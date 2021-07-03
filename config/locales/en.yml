@@ -2319,7 +2319,8 @@ en:
       approve_listing: "Approve listing"
       reject_listing: "Reject listing"
       delete_listing: "Delete listing"
-      make_sponsored: "Make Sponsored"
+      promote_listing: "Promote listing"
+      pay_promote: "Pay to promote listing $15 for 7 days"
     map:
       open_in_google_maps: "Open in Google Maps"
     error:

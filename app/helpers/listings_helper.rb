@@ -63,7 +63,11 @@ module ListingsHelper
 
   def price_as_text(listing)
     MoneyViewUtils.to_humanized(listing.price) +
-    unless listing.quantity.blank? then " / #{listing.quantity}" else "" end
+      unless listing.quantity.blank? then
+        " / #{listing.quantity}"
+      else
+        ""
+      end
   end
 
   def has_images?(listing)
@@ -135,25 +139,17 @@ module ListingsHelper
   def sponsored_payment(listing)
     form_tag sponsored_listing_path(listing_id: listing) do
       tag.div do
-
         if flash[:error].present?
           tag.div id: "error_explanation" do
             tag.p flash[:error]
           end
         end
-
         tag.div class: "amount" do
-          tag.span "Amount: $100.00"
+          tag.span "Amount: $15.00"
         end
-
-        tag.script src: "https://checkout.stripe.com/checkout.js", class:"stripe-button ", data: {  key:  StripeHelper.publishable_key(@current_community.id)  , description: "Pay for make sponsored", amount: "5000", locale: "auto"}
-
+        tag.script src: "https://checkout.stripe.com/checkout.js", class: "stripe-button ", data: { key: StripeHelper.publishable_key(@current_community.id), label: "Promote listing", name: 'BoxGiver', description: t('listings.edit_links.pay_promote'), amount: "1500", locale: "auto" }
       end
-
     end
-
-
-
   end
 
 end

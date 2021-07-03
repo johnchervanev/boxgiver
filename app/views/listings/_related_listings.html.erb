@@ -9,11 +9,6 @@
               <%= small_avatar_thumb(listing.author) %>
             <% end %>
           </div>
-          <% if listing.sponsored == true %>
-            <div class='avatar' style="float: right">
-              <%= image_tag('sponsor.png') %>
-            </div>
-          <% end %>
           <div class='author-name-posting clearfix'>
             <% name = PersonViewUtils.person_entity_display_name(listing.author, @current_community.name_display_type) %>
             <%= link_to(person_path(username: listing.author.username), title: name, class: 'author-link') do %>
@@ -29,6 +24,9 @@
             <div class='listing-image-wrapper'>
               <% with_first_love_listing_image(listing) do |first_image_url| %>
                 <%= image_tag first_image_url, { :alt => listed_listing_title(listing) } %>
+              <% end %>
+              <% if listing.sponsored == true %>
+                <div class='promoted-text'>Promoted</div>
               <% end %>
             </div>
           <% end %>
@@ -54,7 +52,6 @@
           </div>
           <div class='user-reaction'>
             <%= love_button(listing, @current_user, 'listing-overx') %>
-            <span class='love-count'> <%= Listing.love_count(listing.id) %> </span>
           </div>
           <div class='listing-displace'>
             <span style="font-weight: 600">
