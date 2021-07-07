@@ -41,7 +41,8 @@ class SponsoredPayment < ApplicationRecord
       )
       if payment.present?
         list = Listing.find(listing_id)
-        list.update(sponsored: true, sponsored_at: Time.now)
+        list.update(sponsored: true, sponsored_at: Time.now, sort_date: Time.now)
+        Delayed::Job.enqueue(RemoveSponsoredJob.new(listing_id), run_at: DateTime.now + 7.days, priority: 7)
       end
       payment
     else
