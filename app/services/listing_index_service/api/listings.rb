@@ -37,9 +37,6 @@ module ListingIndexService::API
     private
 
     def process_results(results, engine)
-      p "<<<<<<reeererreer<<<<<<<<<<<<,,,,,"
-      p results[:listings].last
-      p "<<<<<<<<<<<<<<<<<<,,,,,"
       ListingIndexResult.call(
         count: results[:count],
         listings: results[:listings].map { |search_res|

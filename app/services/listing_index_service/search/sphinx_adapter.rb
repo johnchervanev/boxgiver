@@ -90,7 +90,7 @@ module ListingIndexService::Search
           star: true,
           with: with,
           with_all: with_all,
-          order: geo_search[:order] || 'sort_date DESC',
+          order: geo_search[:order] || 'sponsored DESC, sort_date DESC',
           geo: geo_search[:origin],
           max_query_time: 1000 # Timeout and fail after 1s
         )

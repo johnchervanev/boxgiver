@@ -12,7 +12,7 @@ class RemoveSponsoredJob < Struct.new(:listing_id)
 
   def perform
     listing = Listing.find(listing_id)
-    listing.update(sponsored: false, sort_date: listing.created_at)
+    listing.update(sponsored: false)
   end
 
 end

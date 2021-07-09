@@ -24,7 +24,7 @@ module ListingIndexService::Search::DatabaseSearchHelper
     scope = scope.currently_open unless search[:include_closed]
     listings = scope.where(where_opts)
                  .includes(included_models)
-                 .order("listings.sort_date DESC")
+                 .order("listings.sponsored DESC, listings.sort_date DESC")
                  .paginate(per_page: search[:per_page], page: search[:page])
 
     success_result(listings.total_entries, listings, includes)

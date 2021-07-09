@@ -90,9 +90,6 @@ module ListingIndexViewUtils
       )
     }
 
-    p "<<<<<<<<<<<<<<<<<<,,,,"
-    p listings.first
-    p "<<<<<<<<<<<<<<<<<<,,,,"
 
     paginated = WillPaginate::Collection.create(page, per_page, result[:count]) do |pager|
       pager.replace(listings)

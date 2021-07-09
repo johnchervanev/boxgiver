@@ -19,10 +19,6 @@ class Admin::CommunityCustomizationsController < Admin::AdminBaseController
   end
 
   def update_details
-    p "<<<<<<<<<<<<<<<<<<<<<<<<,,"
-    p params[:earning_potential_image]
-    p params[:community_customizations][:earning_potential_image]
-    p "<<<<<<<<<<<<<<<<<<<<<<<<,,"
     update_results = []
     analytic = AnalyticService::CommunityCustomizations.new(user: @current_user, community: @current_community)
 

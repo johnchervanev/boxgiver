@@ -21,6 +21,7 @@ if APP_CONFIG.use_thinking_sphinx_indexing.to_s.casecmp("true") == 0
     has price_cents
     has created_at, updated_at
     has sort_date
+    has sponsored
     has category(:id), :as => :category_id
     has listing_shape_id
     has community_id
