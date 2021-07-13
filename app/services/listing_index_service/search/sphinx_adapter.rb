@@ -123,7 +123,7 @@ module ListingIndexService::Search
            return {} unless search[:latitude].present? && search[:longitude].present?
 
            geo_params = {
-                 order: (search[:sort] == :distance ? 'geodist ASC' : nil),
+                 order: (search[:sort] == :distance ? 'sponsored DESC, geodist ASC' : nil),
                  origin: [radians(search[:latitude]), radians(search[:longitude])]
            }
 
