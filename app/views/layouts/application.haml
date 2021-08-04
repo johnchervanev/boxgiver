@@ -79,6 +79,7 @@
           - unless CustomFieldSearchParams.custom_field_search_param?(param) || param.match(/^price_/)
             = hidden_field_tag param, value
         = hidden_field_tag "view", @view_type
+        = render 'layouts/ad'
         = content_for(:page_content)
     - else
       = content_for(:page_content)
