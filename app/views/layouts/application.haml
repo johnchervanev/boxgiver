@@ -82,6 +82,7 @@
         = render 'layouts/ad'
         = content_for(:page_content)
     - else
+      = render 'layouts/ad'
       = content_for(:page_content)
 
     - if @custom_footer.try(:display?)
