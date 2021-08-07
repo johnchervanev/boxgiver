@@ -150,7 +150,10 @@
           - if @view_type.eql?("grid")
             %div{class: @category_menu_enabled ? "home-fluid-thumbnail-grid-narrow" : "home-fluid-thumbnail-grid-wide"}
               .home-fluid-thumbnail-grid
-                = render partial: "homepage/custom_grid", collection: @listings, as: :listing, locals: { show_distance: location_search_in_use }
+                - @listings.each_with_index do |listing, index|
+                  - if index == 4
+                    = render partial: "homepage/ad_grid"
+                  = render partial: "homepage/custom_grid", locals: { listing: listing, show_distance: location_search_in_use }
           - else
             .home-listings
               - if (location_search_in_use)

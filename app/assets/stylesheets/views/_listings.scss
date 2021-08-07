@@ -134,7 +134,6 @@
 .listing-container {
   .home-fluid-thumbnail-grid-narrow, .home-listings {
     height: calc(100vh - 168px);
-    overflow-x: auto;
     overflow-x: hidden;
 
     &::-webkit-scrollbar-track {
@@ -288,6 +287,7 @@ $listing-author-avatar-height: 108;
   padding: 2px 15px;
   border-radius: 4px;
   line-height: 25px;
+
   &.down {
     top: unset;
     bottom: 30px;
@@ -413,3 +413,10 @@ $listing-author-avatar-height: 108;
   padding-left: 20px;
 }
 
+@media (max-width: 767px) {
+  .listing-container {
+    .home-fluid-thumbnail-grid-narrow, .home-listings {
+      height: auto;
+    }
+  }
+}
