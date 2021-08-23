@@ -135,10 +135,11 @@
                     - category.children.each do |child|
                       - is_selected = selected_category == child
                       = link_to @category_display_names[child.id], search_path(search_params.merge({category: child})), :class => "home-categories-sub #{if is_selected then 'selected' end}", :data => {:"sub-category" =>child.id}
-        = render 'homepage/sidebar_ad'
 
         #desktop-filters
           - # Filters will be relocated here when in desktop
+
+        = render 'homepage/sidebar_ad'
 
     - main_container_class = if @category_menu_enabled then "col-9 listing-container" else "col-12" end
     %div{:class => main_container_class}
