@@ -131,7 +131,18 @@
   display: none;
 }
 
+.listing-gads {
+  padding: 0;
+  margin-left: -15px;
+  min-width: 252px;
+  margin-right: 10px;
+  min-height: 300px;
+  margin-bottom: 0;
+}
+
 .listing-container {
+  padding-left: 0;
+
   .home-fluid-thumbnail-grid-narrow, .home-listings {
     height: calc(100vh - 168px);
     overflow-x: hidden;
@@ -418,5 +429,11 @@ $listing-author-avatar-height: 108;
     .home-fluid-thumbnail-grid-narrow, .home-listings {
       height: auto;
     }
+  }
+
+  .listing-gads {
+    margin: 0;
+    min-width: auto;
+    padding: 5px;
   }
 }

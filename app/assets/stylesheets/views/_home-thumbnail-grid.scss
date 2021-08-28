@@ -8,6 +8,10 @@ $home-thumbnail-grid-avatar: 36px;
 $home-thumbnail-grid-avatar-padding: 6px;
 $home-thumbnail-grid-author: $home-thumbnail-grid-avatar + ($home-thumbnail-grid-avatar-padding * 2);
 
+.home-fluid-thumbnail-grid {
+  padding: 0 5px;
+}
+
 .home-fluid-thumbnail-grid-narrow {
   @include create-fluid-thumbnail-grid(home, 1, 1, 2, 3, 3, 3, 3, 3);
 }
