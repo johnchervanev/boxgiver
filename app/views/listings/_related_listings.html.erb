@@ -1,6 +1,11 @@
 <h2 style="margin: 15px 0;">Related Listings</h2>
 <div class="box-row">
-  <% @related_listings.each do |listing| %>
+  <% @related_listings.each_with_index do |listing, index| %>
+    <% if index == 5 %>
+      <div class="col-lg-3 col-3 col-md-4 col-sm-6 related-listing-item">
+     <%=  render partial: "homepage/ad_grid" %>
+      </div>
+    <% end %>
     <div class="col-lg-3 col-3 col-md-4 col-sm-6 related-listing-item">
       <div class="home-custom-grid-item">
         <div class="listing-author-wrapper clearfix">
