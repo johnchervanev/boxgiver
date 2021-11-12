@@ -156,6 +156,13 @@ header {
   }
 }
 
+.landing-body {
+  a:hover {
+    color: #ffffff;
+    text-decoration: none;
+  }
+}
+
 .process-img,
 .how-works-img {
   position: relative;
@@ -193,6 +200,26 @@ header {
 
   a {
     text-decoration: none;
+  }
+  .list-item-header {
+    margin-bottom: 10px;
+    .icon {padding: 0 12px;}
+    .created-date {
+      text-align: start;
+      .brand-name {
+        font-weight: 600;
+        color: #00A589;
+        font-size: 16px;
+        line-height: 30px;
+      }
+      .days-ago {
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 20px;
+        color: #626665;
+      }
+    }
+
   }
 
   .list-item-card-img {
@@ -235,7 +262,6 @@ header {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    padding: 15px;
 
     .list-item-card-price {
       font-style: normal;
@@ -275,6 +301,8 @@ header {
 
     .rating-count {
       color: #2D2F2E;
+      font-weight: 400;
+      font-size: 14px;
     }
   }
 
@@ -751,8 +779,11 @@ header {
 }
 
 @media screen and (max-width: 600px) {
+  .view-all-button {
+    padding: 8px !important;
+  }
   .section-header {
-    font-size: 25px !important;
+    font-size: 24px !important;
   }
   .grid-container {
     margin-top: 20px;
@@ -780,12 +811,12 @@ header {
 .view-all-button {
   font-family: 'Work Sans', sans-serif;
   background-image: linear-gradient(#00A589, #00725F);
-  color: white;
   border: 0;
   height: 40px;
-  width: 111px;
   border-radius: 100px;
   padding: 8px 16px 8px 16px;
+  color: white;
+  width: max-content;
 }
 
 .how-it-works-wrapper, .most-viewed-listings-wrapper {

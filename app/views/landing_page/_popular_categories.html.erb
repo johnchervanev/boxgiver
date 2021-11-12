@@ -2,9 +2,9 @@
   <div class="container">
     <div class="d-flex justify-content-between">
       <h2 class="section-header">Popular Categories</h2>
-      <button class="view-all-button">View All</button>
+      <a class="view-all-button" href="/s">View All</a>
     </div>
-    <div class="row m-0 list" style="margin-left: -15px !important;margin-right: -15px !important;">
+    <div class="row m-0 list" style="margin-left: -15px !important; margin-right: -15px !important;">
       <%= render partial: "popular_category_item", collection: @popular_categories, as: :category %>
     </div>
   </div>
