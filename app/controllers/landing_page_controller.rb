@@ -54,7 +54,7 @@ class LandingPageController < ActionController::Metal
     @categories = @current_community.categories.where("parent_id IS NULL")
     @popular_categories = @current_community.categories.where("parent_id IS NULL")
     @most_viewed_listings = @current_community.listings.order('times_viewed DESC').limit(10)
-    @new_listings = @current_community.listings.order('times_viewed DESC').limit(10)
+    @new_listings = @current_community.listings.where(created_at: Date.today.beginning_of_week..Date.today.end_of_week).order(created_at: :desc).limit(10)
     @featured_listings = @current_community.listings.where(sponsored: 1).limit(10)
     @popular_cities = Location.distinct(:address).limit(10)
     begin
