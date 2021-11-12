@@ -1,0 +1,23 @@
+<div class="grid-item">
+  <a class="list-item-card text-decoration-none" href="/s?category=<%= listing %>">
+    <div class="list-item-card">
+      <div class="list-item-card-img" style="background-image: url('/assets/no_image_available.jpg')">
+        <%#= image_tag ('no_image_available.jpg'), style: 'width: 100px; height: auto' %>
+      </div>
+      <div class="list-item-card-body">
+        <p class="list-item-card-title"><%= listing.title %></p>
+      </div>
+      <div class="list-item-card-footer">
+        <p class="list-item-card-price"><%= listing.price.nil? ? "0 $": "#{listing.price} $"%></p>
+        <div class="list-item-card-likes">
+        <span>
+          <svg width="16" height="15" viewBox="0 0 16 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M8.09984 12.7717C5.0338 11.0255 3.32376 9.2898 2.49685 7.78385C1.65051 6.24252 1.72435 4.94434 2.19399 4.02298C3.1593 2.12916 5.90437 1.52357 7.57688 3.63889L8.0998 4.30026L8.62276 3.63893C10.2956 1.52352 13.0408 2.1292 14.0061 4.02298C14.4757 4.94433 14.5495 6.2425 13.7031 7.78384C12.8761 9.28979 11.166 11.0255 8.09984 12.7717ZM8.09986 2.2375C5.74706 0.00176251 2.27613 0.92579 1.00607 3.41747C0.309046 4.78495 0.299524 6.55236 1.32812 8.4256C2.34758 10.2822 4.38019 12.2419 7.77734 14.1196L8.09983 14.2979L8.42232 14.1196C11.8196 12.242 13.8523 10.2822 14.8718 8.42562C15.9005 6.55239 15.891 4.78496 15.194 3.41747C13.9239 0.925742 10.4529 0.00179636 8.09986 2.2375Z" fill="#00725F"/>
+          </svg>
+        </span>
+          <span><%= listing.listing_lovers.count %></span>
+        </div>
+      </div>
+    </div>
+  </a>
+</div>

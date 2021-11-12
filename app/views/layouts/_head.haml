@@ -13,6 +13,10 @@
 
   :css
     @import url(//fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700&subset=latin-ext);
+    /*@import url(//fonts.googleapis.com/css2?family=Work+Sans:wght@700;600;400&display=swap);*/
+    %link{:href => "https://fonts.googleapis.com", :rel => "preconnect"}
+    %link{:crossorigin => "", :href => "https://fonts.gstatic.com", :rel => "preconnect"}
+    %link{:href => "https://fonts.googleapis.com/css2?family=Work+Sans:wght@100;200;300;400;500;600;700;800;900&display=swap", :rel => "stylesheet"}
 
   - font_path = APP_CONFIG[:font_proximanovasoft_url]
   - if font_path.present? && FeatureFlagHelper.feature_enabled?(:topbar_v1)

@@ -52,7 +52,11 @@ class LandingPageController < ActionController::Metal
     script_digest = Digest::MD5.hexdigest(custom_head_scripts.to_s)
 
     @categories = @current_community.categories.where("parent_id IS NULL")
-
+    @popular_categories = @current_community.categories.where("parent_id IS NULL")
+    @most_viewed_listings = @current_community.listings.order('times_viewed DESC').limit(10)
+    @new_listings = @current_community.listings.order('times_viewed DESC').limit(10)
+    @featured_listings = @current_community.listings.where(sponsored: 1).limit(10)
+    @popular_cities = Location.distinct(:address).limit(10)
     begin
       content = nil
       cache_meta = CLP::Caching.fetch_cache_meta(cid, version, locale_param, cta, script_digest)

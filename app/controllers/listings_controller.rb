@@ -84,6 +84,9 @@ class ListingsController < ApplicationController
   end
 
   def show
+    @listing.times_viewed += 1
+    @listing.save
+
     @selected_tribe_navi_tab = "home"
     make_onboarding_popup
 

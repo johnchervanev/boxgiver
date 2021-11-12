@@ -1,0 +1,11 @@
+<div class="section">
+  <div class="container">
+    <div class="d-flex justify-content-between">
+      <h2 class="section-header">Featured Listings</h2>
+      <button class="view-all-button">View All</button>
+    </div>
+    <div class="row">
+      <%= render partial: "featured_list_item", collection: @featured_listings, as: :listing %>
+    </div>
+  </div>
+</div>

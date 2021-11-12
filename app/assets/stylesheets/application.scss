@@ -15,6 +15,10 @@
 //= require_tree ./partials
 //= require_tree ./views
 
+*:focus {
+  outline: none !important;
+}
+
 .love-count {
   font-size: 18px;
   color: #888888;

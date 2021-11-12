@@ -1,0 +1,11 @@
+<div class="section">
+  <div class="container">
+    <div class="d-flex justify-content-between">
+      <h2 class="section-header">Most Viewed Listings</h2>
+      <button class="view-all-button">View All</button>
+    </div>
+    <div class="grid-container">
+      <%= render partial: "list_item", collection: @most_viewed_listings, as: :listing %>
+    </div>
+  </div>
+</div>
