@@ -298,6 +298,18 @@ class Listing < ApplicationRecord
     category.icon_name
   end
 
+  def slug
+    "#{self.id}-#{self.title.to_url}"
+  end
+
+  def get_first_listing_image
+    image_url = ActionController::Base.helpers.asset_path('no_image_available.jpg')
+    if self.listing_images.length > 0
+      image_url = self.listing_images.first.image.url
+    end
+    image_url
+  end
+
   # The price symbol based on this listing's price or community default, if no price set
   def price_symbol
     price ? price.symbol : MoneyRails.default_currency.symbol

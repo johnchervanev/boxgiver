@@ -197,21 +197,29 @@ header {
 .list-item-card {
   font-family: 'Work Sans', sans-serif;
   font-style: normal;
+  text-align: center;
 
   a {
     text-decoration: none;
   }
+
   .list-item-header {
     margin-bottom: 10px;
-    .icon {padding: 0 12px;}
+
+    .icon {
+      padding: 0 12px;
+    }
+
     .created-date {
       text-align: start;
+
       .brand-name {
         font-weight: 600;
         color: #00A589;
         font-size: 16px;
         line-height: 30px;
       }
+
       .days-ago {
         font-weight: 400;
         font-size: 14px;
@@ -229,6 +237,10 @@ header {
     width: 100%;
     left: 0;
     top: 0;
+    background-repeat: no-repeat;
+    background-size: contain;
+    text-align: center;
+    background-position: top center;
 
     .featured-badge {
       font-weight: 500;
@@ -239,7 +251,7 @@ header {
       border-radius: 100px;
       padding: 3px 10px;
       font-size: 12px;
-      color: black;
+      color: #ffffff;
     }
   }
 
@@ -247,7 +259,6 @@ header {
     padding: 15px;
 
     .list-item-card-title {
-      text-align: left;
       font-family: 'Work Sans', sans-serif;
       font-style: normal;
       font-weight: 600;
@@ -306,6 +317,10 @@ header {
     }
   }
 
+}
+
+.dynamic-item-header {
+  margin-bottom: 35px;
 }
 
 .section {

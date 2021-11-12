@@ -5,9 +5,9 @@
       <a class="view-all-button" href="/s">View All</a>
     </div>
     <div class="grid-container" id="new-listings">
-      <% @new_listings.each do |listing|%>
+      <% @new_listings.each do |listing| %>
         <div class="grid-item">
-          <a class="list-item-card text-decoration-none" href="#">
+          <a class="list-item-card text-decoration-none" href="/listings/<%= listing.slug %>">
             <div class="list-item-header d-flex justify-content-center">
               <div class="icon">
                 <svg width="26" height="24" viewBox="0 0 26 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -28,13 +28,16 @@
                 </div>
               </div>
             </div>
-            <div class="list-item-card-img" style="background-image: url('/assets/no_image_available.jpg')"></div>
+            <div class="list-item-card-img" style="background-image: url('<%= listing.get_first_listing_image %>')">
+            </div>
             <div class="list-item-card-body">
               <p class="list-item-card-title"><%= listing.title %></p>
             </div>
             <div class="list-item-card-footer">
               <p class="list-item-card-price">74,95 $</p>
-              <p class="list-item-card-pre-price"><del>121,00 $</del></p>
+              <p class="list-item-card-pre-price">
+                <del>121,00 $</del>
+              </p>
             </div>
             <div class="list-item-card-ratings d-block">
               <span class="rating-star"><i class="fas fa-star"></i></span>

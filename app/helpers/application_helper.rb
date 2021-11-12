@@ -14,25 +14,25 @@ module ApplicationHelper
 
     from_time = from_time.to_time if from_time.respond_to?(:to_time)
     to_time = to_time.to_time if to_time.respond_to?(:to_time)
-    distance_in_minutes = (((to_time - from_time).abs)/60).round
+    distance_in_minutes = (((to_time - from_time).abs) / 60).round
     distance_in_seconds = ((to_time - from_time).abs).round
     time = case distance_in_minutes
-      when 0..1           then (distance_in_seconds < 60) ? t('timestamps.seconds_ago', :count => distance_in_seconds) : t('timestamps.minute_ago', :count => 1)
-      when 2..59          then t('timestamps.minutes_ago', :count => distance_in_minutes)
-      when 60..90         then t('timestamps.hour_ago', :count => 1)
-      when 90..1440       then t('timestamps.hours_ago', :count => (distance_in_minutes.to_f / 60.0).round)
-      when 1440..2160     then t('timestamps.day_ago', :count => 1) # 1-1.5 days
-      when 2160..2880     then t('timestamps.days_ago', :count => (distance_in_minutes.to_f / 1440.0).round) # 1.5-2 days
-      #else from_time.strftime(t('date.formats.default'))
-    end
+           when 0..1 then (distance_in_seconds < 60) ? t('timestamps.seconds_ago', :count => distance_in_seconds) : t('timestamps.minute_ago', :count => 1)
+           when 2..59 then t('timestamps.minutes_ago', :count => distance_in_minutes)
+           when 60..90 then t('timestamps.hour_ago', :count => 1)
+           when 90..1440 then t('timestamps.hours_ago', :count => (distance_in_minutes.to_f / 60.0).round)
+           when 1440..2160 then t('timestamps.day_ago', :count => 1) # 1-1.5 days
+           when 2160..2880 then t('timestamps.days_ago', :count => (distance_in_minutes.to_f / 1440.0).round) # 1.5-2 days
+           #else from_time.strftime(t('date.formats.default'))
+           end
     if distance_in_minutes > 2880
-      distance_in_days = (distance_in_minutes/1440.0).round
+      distance_in_days = (distance_in_minutes / 1440.0).round
       time = case distance_in_days
-        when 0..30    then t('timestamps.days_ago', :count => distance_in_days)
-        when 31..50   then t('timestamps.month_ago', :count => 1)
-        when 51..364  then t('timestamps.months_ago', :count => (distance_in_days.to_f / 30.0).round)
-        else               t('timestamps.years_ago', :count => (distance_in_days.to_f / 365.24).round)
-      end
+             when 0..30 then t('timestamps.days_ago', :count => distance_in_days)
+             when 31..50 then t('timestamps.month_ago', :count => 1)
+             when 51..364 then t('timestamps.months_ago', :count => (distance_in_days.to_f / 30.0).round)
+             else t('timestamps.years_ago', :count => (distance_in_days.to_f / 365.24).round)
+             end
     end
 
     return time
@@ -44,7 +44,7 @@ module ApplicationHelper
 
   # used to escape strings to URL friendly format
   def self.escape_for_url(str)
-     URI.escape(str, Regexp.new("[^-_!~*()a-zA-Z\\d]")) # rubocop:disable Lint/UriEscapeUnescape
+    URI.escape(str, Regexp.new("[^-_!~*()a-zA-Z\\d]")) # rubocop:disable Lint/UriEscapeUnescape
   end
 
   # Changes line breaks to <br>-tags and transforms URLs to links
@@ -67,15 +67,15 @@ module ApplicationHelper
     haml_concat add_links(capture_haml(&block)).html_safe
   end
 
-  def small_avatar_thumb(person, avatar_html_options={})
+  def small_avatar_thumb(person, avatar_html_options = {})
     avatar_thumb(:thumb, person, avatar_html_options)
   end
 
-  def medium_avatar_thumb(person, avatar_html_options={})
+  def medium_avatar_thumb(person, avatar_html_options = {})
     avatar_thumb(:small, person, avatar_html_options)
   end
 
-  def avatar_thumb(size, person, avatar_html_options={})
+  def avatar_thumb(size, person, avatar_html_options = {})
     return "" if person.nil?
 
     image_url = person.image.present? ? person.image.url(size) : missing_avatar(size)
@@ -83,13 +83,13 @@ module ApplicationHelper
     link_to_unless(person.deleted?, image_tag(image_url, avatar_html_options), person)
   end
 
-  def large_avatar_thumb(person, options={})
+  def large_avatar_thumb(person, options = {})
     image_url = person.image.present? ? person.image.url(:medium) : missing_avatar(:medium)
 
     image_tag image_url, { :alt => PersonViewUtils.person_display_name(person, @current_community) }.merge(options)
   end
 
-  def huge_avatar_thumb(person, options={})
+  def huge_avatar_thumb(person, options = {})
     # FIXME! Need a new picture size: :large
 
     image_url = person.image.present? ? person.image.url(:medium) : missing_avatar(:medium)
@@ -109,7 +109,7 @@ module ApplicationHelper
     end
   end
 
-  def pageless(total_pages, target_id, url=nil, loader_message='Loading more results', current_page = 1)
+  def pageless(total_pages, target_id, url = nil, loader_message = 'Loading more results', current_page = 1)
 
     opts = {
       :currentPage => current_page,
@@ -133,7 +133,7 @@ module ApplicationHelper
     locales =
       if @current_community
         @current_community.locales
-          .map { |loc| Sharetribe::AVAILABLE_LOCALES.find { |app_loc| app_loc[:ident] == loc } }
+                          .map { |loc| Sharetribe::AVAILABLE_LOCALES.find { |app_loc| app_loc[:ident] == loc } }
       else
         Sharetribe::AVAILABLE_LOCALES
       end
@@ -145,7 +145,7 @@ module ApplicationHelper
     available_locales.detect { |p| p[1] == locale.to_s }&.first
   end
 
-  def self.send_error_notification(message, error_class="Special Error", parameters={})
+  def self.send_error_notification(message, error_class = "Special Error", parameters = {})
     if APP_CONFIG.use_airbrake
       Airbrake.notify(
         :error_class => error_class,
@@ -162,27 +162,27 @@ module ApplicationHelper
   # Now the domain is included in the params, so this is used only in error cases to redirect back
   def self.pick_referer_domain_part_from_request(request)
     return request.headers["HTTP_ORIGIN"] if request.headers["HTTP_ORIGIN"].present?
-    return request.headers["HTTP_REFERER"][/(^[^\/]*(\/\/)?[^\/]+)/,1] if request.headers["HTTP_REFERER"]
+    return request.headers["HTTP_REFERER"][/(^[^\/]*(\/\/)?[^\/]+)/, 1] if request.headers["HTTP_REFERER"]
 
     return ""
   end
 
   def on_admin?
-    controller.class.name.split("::").first=="Admin"
+    controller.class.name.split("::").first == "Admin"
   end
 
   def on_admin2?
-    controller.class.name.split("::").first=="Admin2"
+    controller.class.name.split("::").first == "Admin2"
   end
 
-  def facebook_like(recommend=false)
+  def facebook_like(recommend = false)
     "<div class=\"fb-like\" data-send=\"true\" data-layout=\"button_count\" data-width=\"200\" data-show-faces=\"false\" #{recommend ? 'data-action="recommend"' : ''}></div>".html_safe
   end
 
-  def self.random_sting(length=6)
+  def self.random_sting(length = 6)
     chars = ("a".."z").to_a + ("0".."9").to_a
     random_string = ""
-    1.upto(length) { |i| random_string << chars[rand(chars.size-1)] }
+    1.upto(length) { |i| random_string << chars[rand(chars.size - 1)] }
     return random_string
   end
 
@@ -209,12 +209,13 @@ module ApplicationHelper
       t("people.new.email_is_in_use")
     end
   end
+
   # Class methods to access the service_name stored in the thread to work with I18N and DelayedJob etc async stuff.
   def self.store_community_service_name_to_thread(name)
     Thread.current[:current_community_service_name] = name
   end
 
-  def self.store_community_service_name_to_thread_from_community_id(community_id=nil)
+  def self.store_community_service_name_to_thread_from_community_id(community_id = nil)
     community = nil
     if community_id.present?
       community = Community.find_by_id(community_id)
@@ -222,7 +223,7 @@ module ApplicationHelper
     store_community_service_name_to_thread_from_community(community)
   end
 
-  def self.store_community_service_name_to_thread_from_community(community=nil)
+  def self.store_community_service_name_to_thread_from_community(community = nil)
     ser_name = APP_CONFIG.global_service_name || "Sharetribe"
 
     # if community has it's own setting, dig it out here
@@ -260,7 +261,7 @@ module ApplicationHelper
     pattern = /[\.)]*$/
     text.gsub(/\b(https?:\/\/|www\.)\S+/i) do |link_url|
       site_url = (link_url.starts_with?("www.") ? "http://" + link_url : link_url)
-      link_to(link_url.gsub(pattern,""), site_url.gsub(pattern,""), class: "truncated-link") + link_url.match(pattern)[0]
+      link_to(link_url.gsub(pattern, ""), site_url.gsub(pattern, ""), class: "truncated-link") + link_url.match(pattern)[0]
     end
   end
 
@@ -274,10 +275,10 @@ module ApplicationHelper
   # general method for making urls as links and line breaks as <br /> tags
   def add_links_and_br_tags_for_email(text)
     pattern = /[\.)]*$/
-    text.gsub(/https?:\/\/\S+/) { |link_url| link_to(truncate(link_url.gsub(pattern,""), :length => 50, :omission => "..."), link_url.gsub(pattern,""), :style => "color:#d25427;text-decoration:none;") + link_url.match(pattern)[0]}.gsub(/\n/, "<br />")
+    text.gsub(/https?:\/\/\S+/) { |link_url| link_to(truncate(link_url.gsub(pattern, ""), :length => 50, :omission => "..."), link_url.gsub(pattern, ""), :style => "color:#d25427;text-decoration:none;") + link_url.match(pattern)[0] }.gsub(/\n/, "<br />")
   end
 
-  def atom_feed_url(params={})
+  def atom_feed_url(params = {})
     url = "#{request.protocol}#{request.host_with_port}/listings.atom?locale=#{I18n.locale}"
     params.each do |key, value|
       url += "&#{key}=#{value}"
@@ -599,10 +600,11 @@ module ApplicationHelper
 
     links
   end
+
   # rubocop:enable Metrics/MethodLength, Metrics/AbcSize
 
   # Settings view left hand navigation content
-  def settings_links_for(person, community=nil, restrict_for_admin=false)
+  def settings_links_for(person, community = nil, restrict_for_admin = false)
     links = [
       {
         :id => "settings-tab-profile",
@@ -640,7 +642,7 @@ module ApplicationHelper
             :id => "settings-tab-account",
             :text => t("layouts.settings.account"),
             :icon_class => icon_class("account_settings"),
-            :path => account_person_settings_path(person) ,
+            :path => account_person_settings_path(person),
             :name => "account"
           },
           {
@@ -700,7 +702,7 @@ module ApplicationHelper
   end
 
   def community_slogan
-    if @community_customization  && !@community_customization.slogan.blank?
+    if @community_customization && !@community_customization.slogan.blank?
       @community_customization.slogan
     else
       if @current_community.slogan && !@current_community.slogan.blank?
@@ -711,7 +713,7 @@ module ApplicationHelper
     end
   end
 
-  def community_description(truncate=true)
+  def community_description(truncate = true)
     if @community_customization && !@community_customization.description.blank?
       truncate ? truncate_html(@community_customization.description, length: 140, omission: "...") : @community_customization.description
     elsif @current_community.description && !@current_community.description.blank?
@@ -733,7 +735,7 @@ module ApplicationHelper
   def author_link(listing)
     link_to(PersonViewUtils.person_display_name(listing.author, @current_community),
             listing.author,
-            {:title => PersonViewUtils.person_display_name(listing.author, @current_community)})
+            { :title => PersonViewUtils.person_display_name(listing.author, @current_community) })
   end
 
   def with_invite_link(&block)
@@ -781,12 +783,14 @@ module ApplicationHelper
 
   # Give an array of translation keys you need in JavaScript. The keys will be loaded and ready to be used in JS
   # with `ST.t` function
-  def js_t(keys, run_js_immediately=false)
+  def js_t(keys, run_js_immediately = false)
     js = javascript_tag("ST.loadTranslations(#{JSTranslations.load(keys).to_json})")
     if run_js_immediately
       js
     else
-      content_for :extra_javascript do js end
+      content_for :extra_javascript do
+        js
+      end
     end
   end
 
