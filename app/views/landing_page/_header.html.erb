@@ -1,24 +1,23 @@
-<div class="section" id="header">
-  <div id="box-2"><%= image_tag('landing_page/box-medium-light.png')%></div>
-  <%= render "landing_page/navbar" %>
+<div id="header">
+  <div class="topbar-placeholder">
+    <div class="container" id="topbar-placeholder">
+
+    </div>
+  </div>
+  <%#= render "landing_page/navbar" %>
   <div class="hero-container">
-    <div class="row m-0">
-      <div class="col-md-3">
-        <%= image_tag('landing_page/hero_image_1.png', style: 'width: 100%')%>
-      </div>
-      <div class="col-md-6">
-        <div class="hero">
-          <h1 class="hero-text">Find & reuse unwanted packaging</h1>
-          <p class="hero-description">
-            The largest and most trusted marketplace to buy, sell, or<br> donate packaging materials locally.
-          </p>
-        </div>
-        <div class="search-section">
-          <div class="custom-search">
-            <input type="text" class="custom-search-input" placeholder="Search your location">
-            <button class="custom-search-botton" type="submit">
-              <span class="text">Search</span>
-              <span class="icon">
+    <div class="hero">
+      <h1 class="hero-text">Find & reuse unwanted packaging</h1>
+      <p class="hero-description">
+        The largest and most trusted marketplace to buy, sell, or donate packaging materials locally.
+      </p>
+    </div>
+    <div class="search-section">
+      <div class="custom-search">
+        <input type="text" class="custom-search-input" placeholder="Search your location">
+        <button class="custom-search-botton" type="submit">
+          <span class="text">Search</span>
+          <span class="icon">
                 <svg width="57" height="56" viewBox="0 0 57 56" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <g filter="url(#filter0_d_1253:34)">
                     <rect x="12.2461" y="2" width="32" height="32" rx="16" fill="white"/>
@@ -38,16 +37,11 @@
                   </defs>
                 </svg>
               </span>
-            </button>
-          </div>
-        </div>
-        <div class="hero-link">
-          <a href="#">List your package now</a>
-        </div>
+        </button>
       </div>
-      <div class="col-md-3 p-0">
-        <%= image_tag('landing_page/hero_image_2.png', style: 'width: 100%')%>
-      </div>
+    </div>
+    <div class="hero-link">
+      <a href="#">List your package now</a>
     </div>
   </div>
 </div>

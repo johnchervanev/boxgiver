@@ -41,7 +41,6 @@
   <%#= render 'layouts/tawk_chat_bot' %>
 </head>
 <body>
-<!--<div id="topbar-placeholder" class="topbar-placeholder"></div>-->
 <!--<header class="header pre-loading" id='landing-header'>-->
 
 <!--  <div class='header-container'>-->
@@ -50,16 +49,16 @@
 <!--        <div class="row">-->
 <!--          <div class="col-md-7" style="padding: 0">-->
 <!--            <div class="header-image">-->
-              <%# sections.each_with_index do |section, index| %>
+<%# sections.each_with_index do |section, index| %>
 
-                <%# s = section["section"] %>
-                <%# section_id = "#{s['kind']}__#{s['id']}__#{index}" %>
-                <%# case s["kind"] %>
-              <%# when "hero" %>
-                  <%#= render partial: "hero", locals: { section_id: section_id, s: s, community_context: community_context } %>
-                <%# end %>
+<%# s = section["section"] %>
+<%# section_id = "#{s['kind']}__#{s['id']}__#{index}" %>
+<%# case s["kind"] %>
+<%# when "hero" %>
+<%#= render partial: "hero", locals: { section_id: section_id, s: s, community_context: community_context } %>
+<%# end %>
 
-              <%# end %>
+<%# end %>
 <!--            </div>-->
 <!--          </div>-->
 <!--          <div class="col-md-5 header-image-wrapper" style="padding: 0">-->
@@ -110,42 +109,42 @@
 <!--          <div class="row">-->
 <!--            <div class="col-lg-3 col-md-6">-->
 <!--              <div class="item-header counter-one">-->
-                <%#= image_tag('list.png') %>
+<%#= image_tag('list.png') %>
 <!--                <h3> LIST </h3>-->
 <!--              </div>-->
 <!--              <p>-->
-                <%#= @current_community.hw_list %>
+<%#= @current_community.hw_list %>
 <!--              </p>-->
 <!--            </div>-->
 <!--            <div class="col-lg-3 col-md-6">-->
 <!--              <div class="item-header counter-two">-->
-                <%#= image_tag('sell.png') %>
+<%#= image_tag('sell.png') %>
 <!--                <h3> SELL </h3>-->
 <!--              </div>-->
 <!--              <p>-->
-                <%#= @current_community.hw_sell %>
+<%#= @current_community.hw_sell %>
 <!--              </p>-->
 <!--            </div>-->
 <!--            <div class="col-lg-3 col-md-6">-->
 <!--              <div class="item-header counter-three">-->
-                <%#= image_tag('deliver.png') %>
+<%#= image_tag('deliver.png') %>
 <!--                <h3>-->
 <!--                  DELIVERY-->
 <!--                </h3>-->
 <!--              </div>-->
 <!--              <p>-->
-                <%#= @current_community.hw_delivery %>
+<%#= @current_community.hw_delivery %>
 <!--              </p>-->
 <!--            </div>-->
 <!--            <div class="col-lg-3 col-md-6">-->
 <!--              <div class="item-header counter-four">-->
-                <%#= image_tag('paid.png') %>
+<%#= image_tag('paid.png') %>
 <!--                <h3>-->
 <!--                  GET PAID-->
 <!--                </h3>-->
 <!--              </div>-->
 <!--              <p>-->
-                <%#= @current_community.hw_paid %>
+<%#= @current_community.hw_paid %>
 <!--              </p>-->
 <!--            </div>-->
 <!--          </div>-->
@@ -163,11 +162,11 @@
 <!--      <div class="row">-->
 <!--        <div class="col-lg-12">-->
 <!--          <div class="row">-->
-            <%# @categories.each do |category| %>
+<%# @categories.each do |category| %>
 <!--              <div class="col-lg-3 col-md-6">-->
 <!--                <a class="board-item" href="/<%#= landing_page_locale %>/s?category=<%#= category.url %>">-->
 <!--                  <div class='board-header'>-->
-                    <%#= category.display_name(locale) %>
+<%#= category.display_name(locale) %>
 <!--                  </div>-->
 <!--                  <div class='board-body'>-->
 <!--                    <div class='image-wrapper' style="background-image: url('<%#= category.image ? category.image : asset_path('nope-not-here.webp') %>')">-->
@@ -176,7 +175,7 @@
 <!--                  </div>-->
 <!--                </a>-->
 <!--              </div>-->
-            <%# end %>
+<%# end %>
 <!--          </div>-->
 <!--        </div>-->
 <!--      </div>-->
@@ -270,8 +269,8 @@
 <script type="text/javascript">
     document.addEventListener('DOMContentLoaded', (event) => {
         setTimeout(function () {
-            //var element = document.getElementById("landing-header");
-            //element.classList.remove("pre-loading");
+            var element = document.getElementById("landing-header");
+            element.classList.remove("pre-loading");
         }, 300);
     })
 </script>
