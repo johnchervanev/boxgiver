@@ -6,7 +6,7 @@
         <ul class="link-list">
           <% @popular_cities.each do |city| %>
             <li class="link-item">
-              <a class="link" href="/s?city=<%= city %>">
+              <a class="link" target="_blank"   href="/s?city=<%= city.address %>">
                 <%= city.address %>
               </a>
             </li>
@@ -18,31 +18,34 @@
         <ul class="link-list">
           <% @popular_categories.each do |category| %>
             <li class="link-item">
-              <a class="link" href="/s?category=<%= category.url %>">
+              <a class="link" target="_blank"   href="/s?category=<%= category.url %>">
                 <%= category.display_name(locale) %>
               </a>
             </li>
           <% end %>
+          <li class="link-item">
+            <a class="link" target="_blank"   href="/s">View all categories</a>
+          </li>
         </ul>
       </div>
       <div class="grid-item">
         <p class="footer-menu-header">About us</p>
         <ul class="link-list">
-          <li class="link-item"><a class="link">About us</a></li>
-          <li class="link-item"><a class="link">How it works</a></li>
-          <li class="link-item"><a class="link">Terms</a></li>
-          <li class="link-item"><a class="link">Privacy policy</a></li>
-          <li class="link-item"><a class="link">FAQ</a></li>
-          <li class="link-item"><a class="link">Invite users</a></li>
-          <li class="link-item"><a class="link">Donate</a></li>
+          <li class="link-item"><a class="link" target="_blank"   target="_blank" href="/about">About us</a></li>
+          <li class="link-item"><a class="link" target="_blank"   target="_blank"  href="/how_to_use">How it works</a></li>
+          <li class="link-item"><a class="link" target="_blank"   target="_blank"  href="/terms">Terms</a></li>
+          <li class="link-item"><a class="link" target="_blank"   target="_blank"  href="/privacy">Privacy policy</a></li>
+          <li class="link-item"><a class="link" target="_blank"   target="_blank"  href="/faq">FAQ</a></li>
+          <li class="link-item"><a class="link" target="_blank"   target="_blank"  href="/invite">Invite users</a></li>
+          <li class="link-item"><a class="link" target="_blank"   target="_blank"  href="#">Donate</a></li>
         </ul>
       </div>
       <div class="grid-item">
         <p class="footer-menu-header">Support</p>
         <ul class="link-list">
-          <li class="link-item"><a class="link">info@boxgiver.com</a></li>
-          <li class="link-item"><a class="link">Contact us</a></li>
-          <li class="link-item"><a class="link">Help</a></li>
+          <li class="link-item"><a class="link" target="_blank" href="mailto:info@boxgiver.com">info@boxgiver.com</a></li>
+          <li class="link-item"><a class="link" target="_blank" href="/contact">Contact us</a></li>
+          <li class="link-item"><a class="link" target="_blank" href="#">Help</a></li>
         </ul>
       </div>
       <div class="grid-item" style="text-align: start">
@@ -74,12 +77,12 @@
         <div class="social-links">
           <p class="connect-text">Connect with us</p>
           <span class="social-link">
-            <a href="#"><i class="fab fa-facebook-f"></i></a>
-            <a href="#"><i class="fab fa-twitter"></i></a>
-            <a href="#"><i class="fab fa-youtube"></i></a>
-            <a href="#"><i class="fab fa-instagram"></i></a>
-            <a href="#"><i class="fab fa-google"></i></a>
-            <a href="#"><i class="fab fa-linkedin"></i></a>
+            <a target="_blank" href="https://www.facebook.com/theboxgiver"><i class="fab fa-facebook-f"></i></a>
+            <a target="_blank" href="https://twitter.com/box_giver"><i class="fab fa-twitter"></i></a>
+            <a target="_blank" href="https://www.youtube.com/channel/UC00ylXdA7xnHbD-KJ9WDI5w"><i class="fab fa-youtube"></i></a>
+            <a target="_blank" href="https://www.instagram.com/box_giver/"><i class="fab fa-instagram"></i></a>
+            <a target="_blank" href="https://g.page/boxgiver?we"><i class="fab fa-google"></i></a>
+            <a target="_blank" href="https://www.linkedin.com/company/boxgiver"><i class="fab fa-linkedin"></i></a>
           </span>
         </div>
       </div>

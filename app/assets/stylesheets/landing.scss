@@ -207,17 +207,19 @@ header {
     margin-bottom: 10px;
 
     .icon {
-      padding: 0 12px;
+      padding: 12px 12px;
     }
 
     .created-date {
       text-align: start;
 
       .brand-name {
-        font-weight: 600;
-        color: #00A589;
-        font-size: 16px;
-        line-height: 30px;
+        a {
+          font-weight: 600;
+          color: #00A589;
+          font-size: 16px;
+          line-height: 30px;
+        }
       }
 
       .days-ago {
@@ -263,9 +265,9 @@ header {
       font-style: normal;
       font-weight: 600;
       font-size: 19px;
-      line-height: 1.5rem;
-      height: 30px;
       color: #00110E;
+      height: 40px;
+      line-height: 1.6rem;
     }
   }
 
@@ -445,6 +447,8 @@ header {
         color: #00725F;
         text-decoration: underline;
         text-decoration-color: #00725F;
+        text-underline-offset: 10px;
+        text-decoration-thickness: 2px;
       }
     }
   }
@@ -796,6 +800,10 @@ header {
 @media screen and (max-width: 600px) {
   .view-all-button {
     padding: 8px !important;
+    width: max-content !important;
+  }
+  .dynamic-item-header {
+    width: 200px !important;
   }
   .section-header {
     font-size: 24px !important;

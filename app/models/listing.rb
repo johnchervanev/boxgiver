@@ -310,6 +310,11 @@ class Listing < ApplicationRecord
     image_url
   end
 
+  def avatar_thumb
+    return "" if self.author.nil?
+    self.author.image.present? ? self.author.image.url(:small) : ActionController::Base.helpers.asset_path("profile_image/small/missing.png")
+  end
+
   # The price symbol based on this listing's price or community default, if no price set
   def price_symbol
     price ? price.symbol : MoneyRails.default_currency.symbol
