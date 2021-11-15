@@ -294,8 +294,7 @@ header {
 
     .text {
       position: relative;
-      top: 50%;
-      transform: translateY(-50%);
+      transform: translateY(29%);
       display: inline-block;
     }
   }
@@ -704,6 +703,12 @@ header {
       .hero-description {
         font-size: 16px;
       }
+    }
+  }
+
+  .search-section {
+    .custom-search {
+      grid-template-columns: 4fr 1fr;
     }
   }
 }
