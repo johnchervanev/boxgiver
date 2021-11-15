@@ -8,11 +8,11 @@
       </div>
 
       <div class="name-posting clearfix">
-        <a title="johncher" class="author-link" href="/en/johnc">
-          johncher
-        </a>
+        <%= link_to(person_path(username: listing.author.username), class: 'author-link') do %>
+          <%= listing.author.username %>
+        <% end %>
         <div class="posting-time">
-          3 days ago.
+          <%= distance_of_time_in_words(listing.created_at, Time.now) %> ago
         </div>
       </div>
 
