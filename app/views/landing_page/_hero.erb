@@ -34,7 +34,7 @@
 <% end %>
 
 <section id="<%= section_id %>" class="landing-hero-container">
-  <div class="hero__content">
+  <div id="hero__content_section" class="hero__content" >
     <div class="hero__content-container">
       <%# if community_context[:show_slogan] %>
 <!--        <h1 class="hero__title"><%#= s["title"]["value"] %></h1>-->
@@ -47,7 +47,8 @@
       <% button_title = cta_button_type == LandingPageVersion::Section::Hero::BUTTON_TYPE_DEFAULT && s["button_title"].try(:[], "value") %>
       <% case cta_button_type %>
       <% when LandingPageVersion::Section::Hero::BUTTON_TYPE_BUTTON %>
-        <a class="hero__signup-button" href="<%= s["button_path"]["value"] %>"><%= s["button_title"]["value"] %></a>
+<!--        <a class="hero__signup-button" href="<%#= s["button_path"]["value"] %>"><%#= s["button_title"]["value"] %></a>-->
+        <a class="landing-signup-button" href="<%= s["button_path"]["value"] %>"><%= s["button_title"]["value"] %></a>
       <% when LandingPageVersion::Section::Hero::BUTTON_TYPE_NONE %>
       <% else %>
         <% search_mode = s["variation"]["value"] %>
@@ -90,7 +91,8 @@
                   <% end %>
                   <% search_title = button_title.present? ? button_title : s["search_button"]["value"] %>
                   <!--              <button type="submit" class="hero__search-button hero__search-button<%#= combined_mode %>"><%#= search_title %></button>-->
-                  <button type="submit" class="hero__search-button hero__search-button<%= combined_mode %> custom-search-botton ">
+<!--                  <button type="submit" class="hero__search-button hero__search-button<%#= combined_mode %> custom-search-botton ">-->
+                  <button type="submit" class="custom-search-botton">
                     <span class="text"><%= search_title %></span>
                     <span class="icon">
                       <svg width="57" height="56" viewBox="0 0 57 56" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -133,15 +135,15 @@
 <!--              <a href="#how-it-works"> How it works </a>-->
 <!--            </p>-->
             <div class="hero-link">
-              <a href="/listings/new">List your package now</a>
+              <a href="/listings/new">List your packaging now</a>
             </div>
           </div>
 
         <% when "private" %>
 
           <% signup_title = button_title.present? ? button_title : s["signup_button"]["value"] %>
-          <a class="hero__signup-button" href="<%= s["signup_path"]["value"] %>"><%= signup_title %></a>
-
+<!--          <a class="hero__signup-button" href="<%#= s["signup_path"]["value"] %>"><%#= signup_title %></a>-->
+          <a class="landing-signup-button" href="<%= s["signup_path"]["value"] %>"><%= signup_title %></a>
         <% end %>
       <% end %>
     </div>
