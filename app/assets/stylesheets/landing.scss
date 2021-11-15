@@ -571,9 +571,6 @@ header {
 }
 
 @media screen and (max-width: 1300px) {
-  .grid-container {
-    grid-template-columns: repeat(4, 1fr);
-  }
   #header, #landing-header {
     .hero-container {
       padding: 0;
