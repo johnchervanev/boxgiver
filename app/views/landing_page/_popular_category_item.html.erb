@@ -1,20 +1,10 @@
-<div class="col-lg-3 col-md-6 col-sm-12">
-  <a class="list-item-card text-decoration-none" href="/s?category=<%= category.url %>">
-    <div class="list-item-card-img" style="background-image: url('<%= category.image ? category.image : asset_path('no_image_available.jpg') %>')"></div>
-    <div class="list-item-card-body">
-      <p class="list-item-card-title"><%= category.display_name(locale) %></p>
-    </div>
-    <div class="list-item-card-footer">
-      <p class="list-item-card-price">74,95 $</p>
-      <p class="list-item-card-pre-price"><del>121,00 $</del></p>
-    </div>
-    <div class="list-item-card-ratings pt-3">
-      <span class="rating-star"><i class="fas fa-star"></i></span>
-      <span class="rating-star"><i class="fas fa-star"></i></span>
-      <span class="rating-star"><i class="fas fa-star"></i></span>
-      <span class="rating-star"><i class="fas fa-star"></i></span>
-      <span class="rating-star"><i class="fas fa-star"></i></span>
-      <span class="rating-count">(45)</span>
+<div class="col-lg-3 col-md-4 col-sm-6">
+  <a class="text-decoration-none" href="/s?category=<%= category.url %>">
+    <div class="popular-item-image" style="background-image: url('<%= category.image ? category.image : asset_path('no_image_available.jpg') %>')"></div>
+    <div class="category-name">
+      <b>
+        <%= category.display_name(locale) %>
+      </b>
     </div>
   </a>
 </div>

@@ -1,0 +1,68 @@
+<div class='col-lg-3 col-md-4 col-sm-6'>
+  <div class='listing-item'>
+    <div class="listing-author-wrapper clearfix">
+      <div class="avatar">
+        <%= link_to(person_path(username: listing.author.username)) do %>
+          <%= image_tag(listing.avatar_thumb, style: 'width: 35px; border-radius: 50px') %>
+        <% end %>
+      </div>
+
+      <div class="name-posting clearfix">
+        <a title="johncher" class="author-link" href="/en/johnc">
+          johncher
+        </a>
+        <div class="posting-time">
+          3 days ago.
+        </div>
+      </div>
+
+    </div>
+    <div class='listing-image'>
+      <div class='listing-image-wrapper'>
+        <%= link_to listing_path(:en, listing.slug) do %>
+          <div class='listing-image-wrapper'>
+            <% if listing.sponsored %>
+              <div class="featured-badge">
+              <span>
+                <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M10.3043 0.906399C10.5695 1.04248 10.7121 1.33801 10.6537 1.63026L9.76483 6.07435L13.234 7.3753C13.4424 7.45345 13.5981 7.63047 13.649 7.84717C13.6998 8.06388 13.6392 8.29167 13.4873 8.45439L6.4873 15.9544C6.28395 16.1723 5.96069 16.2287 5.69553 16.0926C5.43038 15.9566 5.28776 15.661 5.34621 15.3688L6.23503 10.9247L2.76585 9.62373C2.55743 9.54558 2.40177 9.36856 2.3509 9.15186C2.30004 8.93515 2.36068 8.70736 2.51256 8.54464L9.51256 1.04464C9.71591 0.826759 10.0392 0.770319 10.3043 0.906399ZM4.16768 8.72542L7.23401 9.8753C7.54005 9.99006 7.71775 10.3098 7.65365 10.6303L7.11392 13.3289L11.8322 8.27361L8.76585 7.12373C8.45981 7.00897 8.28211 6.68927 8.34621 6.36877L8.88594 3.67014L4.16768 8.72542Z" fill="black"/>
+                </svg>
+              </span>
+                <span>Featured</span>
+              </div>
+            <% end %>
+            <%= image_tag(listing.get_first_listing_image, alt: listing.title) %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <div class="listing-details">
+      <p class="title">
+        <%= link_to listing.title, listing_path(:en, listing.slug) %>
+      </p>
+      <div class="price">
+        Price:
+        <b>
+          <%= listing.price.nil? ? "Free " : "$#{listing.price}" %>
+        </b>
+      </div>
+
+      <div class='row'>
+        <div class="col-lg-12">
+          <div class='row'>
+            <div class='col-6'>
+              <div class="user-reaction">
+                <%= love_button(listing, @current_user) %>
+              </div>
+            </div>
+            <div class='col-6'>
+              <div class='listing-views'>
+                <i class='fa fa-eye'></i> <%= listing.times_viewed %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

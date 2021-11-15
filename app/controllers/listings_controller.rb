@@ -15,6 +15,8 @@ class ListingsController < ApplicationController
   before_action :save_current_path, :only => :show
   before_action :ensure_authorized_to_view, :only => [:show, :follow, :unfollow, :love, :remove_from_love, :report]
 
+  skip_before_action :verify_authenticity_token, :only => [:love, :remove_from_love]
+
   before_action :only => [:close] do |controller|
     controller.ensure_current_user_is_listing_author t("layouts.notifications.only_listing_author_can_close_a_listing")
   end
@@ -111,22 +113,20 @@ class ListingsController < ApplicationController
     make_listing_presenter
   end
 
-
-
   def sponsored
     begin
-     payment=  SponsoredPayment.add_pay(params[:stripeToken],params[:stripeEmail],params[:stripePhone],params[:listing_id] )
-     if payment.present?
-       flash[:success] = 'success'
-       redirect_to listing_path(params[:listing_id])
-     else
-       flash[:alert]= 'Try again'
-       redirect_to request.referrer
-     end
+      payment = SponsoredPayment.add_pay(params[:stripeToken], params[:stripeEmail], params[:stripePhone], params[:listing_id])
+      if payment.present?
+        flash[:success] = 'success'
+        redirect_to listing_path(params[:listing_id])
+      else
+        flash[:alert] = 'Try again'
+        redirect_to request.referrer
+      end
 
     rescue Stripe::CardError => e
       flash[:error] = e.message
-     redirect_to listing_path(params[:listing_id])
+      redirect_to listing_path(params[:listing_id])
     end
   end
 

@@ -4,3 +4,5 @@ love_btn.addClass('active');
 <% else %>
 love_btn.removeClass('active');
 <% end %>
+
+love_btn.find('span').text(" <%= Listing.love_count(@listing.id) %>")

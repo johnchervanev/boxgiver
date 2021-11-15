@@ -31,8 +31,8 @@
   <!-- End Google Tag Manager (noscript) -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
-
+  <!--  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -65,17 +65,12 @@
                     <% s = section["section"] %>
                     <% section_id = "#{s['kind']}__#{s['id']}__#{index}" %>
                     <% case s["kind"] %>
-                    <% when "hero" %>
-                        <%= render partial: "hero", locals: { section_id: section_id, s: s, community_context: community_context } %>
+                  <% when "hero" %>
+                      <%= render partial: "hero", locals: { section_id: section_id, s: s, community_context: community_context } %>
                     <% end %>
                   <% end %>
                 </div>
               </div>
-              <!--          <div class="col-md-5 header-image-wrapper" style="padding: 0">-->
-              <!--            <div class="header-image" style="background-image: url('<%#= community_context[:hero_photo] %>')">-->
-
-              <!--            </div>-->
-              <!--          </div>-->
             </div>
           </div>
         </div>
