@@ -389,10 +389,10 @@ header {
 
   .feature-item {
     display: flex;
-    padding-left: 20px;
-    padding-left: 20px;
+    padding-left: 25px;
+    padding-right: 25px;
     padding-top: 64px;
-    padding-bottom: 64px;
+    padding-bottom: 40px;
     align-items: center;
 
     .icon {
@@ -887,7 +887,7 @@ header {
     .feature-item {
       flex-direction: column !important;
       text-align: center;
-      padding: 20px !important;
+      padding: 25px !important;
 
       .icon {
         padding: 0 0 16px 0 !important;;
