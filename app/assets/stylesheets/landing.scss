@@ -389,7 +389,8 @@ header {
 
   .feature-item {
     display: flex;
-    padding-left: 32px;
+    padding-left: 20px;
+    padding-left: 20px;
     padding-top: 64px;
     padding-bottom: 64px;
     align-items: center;
@@ -885,8 +886,8 @@ header {
   #feature-list {
     .feature-item {
       flex-direction: column !important;
-      padding-left: 0 !important;
       text-align: center;
+      padding: 20px !important;
 
       .icon {
         padding: 0 0 16px 0 !important;;
@@ -908,6 +909,7 @@ header {
   }
 
   #recycle-process {
+    text-align: center !important;
     #learn-more {
       margin-top: 60px !important;
     }

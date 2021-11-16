@@ -43,6 +43,10 @@ module HomepageHelper
     end
   end
 
+  def thousands_formatter(value)
+    value > 1000 ? "#{value / 1000}k" : value
+  end
+
   def format_distance(distance)
     precision = (distance < 1) ? 1 : 2
     (distance < 0.1) ? "< #{number_with_delimiter(0.1, locale: locale)}" : number_with_precision(distance, precision: precision, significant: true, locale: locale)
