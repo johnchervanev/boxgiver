@@ -2,7 +2,7 @@
   <div class="container">
     <div class="d-flex justify-content-between">
       <h2 class="section-header dynamic-item-header">Most Viewed Listings</h2>
-      <a class="view-all-button" href="/s">View All</a>
+      <a class="view-all-button-top" href="/s">View All</a>
     </div>
     <div class="landing-listings">
       <div class='col-lg-12 p0'>
@@ -11,6 +11,7 @@
             <%= render "landing_listing", listing: listing %>
           <% end %>
         </div>
+        <a class="view-all-button-bottom d-none" href="/s">View All</a>
       </div>
     </div>
   </div>
