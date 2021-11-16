@@ -41,6 +41,7 @@
   <%#= render 'layouts/tawk_chat_bot' %>
 </head>
 <body>
+<a id="back-to-top-button"></a>
 <header class="header pre-loading" id='landing-header'>
   <div class="topbar-placeholder">
     <div class="container" id="topbar-placeholder">
@@ -282,6 +283,21 @@
             element.classList.remove("pre-loading");
         }, 300);
     })
+    var btn = $('#back-to-top-button');
+
+    $(window).scroll(function() {
+        if ($(window).scrollTop() > 300) {
+            btn.addClass('show');
+        } else {
+            btn.removeClass('show');
+        }
+    });
+
+    btn.on('click', function(e) {
+        e.preventDefault();
+        $('html, body').animate({scrollTop:0}, '300');
+    });
+
 </script>
 <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
 <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
