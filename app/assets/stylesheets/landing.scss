@@ -823,9 +823,12 @@ header {
 }
 
 @media screen and (max-width: 767px) {
-  #header, #landing-header {
-    background-image: url('header_bg_only.png');
-    background-size: 100% 100%;
+   #landing-header {
+    //background-image: url('header_bg_only.png');
+    background-image: url('mobile_bg.png');
+    background-size: cover;
+     background-repeat: no-repeat;
+     padding-bottom: 50px;
 
     .hero-container {
       max-width: 500px;
