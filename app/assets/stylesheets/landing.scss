@@ -483,11 +483,11 @@ header {
   }
   .get-start-link {
     margin-top: 40px;
-    color: #00725F;
+    color: #ffffff;
     display: inline-block;
-    font-size: 18px;
-    font-weight: 600;
     margin-left: 100px;
+    width: 200px;
+    text-align: center;
   }
 }
 
@@ -922,6 +922,7 @@ header {
     .get-started {
       text-align: center !important;
       .get-start-link {
+        width: 200px !important;
         margin: auto !important;
         margin-top: 40px !important;
       }
