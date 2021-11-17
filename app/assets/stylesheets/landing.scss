@@ -481,13 +481,13 @@ header {
       }
     }
   }
+
   .get-start-link {
-    margin-top: 40px;
-    color: #00725F;
     display: inline-block;
     font-size: 18px;
     font-weight: 600;
     margin-left: 100px;
+    height: auto;
   }
 }
 
@@ -518,6 +518,7 @@ header {
       margin: auto;
     }
   }
+
   .subscribe-section {
     margin: auto;
     margin-top: 100px;
@@ -694,6 +695,7 @@ header {
   color: #6c767a;
   line-height: 1.9;
 }
+
 @media (min-width: 500px) {
   .content {
     width: 43%;
@@ -703,11 +705,13 @@ header {
     right: 10px !important;
   }
 }
+
 .content h1 {
   margin-bottom: -10px;
   color: #03a9f4;
   line-height: 1.5;
 }
+
 .content h3 {
   font-style: italic;
   color: #96a2a7;
@@ -798,10 +802,10 @@ header {
     grid-template-columns: repeat(2, 1fr);
   }
 
-  #header, #landing-header {
+  #header {
     .hero-container {
       max-width: 500px;
-      padding: 60px 0 0 0;
+      padding: 60px 0 70px 0;
 
       .hero-text {
         font-size: 28px;
@@ -823,12 +827,12 @@ header {
 }
 
 @media screen and (max-width: 767px) {
-   #landing-header {
-    //background-image: url('header_bg_only.png');
+  #landing-header {
     background-image: url('mobile_bg.png');
     background-size: cover;
-     background-repeat: no-repeat;
-     padding-bottom: 50px;
+    background-repeat: no-repeat;
+    padding-bottom: 405px;
+    z-index: -1;
 
     .hero-container {
       max-width: 500px;
@@ -844,6 +848,9 @@ header {
         font-size: 16px;
       }
     }
+  }
+  .landing-body {
+    margin-top: -280px;
   }
 }
 
@@ -880,7 +887,7 @@ header {
   }
   .view-all-button-bottom, #contact-us-top {
     display: block !important;
-    margin: auto !important;
+    margin: 15px auto auto auto !important;
   }
   #footer-logo, #footer-sologan {
     text-align: center !important;
@@ -890,7 +897,7 @@ header {
     .feature-item {
       flex-direction: column !important;
       text-align: center;
-      padding: 25px !important;
+      padding: 25px 0 !important;
 
       .icon {
         padding: 0 0 16px 0 !important;;
@@ -913,6 +920,7 @@ header {
 
   #recycle-process {
     text-align: center !important;
+
     #learn-more {
       margin-top: 60px !important;
     }
@@ -921,12 +929,28 @@ header {
   #how-boxgiver-works {
     .get-started {
       text-align: center !important;
+
       .get-start-link {
         margin: auto !important;
         margin-top: 40px !important;
       }
     }
 
+  }
+}
+
+@media (max-width: 500px) {
+  .landing-listings {
+    .listing-item {
+      .listing-image-wrapper {
+        height: 130px !important;
+      }
+    }
+  }
+  .popular-category-list {
+    .popular-item-image {
+      height: 150px;
+    }
   }
 }
 
