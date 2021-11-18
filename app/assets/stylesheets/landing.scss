@@ -345,7 +345,7 @@ header {
     margin: auto;
     padding: 120px 0;
 
-    .hero-text {
+    .hero-text, .hero-text-mobile {
       font-weight: 700;
       font-size: 42px;
       line-height: 68px;
@@ -874,6 +874,7 @@ header {
     width: max-content !important;
   }
   .dynamic-item-header {
+    text-align: center;
     width: 100%;
   }
   .section-header {
@@ -881,18 +882,55 @@ header {
   }
   .grid-container {
     margin-top: 20px;
-    grid-template-columns: repeat(1, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     row-gap: 1.5em;
+
+    .grid-item {
+      padding: 9px;
+    }
   }
-  .view-all-button-top, #contact-us-bottom {
+
+  .view-all-button-top, #contact-us-bottom, #features-top, .hero-text {
     display: none !important;
   }
-  .view-all-button-bottom, #contact-us-top {
+
+  .view-all-button-bottom, #contact-us-top, #features-bottom, .hero-text-mobile {
     display: block !important;
-    margin: 15px auto auto auto !important;
+    margin: auto !important;
   }
+
+  .hero-text-mobile {
+    font-size: 32px !important;
+    line-height: 130% !important;
+  }
+  .hero-description {
+     margin-top: 16px !important;
+     margin-bottom: 45px !important;
+  }
+
+  #header {
+    margin-top: 130px !important;
+  }
+
+  .footer-menu-header {
+    font-size: 15px !important;
+  }
+
+  .link-list {
+    .link-item {
+      .link {
+        font-size: 15px !important;
+      }
+    }
+  }
+
   #footer-logo, #footer-sologan {
     text-align: center !important;
+  }
+
+  .social-link {
+    display: inline-block !important;
+    margin-top: 12px !important;
   }
 
   #feature-list {
@@ -957,14 +995,27 @@ header {
 }
 
 @media (max-width: 420px) {
+  .hero-container {
+    margin-top: 90px !important;
+  }
+
+  .custom-search {
+    padding: 4px 4px 4px 0 !important;
+  }
   .search-section .custom-search-input {
     padding: 7px 3px 7px 12px !important;
     width: calc(100% - 130px) !important;
   }
   .search-section .custom-search-botton {
     margin: auto !important;
-    height: 50px;
+    height: 40px !important;
     text-align: center;
+    padding: 0 !important;
+
+    .icon {
+      width: 49px !important;
+      height: 35px !important;
+    }
 
     #hero__content_section {
       padding: 0 !important;

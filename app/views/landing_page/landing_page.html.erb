@@ -53,6 +53,7 @@
       <div class="hero-container">
         <div class="hero">
           <h1 class="hero-text">Find & reuse unwanted packaging</h1>
+          <h2 class="hero-text-mobile d-none">Find & reuse<br> unwanted packaging</h2>
           <p class="hero-description">
             The largest and most trusted marketplace to buy, sell, or donate packaging materials locally.
           </p>
@@ -95,8 +96,13 @@
 <!--</div>-->
 <div class="landing-body">
   <%#= render "landing_page/header" %>
-  <%= render "landing_page/features" %>
+  <div id="features-top">
+    <%= render "landing_page/features" %>
+  </div>
   <%= render "landing_page/popular_categories" %>
+  <div id="features-bottom" class="d-none">
+    <%= render "landing_page/features" %>
+  </div>
   <%= render "landing_page/new_listings" %>
   <%= render "landing_page/featured_listings" %>
   <%= render "landing_page/recycle_process" %>
