@@ -2,8 +2,7 @@
 
 lock "3.14.1"
 
-set :application, "boxgiver"
-set :repo_url, "git@github.com:Freemovingboxes/boxgiver.git"
+
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp

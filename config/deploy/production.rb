@@ -2,6 +2,9 @@
 # ======================
 # Defines a single server with a list of roles and multiple properties.
 # You can define all roles on a single server, or split them:
+set :application, "boxgiver"
+set :repo_url, "git@github.com:Freemovingboxes/boxgiver.git"
+
 
 set :branch, 'sponsored'
 set :deploy_to, "/home/sharetribeisprettygood/apps/boxgiver"
