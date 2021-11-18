@@ -31,8 +31,8 @@
   <!-- End Google Tag Manager (noscript) -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
-
+  <!--  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -41,36 +41,45 @@
   <%#= render 'layouts/tawk_chat_bot' %>
 </head>
 <body>
-<!--<header class="header pre-loading" id='landing-header'>-->
+<a id="back-to-top-button" data-toggle="tooltip" data-placement="bottom" title="Back to top"></a>
+<header class="header pre-loading" id='landing-header'>
+  <div class="topbar-placeholder">
+    <div class="container" id="topbar-placeholder">
 
-<!--  <div class='header-container'>-->
-<!--    <div class='row'>-->
-<!--      <div class="col-lg-12">-->
-<!--        <div class="row">-->
-<!--          <div class="col-md-7" style="padding: 0">-->
-<!--            <div class="header-image">-->
-<%# sections.each_with_index do |section, index| %>
-
-<%# s = section["section"] %>
-<%# section_id = "#{s['kind']}__#{s['id']}__#{index}" %>
-<%# case s["kind"] %>
-<%# when "hero" %>
-<%#= render partial: "hero", locals: { section_id: section_id, s: s, community_context: community_context } %>
-<%# end %>
-
-<%# end %>
-<!--            </div>-->
-<!--          </div>-->
-<!--          <div class="col-md-5 header-image-wrapper" style="padding: 0">-->
-<!--            <div class="header-image" style="background-image: url('<%#= community_context[:hero_photo] %>')">-->
-
-<!--            </div>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--</header>-->
+    </div>
+  </div>
+  <div class='header-container'>
+    <div id="header">
+      <div class="hero-container">
+        <div class="hero">
+          <h1 class="hero-text">Find & reuse unwanted packaging</h1>
+          <h2 class="hero-text-mobile d-none">Find & reuse<br> unwanted packaging</h2>
+          <p class="hero-description">
+            The largest and most trusted marketplace to buy, sell, or donate packaging materials locally.
+          </p>
+        </div>
+        <div class='row'>
+          <div class="col-lg-12">
+            <div class="row">
+              <div class="col-md-12" style="padding: 0">
+                <div class="header-image">
+                  <% sections.each_with_index do |section, index| %>
+                    <% s = section["section"] %>
+                    <% section_id = "#{s['kind']}__#{s['id']}__#{index}" %>
+                    <% case s["kind"] %>
+                  <% when "hero" %>
+                      <%= render partial: "hero", locals: { section_id: section_id, s: s, community_context: community_context } %>
+                    <% end %>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
 <% if sections.any? { |s| s["section"]["kind"] == "hero" && (s["section"]["variation"]["value"] == "location_search" || s["section"]["variation"]["value"] == "keyword_and_location_search") } %>
   <% key_param = community_context.has_key?(:google_maps_key) && community_context[:google_maps_key] ? "&key=#{community_context[:google_maps_key]}" : "" %>
   <script src="//maps.googleapis.com/maps/api/js?libraries=places<%= key_param %>"></script>
@@ -86,9 +95,14 @@
 <!--  </div>-->
 <!--</div>-->
 <div class="landing-body">
-  <%= render "landing_page/header" %>
-  <%= render "landing_page/features" %>
+  <%#= render "landing_page/header" %>
+  <div id="features-top">
+    <%= render "landing_page/features" %>
+  </div>
   <%= render "landing_page/popular_categories" %>
+  <div id="features-bottom" class="d-none">
+    <%= render "landing_page/features" %>
+  </div>
   <%= render "landing_page/new_listings" %>
   <%= render "landing_page/featured_listings" %>
   <%= render "landing_page/recycle_process" %>
@@ -275,6 +289,21 @@
             element.classList.remove("pre-loading");
         }, 300);
     })
+    var btn = $('#back-to-top-button');
+
+    $(window).scroll(function() {
+        if ($(window).scrollTop() > 300) {
+            btn.addClass('show');
+        } else {
+            btn.removeClass('show');
+        }
+    });
+
+    btn.on('click', function(e) {
+        e.preventDefault();
+        $('html, body').animate({scrollTop:0}, '300');
+    });
+
 </script>
 <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
 <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
