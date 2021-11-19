@@ -585,7 +585,9 @@ header {
   background-color: #00110E;
   text-align: start;
   font-family: 'Work Sans', sans-serif;
-
+  .extra-padding {
+    padding-left: 60px;
+  }
   .footer-menu-header {
     text-align: start;
     color: #00A589;
@@ -869,6 +871,9 @@ header {
 }
 
 @media screen and (max-width: 600px) {
+  .extra-padding {
+    padding-left: 9px !important;
+  }
   .view-all-button {
     padding: 8px !important;
     width: max-content !important;
@@ -997,6 +1002,10 @@ header {
 @media (max-width: 420px) {
   .hero-container {
     margin-top: 90px !important;
+  }
+
+  .extra-padding {
+    padding-left: 9px !important;
   }
 
   .custom-search {
