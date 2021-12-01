@@ -621,6 +621,7 @@ Rails.application.routes.draw do
     end
     get :invite, to: 'invitations#new'
     get :contact, to: 'feedbacks#new'
+    post '/subscribe', to: 'subscriptions#subscribe'
     resources :user_feedbacks, :controller => :feedbacks
     resources :homepage do
       collection do
