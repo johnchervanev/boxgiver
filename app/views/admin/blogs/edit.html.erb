@@ -1,0 +1,12 @@
+<% content_for :title_header do %>
+  <h1>
+    <%= t("layouts.admin.admin") %>
+    <%= "-" %>
+    <%= t("admin.blogs.edit.edit_blog") %>
+  </h1>
+<% end %>
+<%= render :partial => "admin/left_hand_navigation", :locals => { :links => admin_links_for(@current_community) } %>
+
+<div class="left-navi-section">
+  <%= render "form", blog: @blog %>
+</div>

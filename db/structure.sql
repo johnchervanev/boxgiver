@@ -101,6 +101,28 @@ CREATE TABLE `billing_agreements` (
   KEY `index_billing_agreements_on_paypal_account_id` (`paypal_account_id`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `blogs`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `blogs` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `community_id` int(11) DEFAULT NULL,
+  `author_id` varchar(255) DEFAULT NULL,
+  `title` varchar(255) DEFAULT NULL,
+  `content` text,
+  `image` varchar(255) DEFAULT NULL,
+  `slug` varchar(255) DEFAULT NULL,
+  `published` tinyint(1) DEFAULT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  `image_file_name` varchar(255) DEFAULT NULL,
+  `image_content_type` varchar(255) DEFAULT NULL,
+  `image_file_size` int(11) DEFAULT NULL,
+  `image_updated_at` datetime DEFAULT NULL,
+  `minutes` decimal(10,0) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `bookings`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
@@ -680,6 +702,22 @@ CREATE TABLE `follower_relationships` (
   KEY `index_follower_relationships_on_person_id` (`person_id`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `friendly_id_slugs`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `friendly_id_slugs` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `slug` varchar(255) NOT NULL,
+  `sluggable_id` int(11) NOT NULL,
+  `sluggable_type` varchar(50) DEFAULT NULL,
+  `scope` varchar(255) DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope` (`slug`(70),`sluggable_type`,`scope`(70)),
+  KEY `index_friendly_id_slugs_on_sluggable_type_and_sluggable_id` (`sluggable_type`,`sluggable_id`),
+  KEY `index_friendly_id_slugs_on_slug_and_sluggable_type` (`slug`(140),`sluggable_type`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `invitation_unsubscribes`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
@@ -926,6 +964,7 @@ CREATE TABLE `listings` (
   `approval_count` int(11) DEFAULT '0',
   `sponsored` tinyint(1) DEFAULT '0',
   `sponsored_at` timestamp NULL DEFAULT NULL,
+  `is_featured` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `index_listings_on_uuid` (`uuid`),
   KEY `index_listings_on_new_category_id` (`category_id`) USING BTREE,
@@ -1102,6 +1141,19 @@ CREATE TABLE `messages` (
   PRIMARY KEY (`id`),
   KEY `index_messages_on_conversation_id` (`conversation_id`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `newsletter_subscriptions`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `newsletter_subscriptions` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `email` varchar(255) DEFAULT NULL,
+  `token` varchar(255) DEFAULT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  `last_community_updates_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `order_permissions`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -2534,6 +2586,16 @@ INSERT INTO `schema_migrations` (version) VALUES
 ('20210507052923'),
 ('20210521101611'),
 ('20210624142917'),
-('20210624143601');
+('20210624143601'),
+('20211130110725'),
+('20211130111113'),
+('20211201053006'),
+('20211201071228'),
+('20211201094515'),
+('20211201101835'),
+('20211201120017'),
+('20211202052136'),
+('20211202055159'),
+('20211202060304');
 
 

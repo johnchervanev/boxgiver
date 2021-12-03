@@ -520,6 +520,16 @@ module ApplicationHelper
     links += [
       {
         :topic => :configure,
+        :text => t("admin.blogs.index.blog_post"),
+        :icon_class => icon_class("blog"),
+        :path => admin_blogs_path,
+        :name => "blogs"
+      }
+    ]
+
+    links += [
+      {
+        :topic => :configure,
         :text => t("admin.categories.index.listing_categories"),
         :icon_class => icon_class("list"),
         :path => admin_categories_path,

@@ -1,0 +1,26 @@
+<% content_for :title_header do %>
+  <h1>
+    Blog Details
+  </h1>
+<% end %>
+
+<div id="blog-details">
+  <div class="blog-title">
+    <h1><%= @blog.title %></h1>
+  </div>
+  <div class="blog-author">
+    <div class="author-avatar">
+      <%= image_tag(@blog.avatar_thumb) %>
+    </div>
+    <div class="author-name">
+      <%= @blog.author.username %>
+      <div class="blog-info">
+        <%= @blog.minutes%> min read &bull; <%= @blog.created_at.strftime("%B #{@blog.created_at.day.ordinalize}, %Y") %>
+      </div>
+    </div>
+  </div>
+  <div class="blog-image" style=" background-image: url('<%= image_path(@blog.image) %>');"></div>
+  <div class="blog-content">
+    <%= @blog.content.html_safe %>
+  </div>
+</div>

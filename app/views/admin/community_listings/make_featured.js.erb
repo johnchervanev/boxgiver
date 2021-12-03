@@ -1,0 +1,2 @@
+alert("<%= @listing.is_featured ? "Make featured listing successfully!" : "Removed listing from featured!" %>");
+$("#listing-f-<%= @listing.id %>").text("<%= @listing.is_featured ? 'Remove Featured' : 'Make Featured' %>");

@@ -4,11 +4,12 @@
     <p class="subscribe-text">Sign up to receive updates and exclusive information from BoxGiver. Take action against
       packaging waste today!</p>
     <div class="subscribe-section">
-      <div class="custom-subscribe">
-        <input type="text" class="custom-subscribe-input" placeholder="Enter your email">
-        <button class="custom-subscribe-botton" type="submit">
-          <span class="text">Subscribe</span>
-          <span class="icon">
+      <%= form_tag(subscribe_newsletter_subscriptions_path, remote: true, method: 'post') do %>
+        <div class="custom-subscribe">
+          <input type="text" name="email" class="custom-subscribe-input" placeholder="Enter your email" required>
+          <button class="custom-subscribe-botton" type="submit">
+            <span class="text">Subscribe</span>
+            <span class="icon">
                 <svg width="57" height="56" viewBox="0 0 57 56" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <g filter="url(#filter0_d_1253:34)">
                     <rect x="12.2461" y="2" width="32" height="32" rx="16" fill="white"/>
@@ -28,8 +29,9 @@
                   </defs>
                 </svg>
               </span>
-        </button>
-      </div>
+          </button>
+        </div>
+      <% end %>
     </div>
 
   </div>

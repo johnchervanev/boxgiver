@@ -24,4 +24,6 @@
   %td
     = link_to edit_listing_path(listing) do
       = icon_tag("edit")
+    = link_to make_featured_admin_community_listing_path(presenter.community.id, listing.id), id: "listing-f-#{listing.id}", remote: true do
+      = listing.is_featured ? "| Remove Featured" : "| Make Featured"
 

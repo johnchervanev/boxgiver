@@ -102,4 +102,13 @@ module MailUtils
       protocol: APP_CONFIG.always_use_ssl.to_s == "true" ? "https://" : "http://"
     }
   end
+
+  def build_default_locale_url_params(community, ref = 'email')
+    {
+      host: community.full_domain.to_s,
+      locale: community.default_locale,
+      ref: ref,
+      protocol: APP_CONFIG.always_use_ssl.to_s == "true" ? "https://" : "http://"
+    }
+  end
 end

@@ -20,7 +20,7 @@
     <div class='listing-image'>
       <%= link_to listing_path(:en, listing.slug) do %>
         <div class='listing-image-wrapper' style="background-image:url('<%= listing.get_first_listing_image %>')">
-          <% if listing.sponsored %>
+          <% if listing.is_featured %>
             <div class="featured-badge">
               <span>
                 <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -30,7 +30,6 @@
               <span>Featured</span>
             </div>
           <% end %>
-          <%#= image_tag(listing.get_first_listing_image, alt: listing.title) %>
         </div>
       <% end %>
     </div>

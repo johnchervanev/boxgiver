@@ -1,0 +1,80 @@
+<%= form_for [:admin, @blog] do |form| %>
+  <div class="form-group">
+    <%= form.label :title %><br>
+    <%= form.text_field :title %>
+    <% @blog.errors.full_messages_for(:title).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :content %><br>
+    <%= form.text_area :content, :class => "tinymce" %><br>
+    <% @blog.errors.full_messages_for(:content).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :image %><br>
+    <%= form.file_field :image %><br>
+    <% @blog.errors.full_messages_for(:image).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :minutes %><br>
+    <%= form.number_field :minutes %><br>
+    <% @blog.errors.full_messages_for(:minutes).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+  <div class="clearfix" id="category-listing-shapes-container">
+      <%= form.label :published %>
+    <div class="custom-field-categories-checkbox-container">
+      <%= form.radio_button :published , true, :checked => true, class: "category-listing-shape-checkbox"%>
+      <%= form.label :published, "Yes", :value => "true", class: "category-listing-shape-checkbox-label"%>
+    </div>
+    <div class="custom-field-categories-checkbox-container">
+      <%= form.radio_button :published, false, class: "category-listing-shape-checkbox"%>
+      <%= form.label :published, "No", :value => "false", class: "category-listing-shape-checkbox-label"%>
+    </div>
+      <% @blog.errors.full_messages_for(:published).each do |message| %>
+        <div><%= message %></div>
+      <% end %>
+  </div>
+
+  <div class="add-category-buttons">
+    <div class="inline-button-container">
+      <%= form.button %>
+    </div>
+    <div class="inline-button-container">
+      <a class="cancel-button" href="<%= admin_blogs_path %>">
+        <div class="content">
+          Cancel
+        </div>
+      </a>
+    </div>
+  </div>
+<% end %>
+
+<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+<script>
+    tinymce.init({
+        selector: '.tinymce',
+        height: 500,
+        menubar: false,
+        plugins: [
+            'advlist autolink lists link image charmap print preview anchor',
+            'searchreplace visualblocks code fullscreen',
+            'insertdatetime media table paste code help wordcount'
+        ],
+        toolbar: 'undo redo | formatselect | ' +
+            ' bold italic backcolor link image | alignleft aligncenter ' +
+            ' alignright alignjustify | bullist numlist outdent indent | ' +
+            ' removeformat | help'
+    });
+</script>
+

@@ -1,0 +1,45 @@
+<div id='blog-posts' class='section'>
+  <div class="container">
+    <div class="blog-posts-section-header">
+      <h2 class='section-header dynamic-item-header'>Latest blog posts and news</h2>
+      <p> know about our clients, we are a woldwide corporate brand </p>
+    </div>
+    <div class="landing-listings">
+      <div class='col-lg-12 p0'>
+        <div class='row'>
+          <% @blogs.each do |blog| %>
+            <div class='col-md-4 col-sm-6'>
+              <div class='blog-post-item'>
+                <div class='header-image' style="background-image: url('<%= image_path(blog.image) %>')">
+
+                </div>
+                <div class='details'>
+                  <h2> <%= blog.title.truncate(48) %> </h2>
+                  <p>
+                    <%= blog.content.truncate(98).html_safe %>
+                  </p>
+                  <a href='/blogs/<%= blog.slug %>' class='read-more'> Read more... </a>
+                </div>
+                <div class='author'>
+                  <div class='author-avatar'>
+                    <%= image_tag(blog.avatar_thumb) %>
+                  </div>
+                  <div class='author-bio'>
+                    <div class='name'>
+                      <%= blog.author.username %>
+                    </div>
+                    <div class='ext-info clearfix'>
+                      <span class='float-left'> <%= blog.minutes%> min read </span>
+                      <span class='float-right'> <%= blog.created_at.strftime("%B #{blog.created_at.day.ordinalize}, %Y") %> </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+      <a class="view-all-button-bottom d-none" href="/s">View All</a>
+    </div>
+  </div>
+</div>

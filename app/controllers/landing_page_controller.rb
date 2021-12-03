@@ -53,10 +53,11 @@ class LandingPageController < ActionController::Metal
     script_digest = Digest::MD5.hexdigest(custom_head_scripts.to_s)
 
     @categories = @current_community.categories.where("parent_id IS NULL")
-    @popular_categories = @current_community.categories.where("parent_id IS NULL")
+    @popular_categories = @current_community.categories.where("parent_id IS NULL").order('created_at asc').limit(8)
     @most_viewed_listings = @current_community.listings.where("deleted = ? and valid_until >= ?", 0, Date.today).order('times_viewed DESC').limit(8)
     @new_listings = @current_community.listings.where("created_at BETWEEN ? AND ? AND deleted = ? AND valid_until >= ?", (Date.today - 7.days), Date.today, 0, Date.today).order(created_at: :desc).limit(8)
-    @featured_listings = @current_community.listings.where("sponsored = ? AND deleted = ? AND valid_until >= ?", 1, 0, Date.today).limit(8)
+    @featured_listings = @current_community.listings.where("is_featured = ? AND deleted = ? AND valid_until >= ?", 1, 0, Date.today).limit(8)
+    @blogs = Blog.where(published: true)
 
     begin
       content = nil

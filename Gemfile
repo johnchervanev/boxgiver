@@ -3,7 +3,6 @@ source 'https://rubygems.org'
 ruby '2.6.5'
 
 gem 'rails', '5.2.3'
-
 gem 'coffee-rails', '~> 4.2.2'
 gem 'uglifier', '~> 3.2.0'
 
@@ -26,7 +25,7 @@ gem 'rest-client', '~> 2.0.2'
 
 gem 'paperclip', '~> 6.0.0'
 gem 'delayed_paperclip', '~> 3.0.1'
-
+gem 'friendly_id', '~> 5.4.0'
 # Active Storage
 gem 'image_processing', '~> 1.9.3'
 gem 'mini_magick', '~> 4.9.5'
@@ -77,7 +76,7 @@ gem "css_parser", '~> 1.7.0'
 gem 'stringex', '~> 2.7.1'
 gem 'paypal-sdk-permissions', '~> 1.96.4'
 gem 'paypal-sdk-merchant', '~> 1.116.0'
-gem 'airbrake', '~> 9.1.0'
+# gem 'airbrake', '~> 9.1.0'
 gem 'stripe', '~> 4.9.0'
 
 gem 'lograge', '~> 0.10.0'
@@ -190,3 +189,4 @@ gem "select2-rails"
 gem "cocoon"
 gem "fast-polylines"
 gem 'daemons'
+gem 'whenever', require: false

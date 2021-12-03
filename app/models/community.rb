@@ -82,8 +82,6 @@
 #  default_min_days_between_community_updates :integer          default(7)
 #  listing_location_required                  :boolean          default(FALSE)
 #  custom_head_script                         :text(65535)
-#  custom_body_script                         :text(65535)
-#  custom_css_script                          :text(65535)
 #  follow_in_use                              :boolean          default(TRUE), not null
 #  logo_processing                            :boolean
 #  wide_logo_processing                       :boolean
@@ -110,13 +108,11 @@
 #  email_admins_about_new_transactions        :boolean          default(FALSE)
 #  show_location                              :boolean          default(TRUE)
 #  fuzzy_location                             :boolean          default(FALSE)
-#  recaptcha_site_key                         :string(255)
-#  recaptcha_secret_key                       :string(255)
+#  twitter_announcement_enabled               :boolean          default(TRUE)
 #  earning_potential_image_file_name          :string(255)
 #  earning_potential_image_content_type       :string(255)
 #  earning_potential_image_file_size          :integer
 #  earning_potential_image_updated_at         :datetime
-#  twitter_announcement_enabled               :boolean          default(TRUE)
 #  earning_potential_image_processing         :boolean
 #  hero_photo                                 :string(255)
 #  hero_photo_file_name                       :string(255)
@@ -629,6 +625,34 @@ class Community < ApplicationRecord
       .concat(new_listings)
       .sort_by { |listing| listing.updates_email_at }
       .reverse
+  end
+
+  def get_new_listings_to_update_email_for_subscription(subscription)
+    latest = subscription.last_community_updates_at || (Date.today - 7.days)
+    p latest
+    selected_listings = listings
+                          .where("created_at > ?", latest)
+                          .order("created_at DESC")
+                          .limit(10)
+                          .to_a
+
+    # additional_listings = 10 - selected_listings.length
+    # new_listings =
+    #   if additional_listings > 0
+    #     listings
+    #       .currently_open
+    #       .where("created_at > ?", latest)
+    #       .order("created_at DESC")
+    #       .limit(additional_listings)
+    #       .to_a
+    #   else
+    #     []
+    #   end
+
+    selected_listings
+    #.concat(new_listings)
+    #  .sort_by { |listing| listing.updates_email_at }
+    #  .reverse
   end
 
   def self.find_by_allowed_email(email)

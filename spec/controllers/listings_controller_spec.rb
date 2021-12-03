@@ -51,6 +51,7 @@
 #  approval_count                  :integer          default(0)
 #  sponsored                       :boolean          default(FALSE)
 #  sponsored_at                    :datetime
+#  is_featured                     :boolean          default(FALSE)
 #
 # Indexes
 #

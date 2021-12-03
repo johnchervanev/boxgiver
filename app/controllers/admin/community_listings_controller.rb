@@ -2,7 +2,7 @@ class Admin::CommunityListingsController < Admin::AdminBaseController
   before_action :set_selected_left_navi_link
   before_action :set_service
 
-  layout false, only: [:edit, :update]
+  layout false, only: [:edit, :update, :make_featured]
   respond_to :html, :js
 
   def update
@@ -45,6 +45,15 @@ class Admin::CommunityListingsController < Admin::AdminBaseController
   def sponsored_payments
     @sponsored_payments = SponsoredPayment.all
     @selected_left_navi_link = 'sponsored_payments'
+  end
+
+  def make_featured
+    @listing = Listing.find_by_id(params[:id])
+    @listing.is_featured = !@listing.is_featured
+    @listing.save!
+    respond_to do |format|
+      format.js
+    end
   end
 
   private

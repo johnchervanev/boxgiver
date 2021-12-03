@@ -167,6 +167,15 @@ Rails.application.routes.draw do
     get '/community_memberships/check_email_availability_and_validity' => 'community_memberships#check_email_availability_and_validity'
     get '/community_memberships/check_invitation_code' => 'community_memberships#check_invitation_code'
 
+    resources :newsletter_subscriptions, only: [] do
+      collection do
+        post :subscribe
+        get :unsubscribe
+      end
+    end
+
+    resources :blogs, only: [:show]
+
     namespace :paypal_service do
       resources :checkout_orders do
         collection do
@@ -512,6 +521,7 @@ Rails.application.routes.draw do
           member do
             get :approve
             get :reject
+            get :make_featured
           end
           collection do
             get 'export'
@@ -591,6 +601,7 @@ Rails.application.routes.draw do
           post :order
         end
       end
+      resources :blogs
       resources :listing_shapes do
         collection do
           post :order

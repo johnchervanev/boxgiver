@@ -6,6 +6,16 @@ en:
         delimiter: ","
         format: "%u%n"
   admin:
+    blogs:
+      index:
+        blog_post: "Blog post"
+        create_a_new_blog: "+ Create a new blog"
+        new_blog: "+ New Blog"
+      edit:
+        edit_blog: "Edit blog post"
+      buttons:
+        save: Save
+        cancel: Cancel
     categories:
       edit:
         edit_listing_category: "Edit category '%{category}'"
