@@ -15,12 +15,11 @@ class NewsLetterMailer < ActionMailer::Base
     community = Community.first
     NewsletterSubscription.find_each do |subscription|
       listings_to_send = community.get_new_listings_to_update_email_for_subscription(subscription) if community.automatic_newsletters
-      p listings_to_send.length
       next if listings_to_send.blank?
 
       p "$$$$$$$$$$"
       p subscription
-      p listings_to_send.length
+      p listings_to_send
 
       begin
         ApplicationHelper.store_community_service_name_to_thread_from_community(community)
@@ -65,7 +64,8 @@ class NewsLetterMailer < ActionMailer::Base
            :from => community_specific_sender(community),
            :subject => subject,
            :delivery_method => delivery_method) do |format|
-        format.html { render v2_template(community.id, 'community_updates'), layout: v2_layout(community.id, 'email_blank_layout') }
+        # format.html { render v2_template(community.id, 'community_updates'), layout: v2_layout(community.id, 'email_blank_layout') }
+        format.html { render 'community_updates', layout: 'email_blank_layout' }
       end
     end
   end
