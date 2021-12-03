@@ -4,9 +4,9 @@
 # You can define all roles on a single server, or split them:
 
 set :application, "boxgiver"
-set :repo_url, "git@github.com:nazrulcse/boxgiver.git"
+set :repo_url, "git@github.com:Freemovingboxes/boxgiver.git"
 
-set :branch, 'landing_page'
+set :branch, 'blog_newsletter'
 set :deploy_to, "/home/sharetribeisprettygood/apps/staging"
 
 server "198.211.105.116", user: "sharetribeisprettygood", roles: %w{app db web}
