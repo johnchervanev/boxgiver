@@ -121,7 +121,7 @@ CREATE TABLE `blogs` (
   `image_updated_at` datetime DEFAULT NULL,
   `minutes` decimal(10,0) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `bookings`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -716,7 +716,7 @@ CREATE TABLE `friendly_id_slugs` (
   UNIQUE KEY `index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope` (`slug`(70),`sluggable_type`,`scope`(70)),
   KEY `index_friendly_id_slugs_on_sluggable_type_and_sluggable_id` (`sluggable_type`,`sluggable_id`),
   KEY `index_friendly_id_slugs_on_slug_and_sluggable_type` (`slug`(140),`sluggable_type`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `invitation_unsubscribes`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -1153,7 +1153,7 @@ CREATE TABLE `newsletter_subscriptions` (
   `updated_at` datetime NOT NULL,
   `last_community_updates_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `order_permissions`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -1538,6 +1538,17 @@ CREATE TABLE `stripe_payments` (
   `stripe_payment_intent_id` varchar(255) DEFAULT NULL,
   `stripe_payment_intent_status` varchar(255) DEFAULT NULL,
   `stripe_payment_intent_client_secret` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `subscriptions`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `subscriptions` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `email` varchar(255) DEFAULT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -2589,11 +2600,12 @@ INSERT INTO `schema_migrations` (version) VALUES
 ('20210624143601'),
 ('20211130110725'),
 ('20211130111113'),
+('20211201030041'),
 ('20211201053006'),
+('20211201054518'),
 ('20211201071228'),
 ('20211201094515'),
 ('20211201101835'),
-('20211201120017'),
 ('20211202052136'),
 ('20211202055159'),
 ('20211202060304');
