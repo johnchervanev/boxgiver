@@ -5,13 +5,13 @@
       <a class="view-all-button-top" href="/blogs">View All</a>
     </div>
     <div class="mb-4">
-      <p> know about our clients, we are a worldwide corporate brand </p>
+      <p class="blog-info-text"> know about our clients, we are a worldwide corporate brand </p>
     </div>
     <div class="landing-listings">
       <div class='col-lg-12 p0'>
         <div class='row'>
           <% @blogs.each do |blog| %>
-            <div class='col-md-4 col-sm-6'>
+            <div class='col-md-4 col-sm-6 mb-5'>
               <div class='blog-post-item'>
                 <div class='header-image' style="background-image: url('<%= image_path(blog.image) %>')">
 

@@ -636,13 +636,13 @@ header {
       a {
         text-align: center;
         i {
-          width: 21px;
-          height: 21px;
+          width: 24px;
+          height: 24px;
           background-color: #F3F8FC;
           border-radius: 50px;
           font-size: 16px;
           color: #00725F;
-          padding: 3px;
+          padding: 4px;
         }
       }
     }
@@ -704,6 +704,9 @@ header {
 }
 
 #blog-posts {
+
+  font-family: 'Work Sans', sans-serif;
+
   .blog-posts-section-header {
     padding-bottom: 80px;
 
@@ -718,8 +721,11 @@ header {
     }
   }
 
+  .blog-info-text {
+    text-align: left;
+  }
+
   .blog-post-item {
-    font-family: 'Work Sans', sans-serif;
 
     .header-image {
       width: 100%;
@@ -1023,6 +1029,10 @@ header {
         font-size: 15px !important;
       }
     }
+  }
+
+  .blog-info-text {
+    text-align: center !important;
   }
 
   #footer-logo, #footer-sologan {
