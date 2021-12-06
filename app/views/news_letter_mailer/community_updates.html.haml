@@ -42,6 +42,6 @@
                 %p{:style => "margin-top:10px;margin-bottom:5px;font-family:helvetica,arial,sans-serif;font-size:12px;color:#464646;"}
                   %p
                     Too much email?
-                    %a{:href => "#{unsubscribe_newsletter_subscriptions_url(@recipient.token)}", :target => "_blank"}
+                    %a{:href => "#{@url}/newsletter_subscriptions/unsubscribe?token=#{@recipient.token}", :target => "_blank"}
                       Unsubscribe here
 

@@ -57,6 +57,8 @@ class NewsLetterMailer < ActionMailer::Base
       @title_link_text = t("emails.community_updates.title_link_text",
                            :community_name => @community.full_name('en'))
       subject = t("emails.community_updates.update_mail_title", :title_link => @title_link_text)
+      # @url = "http://198.211.105.116"
+      @url = "http://lvh.me:3001/en"
 
       delivery_method = APP_CONFIG.mail_delivery_method.to_sym unless Rails.env.test?
 
