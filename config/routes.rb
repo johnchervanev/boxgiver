@@ -174,7 +174,7 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :blogs, only: [:index, :show]
+    resources :blogs, path: 'blog', as: 'blog', only: [:index, :show]
 
     namespace :paypal_service do
       resources :checkout_orders do
