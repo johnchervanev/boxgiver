@@ -21,7 +21,7 @@
                   <p>
                     <%= blog.content.truncate(98).html_safe %>
                   </p>
-                  <a href='/blogs/<%= blog.slug %>' class='read-more'> Read more... </a>
+                  <a href='/blog/<%= blog.slug %>' class='read-more'> Read more... </a>
                 </div>
                 <div class='author'>
                   <div class='author-avatar'>
@@ -42,7 +42,7 @@
           <% end %>
         </div>
       </div>
-      <a class="view-all-button-bottom d-none" href="/blogs">View All</a>
+      <a class="view-all-button-bottom d-none" href="/blog">View All</a>
     </div>
   </div>
 </div>
