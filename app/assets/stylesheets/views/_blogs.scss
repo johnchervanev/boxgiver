@@ -36,8 +36,9 @@
   .blog-image {
     margin-top: 15px;
     height: 300px;
-    background-size: contain;
+    background-size: cover;
     background-repeat: no-repeat;
+    background-position: center;
   }
   .blog-content {
     margin-top: 50px;
