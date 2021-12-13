@@ -177,9 +177,14 @@ class HomepageController < ApplicationController
       price_max: params[:price_max],
       locale: I18n.locale,
       include_closed: false,
-      sort: nil
+      sort: params[:sort].present? ? params[:sort].to_sym : nil
     }
 
+    # Closet listing for user using user's current ip address
+    if params[:sort] == 'distance'
+      search.merge!(current_cordinates(request.remote_ip))
+    end
+    
     if @view_type != 'map' && location_search_in_use
       search.merge!(location_search_params(params, keyword_search_in_use))
     end
@@ -385,6 +390,19 @@ class HomepageController < ApplicationController
 
     relevant_filters.sort
   end
+
+  def current_cordinates(remote_ip)
+    begin
+      result = Geocoder.search(remote_ip).first
+      if result.present? && result.coordinates.present?
+        return { latitude: result.coordinates[0], longitude: result.coordinates[1] }
+      else
+        return { latitude: nil, longitude: nil }
+      end
+    rescue Exception => e
+      return { latitude: nil, longitude: nil }
+    end    
+  end 
 
   def unsafe_params_hash
     params.to_unsafe_hash

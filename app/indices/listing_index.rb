@@ -29,6 +29,7 @@ if APP_CONFIG.use_thinking_sphinx_indexing.to_s.casecmp("true") == 0
     has custom_checkbox_field_values.selected_options.id, :as => :custom_checkbox_field_options, :type => :integer, :multi => true
     has 'RADIANS(MIN(locations.latitude))', as: :latitude, type: :float
     has 'RADIANS(MIN(locations.longitude))', as: :longitude, type: :float
+    has author.received_reviews_count, :as => :received_reviews_count
 
     set_property :enable_star => true
 

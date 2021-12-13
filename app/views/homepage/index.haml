@@ -80,19 +80,19 @@
                     - is_selected = selected_category == child
                     = link_to @category_display_names[child.id], search_path(search_params.merge({category: child})), :class => "home-categories-sub #{if is_selected then 'selected' end}", :data => {:"sub-category" =>child.id}
         .show-sm-device
-          = link_to "#", :class => "home-categories-main" do
-            = ("Give")
-          = link_to "#", :class => "home-categories-main" do
-            = ("Request")
-          = link_to "#", :class => "home-categories-main" do
-            = ("Sell")
+          = link_to search_path(transaction_type: 'giving-away'), :class => "home-categories-main" do
+            = t(".give")
+          = link_to search_path(transaction_type: 'requested'), :class => "home-categories-main" do
+            = t(".request")
+          = link_to search_path(transaction_type: 'for-sale'), :class => "home-categories-main" do
+            = t(".sell")
 
-    = link_to "#", :class => "button sm-device-hid give-btn" do
-      = ("Give")
-    = link_to "#", :class => "button sm-device-hid request-btn" do
-      = ("Request")
-    = link_to "#", :class => "button sm-device-hid sell-btn" do
-      = ("Sell")
+    = link_to search_path(transaction_type: 'giving-away'), :class => "button sm-device-hid give-btn" do
+      = t(".give")
+    = link_to search_path(transaction_type: 'requested'), :class => "button sm-device-hid request-btn" do
+      = t(".request")
+    = link_to search_path(transaction_type: 'for-sale'), :class => "button sm-device-hid sell-btn" do
+      = t(".sell")
 
     .custom-filterbar
       = image_tag "filter.png"
@@ -109,18 +109,12 @@
             &#10005;
 
       .sort-by
-        Sort by: 
-        %select
-          %option
-            Newest
-          %option
-            Demo
-          %option
-            Demo
+        = t(".sort_by")
+        = select_tag 'sort', options_for_select([['Newest', 'created_at'], ['Closest', 'distance'], ['Popular', 'most_review']], selected: params[:sort]), id: 'sort_filter'
 
 
   .row
-    -#
+    -# NOT IN USE
       - if @category_menu_enabled
 
         #desktop-filters
@@ -170,4 +164,10 @@
       .popup-body
         #filters
           = render :partial => "filters", :locals => { show_price_filter: show_price_filter, show_custom_fields: @show_custom_fields, filters: filters }
+
+- content_for :extra_javascript do
+  :javascript
+    $("#sort_filter").on('change', function(){
+      $("#homepage-filters").submit();
+    })          
 

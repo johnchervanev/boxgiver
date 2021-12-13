@@ -190,3 +190,4 @@ gem "select2-rails"
 gem "cocoon"
 gem "fast-polylines"
 gem 'daemons'
+gem 'geocoder', '~> 1.3', '>= 1.3.7'
