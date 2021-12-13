@@ -670,38 +670,33 @@ $listing-author-avatar-height: 108;
         content: "";
         width: 18px;
         height: 18px;
-        background: #01a58a;
+        //background: #01a58a;
+        background: #fff;
         display: block;
-        /*border: 1px solid #ccc;*/
+        border: 1px solid #ccc;
         border-radius: 2px;
       }
       &:after{
         content: "";
-        width: 10px;
+        width: 5px;
         height: 10px;
         position: absolute;
-        top: 9px;
-        left: 4px;
-        display: block;
-        z-index: 9;
-        background: white;
-        border-radius: 2px;
-        transform: scale(0);
-        transition: all .2s;
-        /*width: 6px;
-        height: 13px;
+        top: 8px;
         border-right: 2px solid #fff;
         border-bottom: 2px solid #fff;
-        position: absolute;
-        top: 6px;
         left: 6px;
         display: block;
         z-index: 9;
-        transform: rotate(40deg);*/
+        transition: all .2s;
+        transform: rotate(45deg);
       }
       &:checked{
         &:after{
-          transform: scale(1);
+          /*transform: scale(1);*/
+        }
+        &:before{
+          background: #01a58a;
+          border-color: #01a58a;
         }
       }
     }
