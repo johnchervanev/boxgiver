@@ -1140,13 +1140,13 @@ header {
     .slick-prev{
       font-size: 30px;
       font-weight: bold;
-      color: black;
+      color: #00725F;
       border: 0;
       left: -20px;
 
       &:hover {
         border: 0;
-        color: black;
+        color: #00725F;
         background-color: transparent  !important;
       }
     }
@@ -1154,13 +1154,13 @@ header {
     .slick-next {
       font-size: 30px;
       font-weight: bold;
-      color: black;
+      color: #00725F;
       border: 0;
       right: -20px;
 
       &:hover {
         border: 0;
-        color: black;
+        color: #00725F;
         background-color: transparent !important;
       }
     }
