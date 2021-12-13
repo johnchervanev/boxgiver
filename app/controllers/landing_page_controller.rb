@@ -57,7 +57,7 @@ class LandingPageController < ActionController::Metal
     @most_viewed_listings = @current_community.listings.where("deleted = ? and valid_until >= ?", 0, Date.today).order('times_viewed DESC').limit(8)
     @new_listings = @current_community.listings.where("created_at BETWEEN ? AND ? AND deleted = ? AND valid_until >= ?", (Date.today - 7.days), Date.today, 0, Date.today).order(created_at: :desc).limit(8)
     @featured_listings = @current_community.listings.where("is_featured = ? AND deleted = ? AND valid_until >= ?", 1, 0, Date.today).limit(8)
-    @blogs = Blog.where(published: true).limit(3)
+    @blogs = Blog.where(published: true).limit(6)
 
     begin
       content = nil
