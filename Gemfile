@@ -190,3 +190,4 @@ gem "cocoon"
 gem "fast-polylines"
 gem 'daemons'
 gem 'whenever', require: false
+gem 'geocoder', '~> 1.3', '>= 1.3.7'

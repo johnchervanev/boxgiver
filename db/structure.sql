@@ -854,7 +854,7 @@ CREATE TABLE `listing_reports` (
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `listing_shapes`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -1398,6 +1398,7 @@ CREATE TABLE `people` (
   `cloned_from` varchar(22) DEFAULT NULL,
   `google_oauth2_id` varchar(255) DEFAULT NULL,
   `linkedin_id` varchar(255) DEFAULT NULL,
+  `received_reviews_count` int(11) DEFAULT '0',
   UNIQUE KEY `index_people_on_username_and_community_id` (`username`,`community_id`) USING BTREE,
   UNIQUE KEY `index_people_on_uuid` (`uuid`),
   UNIQUE KEY `index_people_on_email` (`email`) USING BTREE,
@@ -1491,7 +1492,7 @@ CREATE TABLE `sponsored_payments` (
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `stripe_accounts`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -2609,5 +2610,6 @@ INSERT INTO `schema_migrations` (version) VALUES
 ('20211202052136'),
 ('20211202055159'),
 ('20211202060304');
+('20211211192559');
 
 

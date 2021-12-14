@@ -44,6 +44,7 @@
 #  cloned_from                        :string(22)
 #  google_oauth2_id                   :string(255)
 #  linkedin_id                        :string(255)
+#  received_reviews_count             :integer          default(0)
 #
 # Indexes
 #
@@ -240,6 +241,7 @@ class Person < ApplicationRecord
   end
 
   after_initialize :add_uuid
+  after_save :rebuild_sphinx
 
   def add_uuid
     self.uuid ||= UUIDUtils.create_raw
@@ -648,4 +650,10 @@ class Person < ApplicationRecord
       "(#{table}.given_name LIKE #{pattern} OR #{table}.family_name LIKE #{pattern} OR #{table}.display_name LIKE #{pattern})"
     end
   end
+
+  def rebuild_sphinx
+    if received_reviews_count_changed?
+      Delayed::Job.enqueue(RebuildWhenUpdate.new(community_id))
+    end
+  end  
 end

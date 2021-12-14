@@ -99,6 +99,7 @@
 //= require listing_form
 //= require radio_buttons
 //= require new_layout
+// = require custom_script
 //= require stripe_form3
 //= require analytics
 //= require social-insurance-number

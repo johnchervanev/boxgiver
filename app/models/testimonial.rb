@@ -42,6 +42,8 @@ class Testimonial < ApplicationRecord
   scope :with_tx_author, -> { with_tx_subquery.where("testimonials.author_id = transactions.listing_author_id") }
   scope :with_tx_starter, -> { with_tx_subquery.where("testimonials.author_id = transactions.starter_id") }
 
+  after_create :update_received_reviews_count
+
   # Formats grade so that it can be displayed in the UI
   def displayed_grade
     (grade * 4 + 1).to_i
@@ -50,4 +52,8 @@ class Testimonial < ApplicationRecord
   def positive?
     grade >= 0.5
   end
+  
+  def update_received_reviews_count
+    receiver.update(received_reviews_count: receiver.received_testimonials.size)
+  end  
 end

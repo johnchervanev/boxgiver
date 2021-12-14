@@ -59,7 +59,7 @@
               .marketplace-title-header
                 = yield :title_header
 
-      %article.page-content{class: is_homepage && !@big_cover_photo ? 'no-cover-photo' : ''}
+      %article.page-content{class: is_homepage && !@big_cover_photo ? 'no-cover-photo all-listings-page' : ''}
         .wrapper
           = render :partial => "layouts/notifications"
           = yield
@@ -76,7 +76,7 @@
         - search_params = ["q", "lc", "ls", "boundingbox", "distance_max"]
         - excluded_params = search_params unless FeatureFlagHelper.feature_enabled?(:topbar_v1)
         - params.except("action", "controller", "view", "utf8", *excluded_params).each do |param, value|
-          - unless CustomFieldSearchParams.custom_field_search_param?(param) || param.match(/^price_/)
+          - unless CustomFieldSearchParams.custom_field_search_param?(param) || param.match(/^price_/) || param.match(/^sort/)
             = hidden_field_tag param, value
         = hidden_field_tag "view", @view_type
         = render 'layouts/ad'

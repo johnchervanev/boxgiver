@@ -4,6 +4,7 @@ module ListingIndexService::Search
 
     # http://pat.github.io/thinking-sphinx/advanced_config.html
     SPHINX_MAX_MATCHES = 1000
+    DISTANCE_UNIT_FACTORS = { miles: 1609.0, km: 1000.0 }
 
     INCLUDE_MAP = {
       listing_images: :listing_images,
@@ -90,7 +91,7 @@ module ListingIndexService::Search
           star: true,
           with: with,
           with_all: with_all,
-          order: geo_search[:order] || 'sponsored DESC, sort_date DESC',
+          order: sort_by_filter(search),
           geo: geo_search[:origin],
           max_query_time: 1000 # Timeout and fail after 1s
         )
@@ -105,6 +106,23 @@ module ListingIndexService::Search
 
     end
 
+    def sort_by_filter(search)
+      filter = search[:sort]
+      if filter == :created_at
+        'sort_date DESC'
+      elsif filter == :most_review
+        'received_reviews_count DESC'
+      elsif search[:latitude].present? && search[:longitude].present?
+        'sponsored DESC, geodist ASC'
+      else  
+        'sponsored DESC, sort_date DESC'
+      end
+    end 
+
+    def radians(degrees)
+      degrees * Math::PI / 180
+    end       
+
     def search_out_of_bounds?(per_page, page)
       pages = (SPHINX_MAX_MATCHES.to_f / per_page.to_f)
       page > pages.ceil
@@ -117,35 +135,29 @@ module ListingIndexService::Search
         groups[:values]
       end
     end
-    DISTANCE_UNIT_FACTORS = { miles: 1609.0, km: 1000.0 }
 
-       def parse_geo_search_params(search)
-           return {} unless search[:latitude].present? && search[:longitude].present?
+    def parse_geo_search_params(search)
+      return {} unless search[:latitude].present? && search[:longitude].present?
 
-           geo_params = {
-                 order: (search[:sort] == :distance ? 'sponsored DESC, geodist ASC' : nil),
-                 origin: [radians(search[:latitude]), radians(search[:longitude])]
-           }
+      geo_params = {
+        order: (search[:sort] == :distance ? 'sponsored DESC, geodist ASC' : nil),
+        origin: [radians(search[:latitude]), radians(search[:longitude])]
+      }
 
-           if search[:distance_max].present?
-                      max_distance_meters = search[:distance_max] * DISTANCE_UNIT_FACTORS[search[:distance_unit]]
-                      geo_params[:distance_max] = 0..max_distance_meters
-                    end
-
-           geo_params
-         end
-
-       def radians(degrees)
-           degrees * Math::PI / 180
-         end
-
-       def collect_geo_distances(models, geo_unit)
-           models.each_with_object({}) do |listing, result|
-               # get distance from ThinkingSphinx::Search::Glaze / DistancePane
-               distance = listing.distance / DISTANCE_UNIT_FACTORS[geo_unit]
-               result[listing.id] = { distance_unit: geo_unit, distance: distance }
-             end
+      if search[:distance_max].present?
+        max_distance_meters = search[:distance_max] * DISTANCE_UNIT_FACTORS[search[:distance_unit]]
+        geo_params[:distance_max] = 0..max_distance_meters
       end
 
+      geo_params
+    end
+
+    def collect_geo_distances(models, geo_unit)
+      models.each_with_object({}) do |listing, result|
+        # get distance from ThinkingSphinx::Search::Glaze / DistancePane
+        distance = listing.distance / DISTANCE_UNIT_FACTORS[geo_unit]
+        result[listing.id] = { distance_unit: geo_unit, distance: distance }
+      end
+    end
   end
 end
