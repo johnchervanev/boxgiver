@@ -91,7 +91,7 @@ module ListingIndexService::Search
           star: true,
           with: with,
           with_all: with_all,
-          order: sort_by_filter(search[:sort]),
+          order: sort_by_filter(search),
           geo: geo_search[:origin],
           max_query_time: 1000 # Timeout and fail after 1s
         )
@@ -106,12 +106,13 @@ module ListingIndexService::Search
 
     end
 
-    def sort_by_filter(filter)
+    def sort_by_filter(search)
+      filter = search[:sort]
       if filter == :created_at
         'sort_date DESC'
       elsif filter == :most_review
         'received_reviews_count DESC'
-      elsif filter == :distance
+      elsif search[:latitude].present? && search[:longitude].present?
         'sponsored DESC, geodist ASC'
       else  
         'sponsored DESC, sort_date DESC'
