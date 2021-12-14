@@ -9,11 +9,13 @@
   <% @blogs.each do |blog| %>
     <div class="col-sm-6 col-md-4 mb-md-5 mb-5">
       <div class='blog-post-item'>
-        <div class='header-image' style="background-image: url('<%= image_path(blog.image) %>')">
-
-        </div>
+        <a href="/blog/<%= blog.slug %>">
+          <div class='header-image' style="background-image: url('<%= image_path(blog.image) %>')"></div>
+        </a>
         <div class='details'>
-          <h2> <%= blog.title.truncate(48) %> </h2>
+          <a href="/blog/<%= blog.slug %>" class="text-decoration-none">
+            <h2> <%= blog.title.truncate(48) %> </h2>
+          </a>
           <p>
             <%= blog.content.truncate(98).html_safe %>
           </p>
