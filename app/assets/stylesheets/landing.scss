@@ -762,9 +762,7 @@ header {
   }
 
   .blog-post-item {
-
-    margin-left: 5px;
-    margin-right: 5px;
+    padding: 20px;
 
     .header-image {
       width: 100%;
@@ -775,7 +773,7 @@ header {
     }
 
     .details {
-      padding: 18px;
+      padding: 18px 0;
       border-bottom: 1px solid #efecec;
 
       h2 {
@@ -805,7 +803,7 @@ header {
     }
 
     .author {
-      padding: 18px;
+      padding: 18px 0;
 
       .author-avatar {
         width: 50px;
@@ -1140,7 +1138,12 @@ header {
   }
 
   #blog-posts {
-    .slick-prev{
+
+    .blog-post-item {
+      padding: 30px;
+    }
+
+    .slick-prev {
       font-size: 30px;
       font-weight: bold;
       color: #00725F;
@@ -1159,7 +1162,7 @@ header {
       font-weight: bold;
       color: #00725F;
       border: 0;
-      right: -20px;
+      right: -15px;
 
       &:hover {
         border: 0;
