@@ -6,7 +6,7 @@
 set :application, "boxgiver"
 set :repo_url, "git@github.com:Freemovingboxes/boxgiver.git"
 
-set :branch, 'blog_newsletter'
+set :branch, 'new_search_page_design'
 set :deploy_to, "/home/sharetribeisprettygood/apps/staging"
 
 server "198.211.105.116", user: "sharetribeisprettygood", roles: %w{app db web}
