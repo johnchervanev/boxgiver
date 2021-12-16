@@ -109,7 +109,7 @@ module ListingIndexService::Search
     def sort_by_filter(search)
       filter = search[:sort]
       if filter == :created_at
-        'sort_date DESC'
+        'created_at DESC'
       elsif filter == :most_review
         'received_reviews_count DESC'
       elsif search[:latitude].present? && search[:longitude].present?

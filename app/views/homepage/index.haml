@@ -65,7 +65,7 @@
         .toggle-header
           %span.hide-phone
             Category
-          = image_tag 'category.png', class: 'icon_img'
+          =# image_tag 'category.png', class: 'icon_img'
         = icon_tag("dropdown", ["icon-dropdown"])
       .home-toolbar-share-type-menu.toggle-menu.hidden
         - if @category_menu_enabled
@@ -87,11 +87,11 @@
           = link_to search_path(transaction_type: 'for-sale'), :class => "home-categories-main" do
             = t(".sell")
 
-    = link_to search_path(transaction_type: 'giving-away'), :class => "button sm-device-hid give-btn" do
+    = link_to search_path(transaction_type: 'giving-away'), :class => "button sm-device-hid give-btn #{ if params[:transaction_type].eql?('giving-away') then 'active-order-type' end }" do
       = t(".give")
-    = link_to search_path(transaction_type: 'requested'), :class => "button sm-device-hid request-btn" do
+    = link_to search_path(transaction_type: 'requested'), :class => "button sm-device-hid request-btn #{ if params[:transaction_type].eql?('requested') then 'active-order-type' end }" do
       = t(".request")
-    = link_to search_path(transaction_type: 'for-sale'), :class => "button sm-device-hid sell-btn" do
+    = link_to search_path(transaction_type: 'for-sale'), :class => "button sm-device-hid sell-btn #{ if params[:transaction_type].eql?('for-sale') then 'active-order-type' end }" do
       = t(".sell")
 
     .custom-filterbar
@@ -100,8 +100,11 @@
       %span.map-text
         Map
       %label#switchBtn.switch
-        %a.map-view-active{:href => "/s?view=map"}
-        %input{:type => "checkbox"}/
+        %a.map-view-active{:href => "/s?view=#{ params[:view].eql?('map') ? 'grid' : 'map'}"}
+        - if params[:view].eql?('map')
+          %input{:type => "checkbox", :checked => "checked" }
+        - else
+          %input{:type => "checkbox" }
         %span.slider.round
           %span.on
             &#10003;
@@ -109,8 +112,8 @@
             &#10005;
 
       .sort-by
-        = t(".sort_by")
-        = select_tag 'sort', options_for_select([['Newest', 'created_at'], ['Closest', 'distance'], ['Popular', 'most_review']], selected: params[:sort]), id: 'sort_filter'
+        =# t(".sort_by")
+        = select_tag 'sort', options_for_select([['Newest', 'created_at'], ['Closest', 'distance'], ['Popular', 'most_review']], selected: params[:sort]), id: 'sort_filter', prompt: '-- Sort by --'
 
 
   .row
@@ -170,16 +173,6 @@
     $("#sort_filter").on('change', function(){
       $("#homepage-filters").submit();
     });
-
-    window.onload = function() {
-     let mapViewShow = document.querySelector('.map-view-active');
-     let switchBtn = document.querySelector('#switchBtn');
-     let url = "https://boxgiver.com/s?view=map" && "http://lvh.me:3000/s?view=map";
-     if(window.location.href == url){
-        mapViewShow.nextElementSibling.setAttribute("checked","checked");
-        mapViewShow.setAttribute("href","javascript:history.go(-1)");
-     }
-    };
 
     let filterBtn = document.querySelector('.custom-filterbar');
     let filterPop = document.querySelector('.filter-popup');

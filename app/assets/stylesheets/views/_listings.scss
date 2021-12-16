@@ -592,6 +592,11 @@ $listing-author-avatar-height: 108;
         display: none;
       } 
     }
+    .active-order-type{
+      background: #01a58a;
+      border-color: #01a58a;
+      color: #fff;      
+    }    
   }
   .custom-all-category{
     .toggle-menu{
