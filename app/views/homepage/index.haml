@@ -65,7 +65,7 @@
         .toggle-header
           %span.hide-phone
             Category
-          =# image_tag 'category.png', class: 'icon_img'
+          = image_tag 'category.png', class: 'icon_img'
         = icon_tag("dropdown", ["icon-dropdown"])
       .home-toolbar-share-type-menu.toggle-menu.hidden
         - if @category_menu_enabled
@@ -79,13 +79,13 @@
                   - category.children.each do |child|
                     - is_selected = selected_category == child
                     = link_to @category_display_names[child.id], search_path(search_params.merge({category: child})), :class => "home-categories-sub #{if is_selected then 'selected' end}", :data => {:"sub-category" =>child.id}
-        .show-sm-device
-          = link_to search_path(transaction_type: 'giving-away'), :class => "home-categories-main" do
-            = t(".give")
-          = link_to search_path(transaction_type: 'requested'), :class => "home-categories-main" do
-            = t(".request")
-          = link_to search_path(transaction_type: 'for-sale'), :class => "home-categories-main" do
-            = t(".sell")
+        / .show-sm-device
+        /   = link_to search_path(transaction_type: 'giving-away'), :class => "home-categories-main" do
+        /     = t(".give")
+        /   = link_to search_path(transaction_type: 'requested'), :class => "home-categories-main" do
+        /     = t(".request")
+        /   = link_to search_path(transaction_type: 'for-sale'), :class => "home-categories-main" do
+        /     = t(".sell")
 
     = link_to search_path(transaction_type: 'giving-away'), :class => "button sm-device-hid give-btn #{ if params[:transaction_type].eql?('giving-away') then 'active-order-type' end }" do
       = t(".give")
@@ -166,6 +166,13 @@
           = image_tag 'close.svg'
       .popup-body
         #filters
+          .btn-group-mobile
+            = link_to search_path(transaction_type: 'giving-away'), :class => "button give-btn #{ if params[:transaction_type].eql?('giving-away') then 'active-order-type' end }" do
+              = t(".give")
+            = link_to search_path(transaction_type: 'requested'), :class => "button request-btn #{ if params[:transaction_type].eql?('requested') then 'active-order-type' end }" do
+              = t(".request")
+            = link_to search_path(transaction_type: 'for-sale'), :class => "button sell-btn #{ if params[:transaction_type].eql?('for-sale') then 'active-order-type' end }" do
+              = t(".sell")
           = render :partial => "filters", :locals => { show_price_filter: show_price_filter, show_custom_fields: @show_custom_fields, filters: filters }
 
 - content_for :extra_javascript do
