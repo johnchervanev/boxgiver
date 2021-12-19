@@ -393,14 +393,18 @@ class HomepageController < ApplicationController
 
   def current_cordinates(remote_ip)
     begin
+      marketplace_configuration = @current_community.configuration
+      distance = params[:distance_max].to_f
+      distance_system = marketplace_configuration ? marketplace_configuration[:distance_unit].to_sym : nil
+      distance_unit = distance_system == :metric ? :km : :miles
       result = Geocoder.search(remote_ip).first
       if result.present? && result.coordinates.present?
-        return { latitude: result.coordinates[0], longitude: result.coordinates[1] }
+        return { latitude: result.coordinates[0], longitude: result.coordinates[1], distance_unit: distance_unit, sort: :distance }
       else
-        return { latitude: nil, longitude: nil }
+        return { latitude: nil, longitude: nil, distance_unit: nil }
       end
     rescue Exception => e
-      return { latitude: nil, longitude: nil }
+      return { latitude: nil, longitude: nil, distance_unit: nil }
     end    
   end 
 

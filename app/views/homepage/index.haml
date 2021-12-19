@@ -87,11 +87,11 @@
         /   = link_to search_path(transaction_type: 'for-sale'), :class => "home-categories-main" do
         /     = t(".sell")
 
-    = link_to search_path(transaction_type: 'giving-away'), :class => "button sm-device-hid give-btn #{ if params[:transaction_type].eql?('giving-away') then 'active-order-type' end }" do
+    = link_to search_path(search_params.merge(transaction_type: 'giving-away')), :class => "button sm-device-hid give-btn #{ if params[:transaction_type].eql?('giving-away') then 'active-order-type' end }" do
       = t(".give")
-    = link_to search_path(transaction_type: 'requested'), :class => "button sm-device-hid request-btn #{ if params[:transaction_type].eql?('requested') then 'active-order-type' end }" do
+    = link_to search_path(search_params.merge(transaction_type: 'requested')), :class => "button sm-device-hid request-btn #{ if params[:transaction_type].eql?('requested') then 'active-order-type' end }" do
       = t(".request")
-    = link_to search_path(transaction_type: 'for-sale'), :class => "button sm-device-hid sell-btn #{ if params[:transaction_type].eql?('for-sale') then 'active-order-type' end }" do
+    = link_to search_path(search_params.merge(transaction_type: 'for-sale')), :class => "button sm-device-hid sell-btn #{ if params[:transaction_type].eql?('for-sale') then 'active-order-type' end }" do
       = t(".sell")
 
     .custom-filterbar
@@ -100,7 +100,8 @@
       %span.map-text
         Map
       %label#switchBtn.switch
-        %a.map-view-active{:href => "/s?view=#{ params[:view].eql?('map') ? 'grid' : 'map'}"}
+        - toggle_view_path = params[:view].eql?('map') ? search_path(search_params.merge({view: "grid"})) : search_path(search_params.merge({view: "map"}))
+        %a.map-view-active{:href => "#{toggle_view_path}"}
         - if params[:view].eql?('map')
           %input{:type => "checkbox", :checked => "checked" }
         - else
@@ -113,7 +114,7 @@
 
       .sort-by
         =# t(".sort_by")
-        = select_tag 'sort', options_for_select([['Newest', 'created_at'], ['Closest', 'distance'], ['Popular', 'most_review']], selected: params[:sort]), id: 'sort_filter', prompt: '-- Sort by --'
+        = select_tag 'sort', options_for_select([['Newest', 'created_at'], ['Closest', 'distance'], ['Popular', 'most_review']], params[:sort]), id: 'sort_filter', prompt: '-- Sort by --'
 
 
   .row
@@ -167,11 +168,11 @@
       .popup-body
         #filters
           .btn-group-mobile
-            = link_to search_path(transaction_type: 'giving-away'), :class => "button give-btn #{ if params[:transaction_type].eql?('giving-away') then 'active-order-type' end }" do
+            = link_to search_path(search_params.merge(transaction_type: 'giving-away')), :class => "button give-btn #{ if params[:transaction_type].eql?('giving-away') then 'active-order-type' end }" do
               = t(".give")
-            = link_to search_path(transaction_type: 'requested'), :class => "button request-btn #{ if params[:transaction_type].eql?('requested') then 'active-order-type' end }" do
+            = link_to search_path(search_params.merge(transaction_type: 'requested')), :class => "button request-btn #{ if params[:transaction_type].eql?('requested') then 'active-order-type' end }" do
               = t(".request")
-            = link_to search_path(transaction_type: 'for-sale'), :class => "button sell-btn #{ if params[:transaction_type].eql?('for-sale') then 'active-order-type' end }" do
+            = link_to search_path(search_params.merge(transaction_type: 'for-sale')), :class => "button sell-btn #{ if params[:transaction_type].eql?('for-sale') then 'active-order-type' end }" do
               = t(".sell")
           = render :partial => "filters", :locals => { show_price_filter: show_price_filter, show_custom_fields: @show_custom_fields, filters: filters }
 

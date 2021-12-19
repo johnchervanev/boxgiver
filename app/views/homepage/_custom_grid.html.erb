@@ -51,7 +51,7 @@
         </div>
         <div class='listing-displace'>
           <% distance = Maybe(listing.distance).or_else(nil) %>
-          <% if show_distance && !distance.blank? %>
+          <% if (show_distance || params[:sort].eql?('distance')) && !distance.blank? %>
             <% dist = format_distance(distance) %>
             <% dist_string = "#{dist} #{listing.distance_unit}" %>
             <span title="<%= dist_string %>" style="font-weight: 600">
