@@ -114,7 +114,7 @@
 
       .sort-by
         =# t(".sort_by")
-        = select_tag 'sort', options_for_select([['Newest', 'created_at'], ['Closest', 'distance'], ['Popular', 'most_review']], params[:sort]), id: 'sort_filter', prompt: '-- Sort by --'
+        = select_tag 'sort_by_option', options_for_select([['Newest', 'created_at'], ['Closest', 'closest'], ['Popular', 'most_review']], params[:sort_by_option]), id: 'sort_by_option', prompt: '-- Sort by --'
       
       = link_to search_path, :class => "button space-left" ,:title => "Reset Filters"  do
         = image_tag 'icons8-reset-50.png'
@@ -180,7 +180,7 @@
 
 - content_for :extra_javascript do
   :javascript
-    $("#sort_filter").on('change', function(){
+    $("#sort_by_option").on('change', function(e){
       $("#homepage-filters").submit();
     });
 

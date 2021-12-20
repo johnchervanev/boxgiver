@@ -43,6 +43,7 @@ module ListingIndexService::Search::DatabaseSearchHelper
       :longitude,
       :distance_max,
       :sort,
+      :sort_by_option,
       :listing_shape_id,
       :listing_shape_ids,
       :categories,

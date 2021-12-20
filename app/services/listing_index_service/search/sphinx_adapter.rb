@@ -107,14 +107,15 @@ module ListingIndexService::Search
     end
 
     def sort_by_filter(search)
-      filter = search[:sort]
-      if filter == :created_at
-        'created_at DESC'
-      elsif filter == :most_review
-        'received_reviews_count DESC'
-      elsif search[:latitude].present? && search[:longitude].present?
+      if search[:sort_by_option].present? && search[:sort_by_option] == :created_at
+        'sponsored DESC, created_at DESC'
+      elsif search[:sort_by_option].present? && search[:sort_by_option] == :most_review
+        'sponsored DESC, received_reviews_count DESC'
+      elsif search[:sort_by_option].present? && search[:sort_by_option] == :closest
         'sponsored DESC, geodist ASC'
-      else  
+      elsif search[:sort_by_option].blank? && search[:sort].present? && search[:sort] == :distance
+        'sponsored DESC, geodist ASC'
+      else
         'sponsored DESC, sort_date DESC'
       end
     end 

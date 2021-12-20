@@ -22,6 +22,7 @@ module ListingIndexService::DataTypes
     [:scale, :to_float, :optional],
     [:offset, :to_float, :optional],
     [:sort, :symbol, :optional],
+    [:sort_by_option, :symbol, :optional],
     [:distance_unit, :symbol, :optional],
     [:categories, :array, :optional],
     [:listing_shape_ids, :array, :optional],

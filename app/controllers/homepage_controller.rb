@@ -177,11 +177,12 @@ class HomepageController < ApplicationController
       price_max: params[:price_max],
       locale: I18n.locale,
       include_closed: false,
-      sort: params[:sort].present? ? params[:sort].to_sym : nil
+      sort: params[:sort].present? ? params[:sort].to_sym : nil,
+      sort_by_option: params[:sort_by_option].present? ? params[:sort_by_option].to_sym : nil
     }
 
     # Closet listing for user using user's current ip address
-    if params[:sort] == 'distance'
+    if params[:sort_by_option] == 'closest'
       search.merge!(current_cordinates(request.remote_ip))
     end
     
