@@ -5,6 +5,7 @@ module ListingIndexService::Search
     # http://pat.github.io/thinking-sphinx/advanced_config.html
     SPHINX_MAX_MATCHES = 1000
     DISTANCE_UNIT_FACTORS = { miles: 1609.0, km: 1000.0 }
+    DEFAULT_GEO_RADIUS = 50
 
     INCLUDE_MAP = {
       listing_images: :listing_images,
@@ -139,6 +140,7 @@ module ListingIndexService::Search
 
     def parse_geo_search_params(search)
       return {} unless search[:latitude].present? && search[:longitude].present?
+      search[:distance_max] ||= DEFAULT_GEO_RADIUS
 
       geo_params = {
         order: (search[:sort] == :distance ? 'sponsored DESC, geodist ASC' : nil),
