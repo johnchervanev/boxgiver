@@ -5,7 +5,7 @@ module ListingIndexService::Search
     # http://pat.github.io/thinking-sphinx/advanced_config.html
     SPHINX_MAX_MATCHES = 1000
     DISTANCE_UNIT_FACTORS = { miles: 1609.0, km: 1000.0 }
-    DEFAULT_GEO_RADIUS = 50
+    DEFAULT_GEO_RADIUS = 200
 
     INCLUDE_MAP = {
       listing_images: :listing_images,
