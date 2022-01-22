@@ -1,5 +1,6 @@
 class HomepageController < ApplicationController
 
+  add_breadcrumb "Home", :landing_page_without_locale_path
   before_action :save_current_path, :except => :sign_in
 
   APP_DEFAULT_VIEW_TYPE = "grid".freeze
@@ -9,6 +10,7 @@ class HomepageController < ApplicationController
   # rubocop:disable AbcSize
   # rubocop:disable MethodLength
   def index
+    add_breadcrumb "Listings", search_path
     params = unsafe_params_hash.select{|k, v| v.present? }
 
     redirect_to landing_page_path and return if no_current_user_in_private_clp_enabled_marketplace?

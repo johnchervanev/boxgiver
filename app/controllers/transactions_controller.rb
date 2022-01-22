@@ -1,5 +1,7 @@
 class TransactionsController < ApplicationController
 
+  add_breadcrumb "Home", :landing_page_without_locale_path
+
   before_action only: [:show] do |controller|
     controller.ensure_logged_in t("layouts.notifications.you_must_log_in_to_view_your_inbox")
   end
@@ -30,6 +32,8 @@ class TransactionsController < ApplicationController
   )
 
   def new
+    add_breadcrumb 'My Transactions', transactions_person_settings_path(@current_user)
+
     Result.all(
       -> {
         fetch_data(params[:listing_id])
@@ -42,6 +46,9 @@ class TransactionsController < ApplicationController
         {listing_id: listing_model.id}
         .merge(params.slice(:start_on, :end_on, :quantity, :delivery, :start_time, :end_time, :per_hour).permit!)
       )
+
+      add_breadcrumb listing_model.title, listing_path(listing_model.to_param) if listing_model.present?
+      add_breadcrumb 'New', new_transaction_path(listing_id: listing_model.id) if listing_model.present?
 
       case [process.process, gateway]
       when matches([:none])
@@ -122,6 +129,10 @@ class TransactionsController < ApplicationController
 
   def show
     @transaction = @current_community.transactions.find(params[:id])
+
+    add_breadcrumb 'Inbox', person_inbox_path(@current_user)
+    add_breadcrumb "Transaction##{@transaction.id}", person_transaction_path(@current_user.username, @transaction)
+
     m_admin = @current_user.has_admin_rights?(@current_community)
     m_participant = @current_user.id == @transaction.starter_id || @current_user.id == @transaction.listing_author_id
 

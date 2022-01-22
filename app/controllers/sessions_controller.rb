@@ -2,6 +2,8 @@ require 'rest_client'
 
 class SessionsController < ApplicationController
 
+  add_breadcrumb "Home", :landing_page_without_locale_path
+
   skip_before_action :cannot_access_if_banned, :only => [:destroy, :confirmation_pending]
   skip_before_action :cannot_access_without_confirmation, :only => [:destroy, :confirmation_pending]
   skip_before_action :ensure_consent_given, only: [:destroy, :confirmation_pending]
@@ -13,6 +15,8 @@ class SessionsController < ApplicationController
   before_action :allow_params_authentication!, :only => :create
 
   def new
+    add_breadcrumb "Login", login_url
+
     if params[:return_to].present?
       session[:return_to] = params[:return_to]
     end

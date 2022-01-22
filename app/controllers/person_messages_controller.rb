@@ -1,5 +1,7 @@
 class PersonMessagesController < ApplicationController
 
+  add_breadcrumb "Home", :landing_page_without_locale_path
+
   before_action do |controller|
     controller.ensure_logged_in t("layouts.notifications.you_must_log_in_to_send_a_message")
   end
@@ -7,6 +9,9 @@ class PersonMessagesController < ApplicationController
   before_action :fetch_recipient
 
   def new
+    add_breadcrumb PersonViewUtils.person_display_name(@recipient, @current_community), person_path(@recipient)
+    add_breadcrumb 'Message', new_person_person_message_path(@recipient)
+
     @conversation = Conversation.new
   end
 

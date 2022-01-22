@@ -1,4 +1,6 @@
 class PaymentSettingsController < ApplicationController
+  add_breadcrumb "Home", :landing_page_without_locale_path
+
   before_action do |controller|
     controller.ensure_logged_in t("layouts.notifications.you_must_log_in_to_view_your_settings")
   end
@@ -7,7 +9,11 @@ class PaymentSettingsController < ApplicationController
   before_action :ensure_payments_enabled
   skip_before_action :warn_about_missing_payment_info, only: [:update]
 
-  def index; end
+  def index
+    add_breadcrumb PersonViewUtils.person_display_name(@current_user, @current_community), person_path(@current_user)
+    add_breadcrumb 'Settings', person_path(@current_user)
+    add_breadcrumb 'Payments', person_payment_settings_path(@current_user)
+  end
 
   def create
     unless @presenter.stripe_enabled

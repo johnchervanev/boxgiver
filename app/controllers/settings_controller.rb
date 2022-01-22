@@ -1,4 +1,5 @@
 class SettingsController < ApplicationController
+  add_breadcrumb "Home", :landing_page_without_locale_path
 
   before_action :except => :unsubscribe do |controller|
     controller.ensure_logged_in t("layouts.notifications.you_must_log_in_to_view_your_settings")
@@ -8,6 +9,10 @@ class SettingsController < ApplicationController
   before_action EnsureCanAccessPerson.new(:person_id, allow_admin: true, error_message_key: "layouts.notifications.you_are_not_authorized_to_view_this_content"), only: :show
 
   def show
+    add_breadcrumb PersonViewUtils.person_display_name(@current_user, @current_community), person_path(@current_user)
+    add_breadcrumb 'Settings', person_path(@current_user)
+    add_breadcrumb 'Edit', person_settings_path(@current_user)
+
     @selected_left_navi_link = "profile"
     @service = Person::SettingsService.new(community: @current_community, params: params, current_user: @current_user)
     @service.add_location_to_person
@@ -15,6 +20,10 @@ class SettingsController < ApplicationController
   end
 
   def account
+    add_breadcrumb PersonViewUtils.person_display_name(@current_user, @current_community), person_path(@current_user)
+    add_breadcrumb 'Settings', person_path(@current_user)
+    add_breadcrumb 'Account', account_person_settings_path(@current_user)
+
     target_user = Person.find_by!(username: params[:person_id], community_id: @current_community.id)
     @selected_left_navi_link = "account"
     target_user.emails.build
@@ -25,6 +34,10 @@ class SettingsController < ApplicationController
   end
 
   def notifications
+    add_breadcrumb PersonViewUtils.person_display_name(@current_user, @current_community), person_path(@current_user)
+    add_breadcrumb 'Settings', person_path(@current_user)
+    add_breadcrumb 'Notifications', notifications_person_settings_path(@current_user)
+
     target_user = Person.find_by!(username: params[:person_id], community_id: @current_community.id)
     @selected_left_navi_link = "notifications"
     render locals: {target_user: target_user}
@@ -49,17 +62,29 @@ class SettingsController < ApplicationController
   end
 
   def listings
+    add_breadcrumb PersonViewUtils.person_display_name(@current_user, @current_community), person_path(@current_user)
+    add_breadcrumb 'Settings', person_path(@current_user)
+    add_breadcrumb 'Listings', listings_person_settings_path(@current_user)
+
     @selected_left_navi_link = "listings"
     @presenter = Listing::ListPresenter.new(@current_community, @current_user, params, false)
   end
 
   def reported_listings
+    add_breadcrumb PersonViewUtils.person_display_name(@current_user, @current_community), person_path(@current_user)
+    add_breadcrumb 'Settings', person_path(@current_user)
+    add_breadcrumb 'Reported Listings', reported_listings_person_settings_path(@current_user)
+
     @selected_left_navi_link = "reported_listings"
     listing_ids = @current_user.listings.map(&:id)
     @reported_listings = ListingReport.where(listing_id: listing_ids)
   end
 
   def transactions
+    add_breadcrumb PersonViewUtils.person_display_name(@current_user, @current_community), person_path(@current_user)
+    add_breadcrumb 'Settings', person_path(@current_user)
+    add_breadcrumb 'Transactions', transactions_person_settings_path(@current_user)
+
     @selected_left_navi_link = "transactions"
     @service = Admin::TransactionsService.new(@current_community, params, request.format, @current_user, true)
     @transactions_presenter = Admin::TransactionsPresenter.new(params, @service)

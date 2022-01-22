@@ -1,5 +1,7 @@
 class FeedbacksController < ApplicationController
 
+  add_breadcrumb "Home", :landing_page_without_locale_path
+
   skip_before_action :cannot_access_if_banned
   skip_before_action :cannot_access_without_confirmation
   skip_before_action :ensure_consent_given
@@ -16,6 +18,8 @@ class FeedbacksController < ApplicationController
   }
 
   def new
+    add_breadcrumb "Contact", new_user_feedback_path
+
     render_form
   end
 

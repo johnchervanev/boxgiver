@@ -1,4 +1,5 @@
 class InboxesController < ApplicationController
+  add_breadcrumb "Home", :landing_page_without_locale_path
   include MoneyRails::ActionViewExtension
 
   before_action do |controller|
@@ -6,6 +7,8 @@ class InboxesController < ApplicationController
   end
 
   def show
+    add_breadcrumb "Inbox", person_inbox_path(@current_user)
+    
     # We use pageless scroll, so the page should be always the first one (1) when request was not AJAX request
     params[:page] = 1 unless request.xhr?
 

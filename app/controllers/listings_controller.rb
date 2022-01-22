@@ -1,6 +1,9 @@
 class ListingsController < ApplicationController
   class ListingDeleted < StandardError; end
 
+  add_breadcrumb "Home", :landing_page_without_locale_path
+  add_breadcrumb "Listings", :search_path
+
   # Skip auth token check as current jQuery doesn't provide it automatically
   skip_before_action :verify_authenticity_token, :only => [:close, :update, :follow, :unfollow]
 
@@ -86,6 +89,8 @@ class ListingsController < ApplicationController
   end
 
   def show
+    add_breadcrumb @listing.title, listing_path(@listing.to_param)
+
     @listing.times_viewed += 1
     @listing.save
 
@@ -109,6 +114,8 @@ class ListingsController < ApplicationController
   end
 
   def new
+    add_breadcrumb 'new', new_listing_path
+
     @listing = Listing.new
     make_listing_presenter
   end
@@ -197,6 +204,9 @@ class ListingsController < ApplicationController
   end
 
   def edit
+    add_breadcrumb @listing.title, listing_path(@listing.to_param)
+    add_breadcrumb 'Edit', edit_listing_path(@listing.to_param)
+
     @selected_tribe_navi_tab = "home"
 
     make_listing_presenter

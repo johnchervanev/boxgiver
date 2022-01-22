@@ -43,7 +43,7 @@
           .banner--title-wrapper
             .banner--title
               = yield :banner_warning
-      %section.marketplace-lander
+      %section.marketplace-lander       
         - if @big_cover_photo
           .coverimage
             %figure.marketplace-cover.fluidratio
@@ -61,6 +61,8 @@
 
       %article.page-content{class: is_homepage && !@big_cover_photo ? 'no-cover-photo all-listings-page' : ''}
         .wrapper
+          .breadcrumbs-wrapper
+            = render_breadcrumbs :separator => ' >> '         
           = render :partial => "layouts/notifications"
           = yield
           - if display_branding_info?

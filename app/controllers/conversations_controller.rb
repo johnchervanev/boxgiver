@@ -1,12 +1,16 @@
 class ConversationsController < ApplicationController
   include MoneyRails::ActionViewExtension
 
+  add_breadcrumb "Home", :landing_page_without_locale_path
+
   before_action do |controller|
     controller.ensure_logged_in t("layouts.notifications.you_must_log_in_to_view_your_inbox")
   end
 
   def show
     conversation_id = params[:id]
+    add_breadcrumb 'Inbox', person_inbox_path(@current_user)
+    add_breadcrumb 'Message', person_message_path(person_id: @current_user.username, id: conversation_id)
 
     conversation = Conversation.by_community(@current_community).for_person(@current_user).where(id: conversation_id).first
 

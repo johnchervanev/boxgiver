@@ -791,7 +791,7 @@ Rails.application.routes.draw do
             get :notifications
             get :unsubscribe
             get :listings
-            get 'reported_listings'
+            get :reported_listings
             get :transactions
           end
         end

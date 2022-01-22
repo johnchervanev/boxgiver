@@ -1,4 +1,6 @@
 class PeopleController < Devise::RegistrationsController
+  add_breadcrumb "Home", :landing_page_without_locale_path
+
   skip_before_action :verify_authenticity_token, :only => [:create]
   skip_before_action :require_no_authentication, :only => [:new]
 
@@ -26,9 +28,13 @@ class PeopleController < Devise::RegistrationsController
     redirect_to landing_page_path and return if @current_community.private? && !@current_user
     @selected_tribe_navi_tab = "members"
     @seo_service.user = @service.person
+
+    add_breadcrumb PersonViewUtils.person_display_name(@seo_service.user, @current_community), person_path(@seo_service.user)
   end
 
   def new
+    add_breadcrumb "Sign Up", sign_up_path
+
     @selected_tribe_navi_tab = "members"
     redirect_to search_path if logged_in?
     session[:invitation_code] = params[:code] if params[:code]
