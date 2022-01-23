@@ -1,11 +1,15 @@
 class Admin::CommunityTestimonialsController < Admin::AdminBaseController
+  add_breadcrumb 'Home', :landing_page_without_locale_path
+
   before_action :set_selected_left_navi_link
   before_action :set_service
 
   layout false, only: [:edit, :update, :new, :create, :new_unskip, :unskip]
   respond_to :html, :js
 
-  def index; end
+  def index
+    add_breadcrumb 'Testimonials', admin_community_testimonials_path(@current_community)
+  end
 
   def edit; end
 

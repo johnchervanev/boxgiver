@@ -1,5 +1,8 @@
 class Admin::EmailsController < Admin::AdminBaseController
+  add_breadcrumb 'Home', :landing_page_without_locale_path
+
   def new
+    add_breadcrumb 'Emails', new_admin_community_email_path(@current_community)
     @selected_tribe_navi_tab = "admin"
     @selected_left_navi_link = "email_members"
     @display_knowledge_base_articles = APP_CONFIG.display_knowledge_base_articles

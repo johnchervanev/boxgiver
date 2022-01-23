@@ -1,4 +1,6 @@
 class Admin::CommunityListingsController < Admin::AdminBaseController
+  add_breadcrumb 'Home', :landing_page_without_locale_path
+
   before_action :set_selected_left_navi_link
   before_action :set_service
 
@@ -38,11 +40,13 @@ class Admin::CommunityListingsController < Admin::AdminBaseController
   end
 
   def reported_listings
+    add_breadcrumb 'Reported listings', reported_listings_admin_community_listings_path(@current_community)
     @reported_listings = ListingReport.all
     @selected_left_navi_link = 'reported_listings'
   end
 
   def sponsored_payments
+    add_breadcrumb 'Sponsored payments', sponsored_payments_admin_community_listings_path(@current_community)
     @sponsored_payments = SponsoredPayment.all
     @selected_left_navi_link = 'sponsored_payments'
   end
@@ -59,6 +63,7 @@ class Admin::CommunityListingsController < Admin::AdminBaseController
   private
 
   def set_selected_left_navi_link
+    add_breadcrumb 'Listings', admin_community_listings_path(@current_community)
     @selected_left_navi_link = 'listings'
   end
 

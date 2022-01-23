@@ -1,8 +1,11 @@
 class Admin::CommunityInvitationsController < Admin::AdminBaseController
+  add_breadcrumb 'Home', :landing_page_without_locale_path
   before_action :set_selected_left_navi_link
   before_action :set_service
 
-  def index; end
+  def index
+    add_breadcrumb 'Invitations', admin_community_invitations_path(@current_community)
+  end
 
   private
 

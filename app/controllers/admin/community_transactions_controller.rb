@@ -1,10 +1,14 @@
 require 'csv'
 
 class Admin::CommunityTransactionsController < Admin::AdminBaseController
+  add_breadcrumb 'Home', :landing_page_without_locale_path
+
   before_action :set_selected_left_navi_link
   before_action :set_presenter, only: [:index, :show, :confirm, :cancel, :refund, :dismiss]
 
   def index
+    add_breadcrumb 'Transactions', admin_community_transactions_path(@current_community)
+
     respond_to do |format|
       format.html
       format.csv do

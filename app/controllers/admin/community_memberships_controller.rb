@@ -1,10 +1,14 @@
 require 'csv'
 
 class Admin::CommunityMembershipsController < Admin::AdminBaseController
+  add_breadcrumb 'Home', :landing_page_without_locale_path
+
   before_action :set_selected_left_navi_link
   before_action :set_service
 
   def index
+    add_breadcrumb 'Users', admin_community_community_memberships_path(@current_community)
+    
     respond_to do |format|
       format.html {}
       format.csv do

@@ -1,5 +1,7 @@
 class InvitationsController < ApplicationController
 
+  add_breadcrumb "Home", :landing_page_without_locale_path
+
   before_action except: :unsubscribe do |controller|
     controller.ensure_logged_in t("layouts.notifications.you_must_log_in_to_invite_new_users")
   end
@@ -7,6 +9,8 @@ class InvitationsController < ApplicationController
   before_action :users_can_invite_new_users, except: :unsubscribe
 
   def new
+    add_breadcrumb "Invitation", invite_path
+
     @selected_tribe_navi_tab = "members"
     @invitation = Invitation.new
     invitation_limit = @current_community.join_with_invite_only ? Invitation.invite_only_invitation_limit : Invitation.invitation_limit

@@ -1,8 +1,12 @@
 class Admin::CommunityConversationsController < Admin::AdminBaseController
+  add_breadcrumb 'Home', :landing_page_without_locale_path
+
   before_action :set_selected_left_navi_link
   before_action :set_service
 
   def index
+    add_breadcrumb 'Conversations', admin_community_conversations_path(@current_community)
+
     render locals: {service: @service}
   end
 

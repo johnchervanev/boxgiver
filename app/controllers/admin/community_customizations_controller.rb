@@ -1,4 +1,5 @@
 class Admin::CommunityCustomizationsController < Admin::AdminBaseController
+  add_breadcrumb 'Home', :landing_page_without_locale_path
 
   def edit_details
     @selected_left_navi_link = "tribe_details"
