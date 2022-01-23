@@ -10,7 +10,7 @@ class PaymentSettingsController < ApplicationController
   skip_before_action :warn_about_missing_payment_info, only: [:update]
 
   def index
-    add_breadcrumb PersonViewUtils.person_display_name(@current_user, @current_community), person_path(@current_user)
+    #add_breadcrumb PersonViewUtils.person_display_name(@current_user, @current_community), person_path(@current_user)
     add_breadcrumb 'Settings', person_path(@current_user)
     add_breadcrumb 'Payments', person_payment_settings_path(@current_user)
   end

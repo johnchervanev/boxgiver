@@ -9,7 +9,7 @@ class SettingsController < ApplicationController
   before_action EnsureCanAccessPerson.new(:person_id, allow_admin: true, error_message_key: "layouts.notifications.you_are_not_authorized_to_view_this_content"), only: :show
 
   def show
-    add_breadcrumb PersonViewUtils.person_display_name(@current_user, @current_community), person_path(@current_user)
+    #add_breadcrumb PersonViewUtils.person_display_name(@current_user, @current_community), person_path(@current_user)
     add_breadcrumb 'Settings', person_path(@current_user)
     add_breadcrumb 'Edit', person_settings_path(@current_user)
 
@@ -20,7 +20,7 @@ class SettingsController < ApplicationController
   end
 
   def account
-    add_breadcrumb PersonViewUtils.person_display_name(@current_user, @current_community), person_path(@current_user)
+    #add_breadcrumb PersonViewUtils.person_display_name(@current_user, @current_community), person_path(@current_user)
     add_breadcrumb 'Settings', person_path(@current_user)
     add_breadcrumb 'Account', account_person_settings_path(@current_user)
 
@@ -34,7 +34,7 @@ class SettingsController < ApplicationController
   end
 
   def notifications
-    add_breadcrumb PersonViewUtils.person_display_name(@current_user, @current_community), person_path(@current_user)
+    #add_breadcrumb PersonViewUtils.person_display_name(@current_user, @current_community), person_path(@current_user)
     add_breadcrumb 'Settings', person_path(@current_user)
     add_breadcrumb 'Notifications', notifications_person_settings_path(@current_user)
 
@@ -62,7 +62,7 @@ class SettingsController < ApplicationController
   end
 
   def listings
-    add_breadcrumb PersonViewUtils.person_display_name(@current_user, @current_community), person_path(@current_user)
+    #add_breadcrumb PersonViewUtils.person_display_name(@current_user, @current_community), person_path(@current_user)
     add_breadcrumb 'Settings', person_path(@current_user)
     add_breadcrumb 'Listings', listings_person_settings_path(@current_user)
 
@@ -71,7 +71,7 @@ class SettingsController < ApplicationController
   end
 
   def reported_listings
-    add_breadcrumb PersonViewUtils.person_display_name(@current_user, @current_community), person_path(@current_user)
+    #add_breadcrumb PersonViewUtils.person_display_name(@current_user, @current_community), person_path(@current_user)
     add_breadcrumb 'Settings', person_path(@current_user)
     add_breadcrumb 'Reported Listings', reported_listings_person_settings_path(@current_user)
 
@@ -81,7 +81,7 @@ class SettingsController < ApplicationController
   end
 
   def transactions
-    add_breadcrumb PersonViewUtils.person_display_name(@current_user, @current_community), person_path(@current_user)
+    #add_breadcrumb PersonViewUtils.person_display_name(@current_user, @current_community), person_path(@current_user)
     add_breadcrumb 'Settings', person_path(@current_user)
     add_breadcrumb 'Transactions', transactions_person_settings_path(@current_user)
 

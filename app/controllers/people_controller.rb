@@ -29,7 +29,9 @@ class PeopleController < Devise::RegistrationsController
     @selected_tribe_navi_tab = "members"
     @seo_service.user = @service.person
 
-    add_breadcrumb PersonViewUtils.person_display_name(@seo_service.user, @current_community), person_path(@seo_service.user)
+    user_display_name = PersonViewUtils.person_display_name(@seo_service.user, @current_community)
+    trincated_user_title = ApplicationController.helpers.truncate(user_display_name, :length => 45, :omission => '...')
+    add_breadcrumb trincated_user_title, person_path(@seo_service.user)
   end
 
   def new
