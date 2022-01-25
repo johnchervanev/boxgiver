@@ -90,7 +90,7 @@ class ListingsController < ApplicationController
 
   def show
     trincated_listing_title = ApplicationController.helpers.truncate(@listing.title, :length => 18, :omission => '...')
-    add_breadcrumb trincated_listing_title, listing_path(@listing.to_param)
+    add_breadcrumb @listing.title, listing_path(@listing.to_param)
 
     @listing.times_viewed += 1
     @listing.save

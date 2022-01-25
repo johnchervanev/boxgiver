@@ -31,7 +31,7 @@ class PeopleController < Devise::RegistrationsController
 
     user_display_name = PersonViewUtils.person_display_name(@seo_service.user, @current_community)
     trincated_user_title = ApplicationController.helpers.truncate(user_display_name, :length => 45, :omission => '...')
-    add_breadcrumb trincated_user_title, person_path(@seo_service.user)
+    add_breadcrumb user_display_name, person_path(@seo_service.user)
   end
 
   def new

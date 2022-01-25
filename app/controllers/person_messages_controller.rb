@@ -11,7 +11,7 @@ class PersonMessagesController < ApplicationController
   def new
     user_display_name = PersonViewUtils.person_display_name(@recipient, @current_community)
     trincated_user_title = ApplicationController.helpers.truncate(user_display_name, :length => 6, :omission => '...')
-    add_breadcrumb trincated_user_title, person_path(@recipient)
+    add_breadcrumb user_display_name, person_path(@recipient)
     add_breadcrumb 'Message', new_person_person_message_path(@recipient)
 
     @conversation = Conversation.new
