@@ -8,6 +8,6 @@ class BlogsController < ApplicationController
 
   def show
     @blog = Blog.friendly.find(params[:id])
-    add_breadcrumb blog.title, blog_path(@blog)
+    add_breadcrumb @blog.title, blog_path(@blog)
   end
 end
