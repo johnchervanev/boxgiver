@@ -7,7 +7,9 @@ class BlogsController < ApplicationController
   end
 
   def show
+    add_breadcrumb "Blog", blog_index_path
     @blog = Blog.friendly.find(params[:id])
+    
     add_breadcrumb @blog.title, blog_path(@blog)
   end
 end
